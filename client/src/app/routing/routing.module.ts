@@ -8,11 +8,6 @@ import { AppComponent } from "../app.component";
 
 const routes: Routes = [
   {
-    path: "",
-    pathMatch: "prefix",
-    redirectTo: "login"
-  },
-  {
     path: "login",
     pathMatch: "full",
     component: LoginComponent
