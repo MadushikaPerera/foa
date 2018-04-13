@@ -1,10 +1,29 @@
-<mat-toolbar color="primary">
-  <span>Application Title</span>
+<mat-sidenav-container class="all-wrap" fullscreen>
+  <mat-sidenav #sidenav>
+    <mat-list>
+      <mat-list-item [routerLink]="['/']"> Foo</mat-list-item>
+      <mat-list-item [routerLink]="['/bar']"> Bar</mat-list-item>
+    </mat-list>
+  </mat-sidenav>
 
-  <!-- This fills the remaining space of the current row -->
-  <span class="example-fill-remaining-space"></span>
-
-  <span>Right Aligned Text</span>
-</mat-toolbar>
-
-<router-outlet></router-outlet>
+  <div class="page-wrap">
+    <header role="banner">
+      <mat-toolbar color="primary">
+        <button
+          type="button"
+          mat-icon-button
+          (click)="sidenav.open()"
+          title="Open sidenav">
+          <mat-icon>menu</mat-icon>
+        </button>
+        Your Toolbar
+      </mat-toolbar>
+    </header>
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+    <footer>
+      Food Ordering Application
+    </footer>
+  </div>
+</mat-sidenav-container>

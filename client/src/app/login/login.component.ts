@@ -7,7 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
+
+  username : string
+  password : string
+
+  login() : void {
+    if(this.username == 'admin' && this.password == 'admin'){
+     
+    }else {
+      alert("Invalid credentials");
+    }
+  }
 
   ngOnInit() {
   }
