@@ -15,6 +15,7 @@ import { RestaurantCardComponent } from './restaurant-card/restaurant-card.compo
 import { FoodCardComponent } from './food-card/food-card.component';
 import { RestaurantProfileComponent } from './restaurant-profile/restaurant-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { OrdersListComponent } from './orders-list/orders-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     RestaurantCardComponent,
     FoodCardComponent,
     RestaurantProfileComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    OrdersListComponent
   ],
   imports: [
     BrowserModule,
