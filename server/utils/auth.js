@@ -1,5 +1,6 @@
 const jwt = require("jwt-simple");
 const bcrypt = require("bcrypt-nodejs");
+require("dotenv").config();
 
 const User = require("../models/user");
 

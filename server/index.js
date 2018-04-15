@@ -4,6 +4,7 @@ const path = require("path");
 const server = require("http").Server(app);
 const cors = require("cors")();
 const bodyParser = require("body-parser");
+require("dotenv").config();
 
 const port = process.env.PORT || 3000;
 
