@@ -13,18 +13,17 @@ import {
 export class RestaurantComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
-  constructor() {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.galleryOptions = [
       {
-        width: "600px",
-        height: "400px",
+        width: "75%",
+        height: "600px",
         thumbnailsColumns: 4,
         imageAnimation: NgxGalleryAnimation.Slide,
         imageArrows: true,
         imageSwipe: true,
-        thumbnailsArrows: false,
+        thumbnailsArrows: true,
         thumbnailsSwipe: true,
         previewSwipe: true
       },
