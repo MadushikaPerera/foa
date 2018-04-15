@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <mat-toolbar color="primary" layout="row" style="position: fixed;">
     <button mat-icon-button class="menu-icon">
       <mat-icon (click)="sidenav.toggle()" class="mat-24" aria-label="Menu">menu</mat-icon>
@@ -24,4 +24,28 @@
   <footer>
     Food Ordering Application
   </footer>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
+
+<div style="position:fixed;top:0;left:0;right:0;bottom:0;">
+  <mat-sidenav-container fullscreen>
+    <mat-sidenav mode="over" #sidenav style="min-width:220px;">
+      <mat-list>
+        <mat-list-item [routerLink]="['/orders']"> Orders</mat-list-item>
+        <mat-list-item [routerLink]="['/restaurant']"> Restaurants</mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+    <mat-toolbar color="primary" style="min-height:64px;">
+      <span>
+        <button style="background-color:transparent;border-style:none;cursor:pointer;" (click)="sidenav.open()">
+          <i class="material-icons toolbar-link-icon" style="color:white;">menu</i>
+        </button>
+      </span>
+      <span>Food Ordering Application</span>
+    </mat-toolbar>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <div class="inner-sidenav-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-container>
+
+</div>

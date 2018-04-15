@@ -1,10 +1,5 @@
-footer {
-  background: #efefef;
-  padding: 15px;
-}
-
-.mat-toolbar.mat-primary {
-  position: fixed;
+/* .mat-toolbar.mat-primary {
+  
   top: 0;
   right: 0;
   left: 0;
@@ -38,4 +33,11 @@ footer {
 
 .filler-content {
   padding: 60px;
+} */
+
+.inner-sidenav-content {
+  overflow: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 80%;
 }
