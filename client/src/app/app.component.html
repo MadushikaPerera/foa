@@ -1,31 +1,3 @@
-<!-- <div>
-  <mat-toolbar color="primary" layout="row" style="position: fixed;">
-    <button mat-icon-button class="menu-icon">
-      <mat-icon (click)="sidenav.toggle()" class="mat-24" aria-label="Menu">menu</mat-icon>
-    </button>
-    <span>
-      <h2>Food Ordering</h2>
-    </span>
-    <span class="toolbar-spacer"></span>
-    <mat-icon class="toolbar-icon">settings</mat-icon>
-  </mat-toolbar>
-</div>
-
-<mat-sidenav-container fullscreen style="margin-top: 75px !important;">
-  <mat-sidenav #sidenav mode="side" class="sidenav">
-    <mat-list>
-      <mat-list-item [routerLink]="['/orders']"> Orders</mat-list-item>
-      <mat-list-item [routerLink]="['/restaurant']"> Restaurants</mat-list-item>
-    </mat-list>
-  </mat-sidenav>
-  <div class="content">
-    <router-outlet class="z-depth"></router-outlet>
-  </div>
-  <footer>
-    Food Ordering Application
-  </footer>
-</mat-sidenav-container> -->
-
 <div style="position:fixed;top:0;left:0;right:0;bottom:0;">
   <mat-sidenav-container fullscreen>
     <mat-sidenav mode="over" #sidenav style="min-width:220px;">
@@ -43,7 +15,7 @@
       <span>Food Ordering Application</span>
     </mat-toolbar>
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    <div class="inner-sidenav-content">
+    <div class="inner-sidenav-content scrollbar" id="style-4">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-container>
