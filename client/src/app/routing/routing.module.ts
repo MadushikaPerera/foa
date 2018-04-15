@@ -6,6 +6,9 @@ import { NotfoundComponent } from "../notfound/notfound.component";
 import { RegisterComponent } from "../register/register.component";
 import { AppComponent } from "../app.component";
 import { OrdersListComponent } from "../orders-list/orders-list.component";
+import { MapComponent } from "../map/map.component";
+import { RestaurantComponent } from "../restaurant/restaurant.component";
+import { FoodCardComponent } from "../food-card/food-card.component";
 
 const routes: Routes = [
   {
@@ -22,6 +25,21 @@ const routes: Routes = [
     path: "orders",
     pathMatch: "full",
     component: OrdersListComponent
+  },
+  {
+    path: "restaurant",
+    pathMatch: "full",
+    component: RestaurantComponent
+  },
+  {
+    path: "food",
+    pathMatch: "full",
+    component: FoodCardComponent
+  },
+  {
+    path: "map",
+    pathMatch: "full",
+    component: MapComponent
   },
   {
     path: "**",

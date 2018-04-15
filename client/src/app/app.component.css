@@ -1,4 +1,8 @@
 footer {
-    background: #efefef;
-    padding: 15px;
-  }
+  background: #efefef;
+  padding: 15px;
+}
+
+.content {
+  margin: 10px;
+}
