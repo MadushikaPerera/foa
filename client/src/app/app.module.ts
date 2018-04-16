@@ -24,6 +24,7 @@ import { UserComponent } from "./user/user.component";
 import { InventoryComponent } from "./inventory/inventory.component";
 import { DeliveryComponent } from "./delivery/delivery.component";
 import { RestaurantComponent } from "./restaurant/restaurant.component";
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { RestaurantComponent } from "./restaurant/restaurant.component";
     UserComponent,
     InventoryComponent,
     DeliveryComponent,
-    RestaurantComponent
+    RestaurantComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
