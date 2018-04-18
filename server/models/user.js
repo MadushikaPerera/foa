@@ -1,44 +1,70 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt-nodejs');
+// const Sequelize = require('sequelize');
 
-const User = new Schema({
-  fname:String,
-  lname:String,
-  uname:{type:String,unique:true},
-  image:{ type: String, default: 'defaultuser.png' },
-  email:{type:String,unique:true,lowercase:true},
-  password:String
-});
+// // const User = sequelize.define('user', {
+// //   fname: {
+// //     type: Sequelize.STRING
+// //   },
+// //   lname: {
+// //     type: Sequelize.STRING
+// //   },
+// //   age: {
+// //     type: Sequelize.NUMBER
+// //   },
+// //   address: {
+// //     type: Sequelize.STRING
+// //   },
+// //   email: {
+// //     type: Sequelize.STRING
+// //   },
+// //   phone: {
+// //     type: Sequelize.STRING
+// //   }
+// // });
 
-// On Save Hook, encrypt password
-// Before saving a model, run this function
-User.pre('save', function (next) {
-  //get access to the user model
-  const user = this;
+// module.exports = User;
 
-  // generate a salt then run callback
-  bcrypt.genSalt(10, function (err, salt) {
-    if (err) { return next(err); }
 
-    // hash (encrypt) our password using the sale
-    bcrypt.hash(user.password, salt, null, function (err, hash) {
-      if (err) { return next(err); }
+// const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
+// const bcrypt = require('bcrypt-nodejs');
 
-      //overwrite plain text password with encrypted password
-      user.password = hash;
-      next();
-    });
-  });
-});
+// const User = new Schema({
+//   fname:String,
+//   lname:String,
+//   uname:{type:String,unique:true},
+//   image:{ type: String, default: 'defaultuser.png' },
+//   email:{type:String,unique:true,lowercase:true},
+//   password:String
+// });
 
-// compare passwords is equal to user's password
-User.methods.comparePassword = function (candidatePassword, callback) {
-  bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
-    if (err) { return callback(err); }
+// // On Save Hook, encrypt password
+// // Before saving a model, run this function
+// User.pre('save', function (next) {
+//   //get access to the user model
+//   const user = this;
 
-    callback(null, isMatch);
-  })
-}
+//   // generate a salt then run callback
+//   bcrypt.genSalt(10, function (err, salt) {
+//     if (err) { return next(err); }
 
-module.exports = mongoose.model('User',User);
+//     // hash (encrypt) our password using the sale
+//     bcrypt.hash(user.password, salt, null, function (err, hash) {
+//       if (err) { return next(err); }
+
+//       //overwrite plain text password with encrypted password
+//       user.password = hash;
+//       next();
+//     });
+//   });
+// });
+
+// // compare passwords is equal to user's password
+// User.methods.comparePassword = function (candidatePassword, callback) {
+//   bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+//     if (err) { return callback(err); }
+
+//     callback(null, isMatch);
+//   })
+// }
+
+// module.exports = mongoose.model('User',User);
