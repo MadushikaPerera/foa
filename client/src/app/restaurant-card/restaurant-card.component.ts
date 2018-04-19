@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RestaurantCardComponent implements OnInit {
 
+  title:String;
+  subtitle:String;
+  image:String;
+  description:String;
+
+
   constructor() { }
 
   ngOnInit() {

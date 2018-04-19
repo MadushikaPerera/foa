@@ -1,28 +1,27 @@
 <div>
-  <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
-</div>
+<!-- <mat-grid-list cols="1" >
+    <mat-grid-tile><ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery></mat-grid-tile>
+</mat-grid-list> -->
 
 
 <mat-chip-list>
-  <mat-chip>All</mat-chip>
-  <mat-chip>Naan</mat-chip>
-  <mat-chip>Dal</mat-chip>
+  <mat-chip
+    *ngFor="let type of types">
+    {{type.title}}
+  </mat-chip>
 </mat-chip-list>
 
-<mat-grid-list cols="5" rowHeight="2:1">
-  <mat-grid-tile>1</mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
-  <mat-grid-tile>3</mat-grid-tile>
-  <mat-grid-tile>4</mat-grid-tile>
-  <mat-grid-tile>5</mat-grid-tile>
-  <mat-grid-tile>1</mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
-  <mat-grid-tile>3</mat-grid-tile>
-  <mat-grid-tile>4</mat-grid-tile>
-  <mat-grid-tile>5</mat-grid-tile>
-  <mat-grid-tile>1</mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
-  <mat-grid-tile>3</mat-grid-tile>
-  <mat-grid-tile>4</mat-grid-tile>
-  <mat-grid-tile>5</mat-grid-tile>
+
+<mat-grid-list cols="4" rowHeight="1:2">
+    <mat-grid-tile
+      *ngFor="let meal of meals">
+        <app-food-card
+        [title]="meal.text">
+        </app-food-card>
+        
+    </mat-grid-tile>
 </mat-grid-list>
+
+
+
+</div>
