@@ -1,5 +1,6 @@
 const jwt = require("jwt-simple");
 const bcrypt = require("bcrypt-nodejs");
+const connection = require('./dbconnection');
 require("dotenv").config();
 
 const User = require("../models/user");
@@ -8,7 +9,7 @@ function tokenForUser(user) {
   const timpestamp = new Date().getTime();
   return jwt.encode(
     { sub: user.id, iat: timpestamp, usr: user.uname },
-    "asasasas"
+    process.env.JWT_KEY
   );
 }
 
@@ -32,32 +33,55 @@ exports.signup = function(req, res, next) {
   }
 
   // See if a user with given email exists
-  User.findOne({ email: email }, function(err, existingUser) {
+  connection.query("SELECT uname FROM user WHERE email='"+email+"' ", function (err, result, fields) {
     if (err) {
       return next(err);
     }
 
     // If a user with email does exist, return an error
-    if (existingUser) {
-      return res.status(422).send({ error: "Email is in use" });
+    if (result) {
+        return res.status(422).send({ error: "Email is in use" });
     }
 
     // If a user email does NOT exist, create and save user record
-    const user = new User({
-      fname: fname,
-      lname: lname,
-      uname: uname,
-      email: email,
-      password: password
-    });
-
-    user.save(function(err) {
+    connection.query("INSERT INTO user (fname, lname,uname,email,password) VALUES ('"+fname+"', '"+lname+"','"+uname+"','"+email+"','"+password+"')", function (err, result) {
       if (err) {
         return next(err);
       }
-
       // Respond to request indicating the user was created
-      res.json({ token: tokenForUser(user) });
+      res.json({ token: tokenForUser(result) });
     });
+
   });
+
+  // User.findOne({ email: email }, function(err, existingUser) {
+  //   if (err) {
+  //     return next(err);
+  //   }
+
+  //   // If a user with email does exist, return an error
+  //   if (existingUser) {
+  //     return res.status(422).send({ error: "Email is in use" });
+  //   }
+
+  //   // If a user email does NOT exist, create and save user record
+  //   const user = new User({
+  //     fname: fname,
+  //     lname: lname,
+  //     uname: uname,
+  //     email: email,
+  //     password: password
+  //   });
+
+  //   user.save(function(err) {
+  //     if (err) {
+  //       return next(err);
+  //     }
+
+  //     // Respond to request indicating the user was created
+  //     res.json({ token: tokenForUser(user) });
+  //   });
+  // });
+
+
 };
