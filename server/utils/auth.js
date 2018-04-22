@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt-nodejs");
 const pool = require("./dbconnection");
 require("dotenv").config();
 
-const User = require("../models/user");
-
 function tokenForUser(user) {
   const timpestamp = new Date().getTime();
   return jwt.encode(
