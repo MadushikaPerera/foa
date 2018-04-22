@@ -1,6 +1,6 @@
 const jwt = require("jwt-simple");
 const bcrypt = require("bcrypt-nodejs");
-const connection = require('./dbconnection');
+const pool = require("./dbconnection");
 require("dotenv").config();
 
 const User = require("../models/user");
@@ -8,7 +8,7 @@ const User = require("../models/user");
 function tokenForUser(user) {
   const timpestamp = new Date().getTime();
   return jwt.encode(
-    { sub: user.id, iat: timpestamp, usr: user.uname },
+    { sub: user.uname, iat: timpestamp, usr: user.email },
     process.env.JWT_KEY
   );
 }
@@ -24,6 +24,9 @@ exports.signup = function(req, res, next) {
   const lname = req.body.lname;
   const uname = req.body.uname;
   const email = req.body.email;
+  const address = req.body.address;
+  const phone = req.body.phone;
+  const accesslevel = req.body.access;
   const password = req.body.password;
 
   if (!email || !password) {
@@ -32,56 +35,52 @@ exports.signup = function(req, res, next) {
       .send({ error: "You must provide email and password" });
   }
 
-  // See if a user with given email exists
-  connection.query("SELECT uname FROM user WHERE email='"+email+"' ", function (err, result, fields) {
+  pool.getconn(function(err, conn) {
     if (err) {
-      return next(err);
+    } else {
+      // See if a user with given email exists
+      conn.query(
+        "SELECT uname FROM user WHERE email='" + email + "' ",
+        function(err, result, fields) {
+          if (err) {
+            return next(err);
+          }
+
+          // If a user with email does exist, return an error
+          if (result) {
+            return res.status(422).send({ error: "Email is in use" });
+          }
+
+          // If a user email does NOT exist, create and save user record
+          conn.query(
+            "INSERT INTO user (fname, lname,uname,email,address,phone,accesslevel,password) VALUES ('" +
+              fname +
+              "', '" +
+              lname +
+              "','" +
+              uname +
+              "','" +
+              email +
+              "','" +
+              address +
+              "','" +
+              phone +
+              "','" +
+              accesslevel +
+              "','" +
+              password +
+              "')",
+            function(err, result) {
+              if (err) {
+                return next(err);
+              }
+              // Respond to request indicating the user was created
+              res.json({ token: tokenForUser({ uname, email }) });
+              conn.release();
+            }
+          );
+        }
+      );
     }
-
-    // If a user with email does exist, return an error
-    if (result) {
-        return res.status(422).send({ error: "Email is in use" });
-    }
-
-    // If a user email does NOT exist, create and save user record
-    connection.query("INSERT INTO user (fname, lname,uname,email,password) VALUES ('"+fname+"', '"+lname+"','"+uname+"','"+email+"','"+password+"')", function (err, result) {
-      if (err) {
-        return next(err);
-      }
-      // Respond to request indicating the user was created
-      res.json({ token: tokenForUser(result) });
-    });
-
   });
-
-  // User.findOne({ email: email }, function(err, existingUser) {
-  //   if (err) {
-  //     return next(err);
-  //   }
-
-  //   // If a user with email does exist, return an error
-  //   if (existingUser) {
-  //     return res.status(422).send({ error: "Email is in use" });
-  //   }
-
-  //   // If a user email does NOT exist, create and save user record
-  //   const user = new User({
-  //     fname: fname,
-  //     lname: lname,
-  //     uname: uname,
-  //     email: email,
-  //     password: password
-  //   });
-
-  //   user.save(function(err) {
-  //     if (err) {
-  //       return next(err);
-  //     }
-
-  //     // Respond to request indicating the user was created
-  //     res.json({ token: tokenForUser(user) });
-  //   });
-  // });
-
-
 };

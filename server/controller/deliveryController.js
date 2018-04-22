@@ -1,21 +1,57 @@
-const Orders = function (){
+const pool = require("../utils/dbconnection");
 
-    function makeOrder(connection,callback){
-
-        return callback()
-
+exports.makeDelivery = function(req, res, next) {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+    } else {
+      conn.query("", function(err1, records, fields) {
+        if (!err1) {
+          // do something
+        }
+        conn.release();
+      });
     }
+  });
+};
 
-    function getOrders(connection,callback){
-
+exports.getDeliveries = function(req, res, next) {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+    } else {
+      conn.query("", function(err1, records, fields) {
+        if (!err1) {
+          // do something
+        }
+        conn.release();
+      });
     }
+  });
+};
 
-    function editOrder(connection,callback){
-
+exports.editDelivery = function(req, res, next) {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+    } else {
+      conn.query("", function(err1, records, fields) {
+        if (!err1) {
+          // do something
+        }
+        conn.release();
+      });
     }
+  });
+};
 
-    function cancelOrder(connection,callback){
-
+exports.cancelDelivery = function(req, res, next) {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+    } else {
+      conn.query("", function(err1, records, fields) {
+        if (!err1) {
+          // do something
+        }
+        conn.release();
+      });
     }
-
-}
+  });
+};

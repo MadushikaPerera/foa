@@ -1,19 +1,75 @@
-const Orders = function (){
+const pool = require("../utils/dbconnection");
 
-    function makeOrder(connection){
-
+exports.getUser = function(req, res, next) {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+      console.log("error");
+      res.json({ error: true });
+    } else {
+      conn.query("select * from user", function(err1, records, fields) {
+        if (!err1) {
+          // do something
+          console.log(records);
+          res.json(records);
+        }
+        conn.release();
+      });
     }
+  });
+};
 
-    function getOrders(connection){
-
+exports.makeOrder = function(req, res, next) {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+    } else {
+      conn.query("", function(err1, records, fields) {
+        if (!err1) {
+          // do something
+        }
+        conn.release();
+      });
     }
+  });
+};
 
-    function editOrder(connection){
-
+exports.getOrders = function() {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+    } else {
+      conn.query("", function(err1, records, fields) {
+        if (!err1) {
+          // do something
+        }
+        conn.release();
+      });
     }
+  });
+};
 
-    function cancelOrder(connection){
-
+exports.editOrder = function() {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+    } else {
+      conn.query("", function(err1, records, fields) {
+        if (!err1) {
+          // do something
+        }
+        conn.release();
+      });
     }
+  });
+};
 
-}
+exports.cancelOrder = function() {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+    } else {
+      conn.query("", function(err1, records, fields) {
+        if (!err1) {
+          // do something
+        }
+        conn.release();
+      });
+    }
+  });
+};
