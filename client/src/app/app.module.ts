@@ -9,22 +9,22 @@ import { NgxGalleryModule } from "ngx-gallery";
 
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ToolbarComponent } from "./toolbar/toolbar.component";
-import { LoginComponent } from "./login/login.component";
-import { FooterComponent } from "./footer/footer.component";
-import { NotfoundComponent } from "./notfound/notfound.component";
-import { RegisterComponent } from "./register/register.component";
-import { RestaurantCardComponent } from "./restaurant-card/restaurant-card.component";
-import { FoodCardComponent } from "./food-card/food-card.component";
-import { RestaurantProfileComponent } from "./restaurant-profile/restaurant-profile.component";
-import { UserProfileComponent } from "./user-profile/user-profile.component";
-import { OrdersListComponent } from "./orders-list/orders-list.component";
-import { MapComponent } from "./map/map.component";
-import { UserComponent } from "./user/user.component";
-import { InventoryComponent } from "./inventory/inventory.component";
-import { DeliveryComponent } from "./delivery/delivery.component";
-import { RestaurantComponent } from "./restaurant/restaurant.component";
-import { AdminComponent } from './admin/admin.component';
+import { ToolbarComponent } from "./components/toolbar/toolbar.component";
+import { LoginComponent } from "./components/login/login.component";
+import { FooterComponent } from "./components/footer/footer.component";
+import { NotfoundComponent } from "./components/notfound/notfound.component";
+import { RegisterComponent } from "./components/register/register.component";
+import { RestaurantCardComponent } from "./components/restaurant-card/restaurant-card.component";
+import { FoodCardComponent } from "./components/food-card/food-card.component";
+import { RestaurantProfileComponent } from "./components/restaurant-profile/restaurant-profile.component";
+import { UserProfileComponent } from "./components/user-profile/user-profile.component";
+import { OrdersListComponent } from "./components/orders-list/orders-list.component";
+import { MapComponent } from "./components/map/map.component";
+import { UserComponent } from "./components/user/user.component";
+import { InventoryComponent } from "./components/inventory/inventory.component";
+import { DeliveryComponent } from "./components/delivery/delivery.component";
+import { RestaurantComponent } from "./components/restaurant/restaurant.component";
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [

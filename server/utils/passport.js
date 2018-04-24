@@ -8,15 +8,17 @@ const bcrypt = require('bcrypt-nodejs');
 require('dotenv').config();
 
 const comparePassword = function(candidatePassword, password) {
+  return new Promise(function(resolve, reject) {
   bcrypt.compare(candidatePassword, password, function(err, isMatch) {
     if (err) {
-      return false;
+      reject(false);
     }
     if (!isMatch) {
-      return false;
+      reject(false);
     }
-    return true;
+    resolve(true);
   });
+ });
 };
 
 // Create local strategy
@@ -36,15 +38,16 @@ const localLogin = new LocalStrategy(localOptions, function(
     } else {
       conn.query(
         "select email,password from user where email='" + email + "' ",
-        function(err1, records, fields) {
+        async function(err1, records) {
           if (err1) {
             return done(err);
           }
           if (records.legth < 0) {
             return done(null, false);
           }
+          let isPassword = await comparePassword(password, JSON.stringify(records[0].password));
           // compare passwords - is `password` equal to user.password before login
-          if (comparePassword(password, JSON.stringify(records[0].password))) {
+          if (isPassword) {
             return done(null, JSON.stringify(records[0]));
           } else {
             return done(null, false);
