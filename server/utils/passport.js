@@ -40,7 +40,7 @@ const localLogin = new LocalStrategy(localOptions, function(
           if (err1) {
             return done(err);
           }
-          if (!records) {
+          if (records.legth < 0) {
             return done(null, false);
           }
           // compare passwords - is `password` equal to user.password before login

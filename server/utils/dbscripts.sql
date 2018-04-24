@@ -4,7 +4,7 @@ CREATE TABLE `foa`.`user` (
      `lname` VARCHAR(45) NULL,
      `uname` VARCHAR(45) NOT NULL,
      `email` VARCHAR(45) NULL,
-     `password` VARCHAR(45) NULL,
+     `password` VARCHAR(250) NULL,
      `phone` VARCHAR(45) NULL,
      `address` VARCHAR(45) NULL,
      `accesslevel` INT NULL DEFAULT NULL ,

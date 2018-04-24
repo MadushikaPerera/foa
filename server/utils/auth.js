@@ -12,23 +12,22 @@ function tokenForUser(user) {
 }
 
 const hashPassword = function(password) {
-  console.log(password);
-  // generate a salt then run callback
-  bcrypt.genSalt(10, function(err, salt) {
-    if (err) {
-      console.log(err);
-      return next(err);
-    }
-    console.log(salt);
-    // hash (encrypt) our password using the sale
-    bcrypt.hash(password, salt, null, function(err, hash) {
+  return new Promise(function(resolve, reject) {
+    // generate a salt then run callback
+    bcrypt.genSalt(10, function(err, salt) {
       if (err) {
-        console.log(err);
-        return next(err);
+        reject(err);
       }
-      console.log(hash);
-      //overwrite plain text password with encrypted password
-      return hash;
+      console.log(salt);
+      // hash (encrypt) our password using the sale
+      bcrypt.hash(password, salt, null, function(err, hash) {
+        if (err) {
+          reject(err);
+        }
+        console.log(hash);
+        //overwrite plain text password with encrypted password
+        resolve(hash);
+      });
     });
   });
 };
@@ -39,7 +38,8 @@ exports.signin = function(req, res, next) {
   res.send({ token: tokenForUser(req.user) });
 };
 
-exports.signup = function(req, res, next) {
+exports.signup = async function(req, res, next) {
+  const password = await hashPassword(req.body.password);
   const fname = req.body.fname;
   const lname = req.body.lname;
   const uname = req.body.uname;
@@ -47,7 +47,6 @@ exports.signup = function(req, res, next) {
   const address = req.body.address;
   const phone = req.body.phone;
   const accesslevel = req.body.access;
-  const password = hashPassword(req.body.password);
 
   if (!email || !password) {
     return res
@@ -55,7 +54,7 @@ exports.signup = function(req, res, next) {
       .send({ error: 'You must provide email and password' });
   }
 
-  pool.getconn(function(err, conn) {
+  pool.getConnection(function(err, conn) {
     if (err) {
     } else {
       // See if a user with given email exists
@@ -67,7 +66,7 @@ exports.signup = function(req, res, next) {
           }
 
           // If a user with email does exist, return an error
-          if (result) {
+          if (result.length < 0) {
             return res.status(422).send({ error: 'Email is in use' });
           }
 
