@@ -1,7 +1,7 @@
-const jwt = require("jwt-simple");
-const bcrypt = require("bcrypt-nodejs");
-const pool = require("./dbconnection");
-require("dotenv").config();
+const jwt = require('jwt-simple');
+const bcrypt = require('bcrypt-nodejs');
+const pool = require('./dbconnection');
+require('dotenv').config();
 
 function tokenForUser(user) {
   const timpestamp = new Date().getTime();
@@ -10,6 +10,28 @@ function tokenForUser(user) {
     process.env.JWT_KEY
   );
 }
+
+const hashPassword = function(password) {
+  console.log(password);
+  // generate a salt then run callback
+  bcrypt.genSalt(10, function(err, salt) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    console.log(salt);
+    // hash (encrypt) our password using the sale
+    bcrypt.hash(password, salt, null, function(err, hash) {
+      if (err) {
+        console.log(err);
+        return next(err);
+      }
+      console.log(hash);
+      //overwrite plain text password with encrypted password
+      return hash;
+    });
+  });
+};
 
 exports.signin = function(req, res, next) {
   // User had already had their email and pass auth'd
@@ -25,12 +47,12 @@ exports.signup = function(req, res, next) {
   const address = req.body.address;
   const phone = req.body.phone;
   const accesslevel = req.body.access;
-  const password = req.body.password;
+  const password = hashPassword(req.body.password);
 
   if (!email || !password) {
     return res
       .status(422)
-      .send({ error: "You must provide email and password" });
+      .send({ error: 'You must provide email and password' });
   }
 
   pool.getconn(function(err, conn) {
@@ -46,7 +68,7 @@ exports.signup = function(req, res, next) {
 
           // If a user with email does exist, return an error
           if (result) {
-            return res.status(422).send({ error: "Email is in use" });
+            return res.status(422).send({ error: 'Email is in use' });
           }
 
           // If a user email does NOT exist, create and save user record
