@@ -9,16 +9,16 @@ require('dotenv').config();
 
 const comparePassword = function(candidatePassword, password) {
   return new Promise(function(resolve, reject) {
-  bcrypt.compare(candidatePassword, password, function(err, isMatch) {
-    if (err) {
-      reject(false);
-    }
-    if (!isMatch) {
-      reject(false);
-    }
-    resolve(true);
+    bcrypt.compare(candidatePassword, password, function(err, isMatch) {
+      if (err) {
+        reject(false);
+      }
+      if (!isMatch) {
+        reject(false);
+      }
+      resolve(true);
+    });
   });
- });
 };
 
 // Create local strategy
@@ -37,22 +37,32 @@ const localLogin = new LocalStrategy(localOptions, function(
       res.json({ error: true });
     } else {
       conn.query(
-        "select email,password from user where email='" + email + "' ",
+        "select email,password,uname,fname from user where email='" +
+          email +
+          "' ",
         async function(err1, records) {
-          if (err1) {
-            return done(err);
+          try {
+            if (err1) {
+              return done(err);
+            }
+            if (records.legth < 0) {
+              return done(null, false);
+            }
+
+            let isPassword = await comparePassword(
+              password,
+              records[0].password
+            );
+            // compare passwords - is `password` equal to user.password before login
+            if (isPassword) {
+              return done(null, JSON.stringify(records[0]));
+            } else {
+              return done(null, false);
+            }
+            conn.release();
+          } catch (err) {
+            console.log(err);
           }
-          if (records.legth < 0) {
-            return done(null, false);
-          }
-          let isPassword = await comparePassword(password, JSON.stringify(records[0].password));
-          // compare passwords - is `password` equal to user.password before login
-          if (isPassword) {
-            return done(null, JSON.stringify(records[0]));
-          } else {
-            return done(null, false);
-          }
-          conn.release();
         }
       );
     }
@@ -67,7 +77,7 @@ const jwtOptions = {
 
 // Create JWT Strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
-  // See if the use ID in the payload exists in our database
+  // See if the use uname in the payload exists in our database
   // If it does, call 'done' with that user
   // otherwise, call done without a user object
   pool.getConnection(function(err, conn) {
@@ -79,11 +89,13 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
         "select * from user where uname='" + payload.sub + "' ",
         function(err1, records, fields) {
           if (err1) {
-            return done(err, false);
+            done(err, false);
           }
 
-          if (records) {
-            done(null, JSON.stringify(records));
+          if (JSON.stringify(records[0]).length > 0) {
+            let user = JSON.parse(JSON.stringify(records[0]));
+            console.log('true baby');
+            done(null, user);
           } else {
             done(null, false);
           }

@@ -18,13 +18,11 @@ const hashPassword = function(password) {
       if (err) {
         reject(err);
       }
-      console.log(salt);
       // hash (encrypt) our password using the sale
       bcrypt.hash(password, salt, null, function(err, hash) {
         if (err) {
           reject(err);
         }
-        console.log(hash);
         //overwrite plain text password with encrypted password
         resolve(hash);
       });
@@ -34,8 +32,8 @@ const hashPassword = function(password) {
 
 exports.signin = function(req, res, next) {
   // User had already had their email and pass auth'd
-  //  We just need to give them a token
-  res.send({ token: tokenForUser(req.user) });
+  //  We just need to give them a tokens
+  res.send({ token: tokenForUser(JSON.parse(req.user)) });
 };
 
 exports.signup = async function(req, res, next) {
