@@ -4,6 +4,7 @@ import { MaterialModule } from './material/material.module';
 import { RoutingModule, routingComponents } from './routing/routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
+import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { NgxGalleryModule } from 'ngx-gallery';
 
@@ -25,8 +26,13 @@ import { InventoryComponent } from './components/inventory/inventory.component';
 import { DeliveryComponent } from './components/delivery/delivery.component';
 import { RestaurantComponent } from './components/restaurant/restaurant.component';
 import { AdminComponent } from './components/admin/admin.component';
-
 import { AuthenticationService } from './services/authentication.service';
+import { UserService } from './services/user.service';
+import { EmployeeService } from './services/employee.service';
+import { RestaurantService } from './services/restaurant.service';
+import { MealService } from './services/meal.service';
+import { DeliveryService } from './services/delivery.service';
+import { DriverService } from './services/driver.service';
 
 @NgModule({
   declarations: [
@@ -59,9 +65,18 @@ import { AuthenticationService } from './services/authentication.service';
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
       apiKey: environment.apiKey
     }),
-    NgxGalleryModule
+    NgxGalleryModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthenticationService,
+    UserService,
+    EmployeeService,
+    RestaurantService,
+    MealService,
+    DeliveryService,
+    DriverService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
