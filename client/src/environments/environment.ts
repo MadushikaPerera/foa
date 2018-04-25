@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  apiKey: "AIzaSyD-9Sg9L5y4QlY1qFNopDwvZznmxTJFi2U"
+  apiKey: 'AIzaSyD-9Sg9L5y4QlY1qFNopDwvZznmxTJFi2U',
+  host: 'http://localhost:3000'
 };

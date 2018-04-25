@@ -61,7 +61,7 @@ const localLogin = new LocalStrategy(localOptions, function(
             }
             conn.release();
           } catch (err) {
-            console.log(err);
+            return done(err);
           }
         }
       );
@@ -82,7 +82,6 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
   // otherwise, call done without a user object
   pool.getConnection(function(err, conn) {
     if (err) {
-      console.log('error');
       res.json({ error: true });
     } else {
       conn.query(
@@ -94,7 +93,6 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
 
           if (JSON.stringify(records[0]).length > 0) {
             let user = JSON.parse(JSON.stringify(records[0]));
-            console.log('true baby');
             done(null, user);
           } else {
             done(null, false);
