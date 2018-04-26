@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
@@ -16,24 +17,39 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
     this.authenticationService.logout();
   }
 
-  // login(): void {
-  //   this.loading = true;
-  //   this.authenticationService
-  //     .login(this.email, this.password)
-  //     .subscribe(result => {
-  //       if (result === true) {
-  //         this.router.navigate(['/']);
-  //       } else {
-  //         this.error = 'Username or password is incorrect';
-  //         this.loading = false;
-  //       }
-  //     });
-  // }
+  login(): void {
+    if (this.email && this.password) {
+      this.loading = true;
+      this.authenticationService
+        .login(this.email, this.password)
+        .subscribe(result => {
+          if (result === true) {
+            this.router.navigate(['/orders']);
+          } else {
+            this.error = 'Email or Password is incorrect';
+            this.loading = false;
+            this.openSnackBar(this.error, 'Error');
+          }
+        });
+    } else {
+      this.error = 'Email or Password cannot be empty';
+      this.loading = false;
+      console.log(this.error);
+      this.openSnackBar(this.error, 'Error');
+    }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
+    });
+  }
 }

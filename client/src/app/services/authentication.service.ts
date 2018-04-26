@@ -3,47 +3,38 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
+import { Auth } from '../model/auth';
 
 @Injectable()
 export class AuthenticationService {
   public token: string;
   constructor(private http: HttpClient) {
     // set token if saved in local storage
-    var currentUser = JSON.parse(localStorage.getItem('User'));
-    this.token = currentUser && currentUser.token;
   }
 
-  // login(email: string, password: string): Observable<boolean> {
-  //   return this.http
-  //     .post(
-  //       environment.host + '/signin',
-  //       JSON.stringify({ email: email, password: password })
-  //     )
-  //     .map((response: Response) => {
-  //       // login successful if there's a jwt token in the response
-  //       let token = response.json() && response.json().token;
-  //       if (token) {
-  //         // set token property
-  //         this.token = token;
-
-  //         // store email and jwt token in local storage to keep user logged in between page refreshes
-  //         localStorage.setItem(
-  //           'User',
-  //           JSON.stringify({ email: email, token: token })
-  //         );
-
-  //         // return true to indicate successful login
-  //         return true;
-  //       } else {
-  //         // return false to indicate failed login
-  //         return false;
-  //       }
-  //     });
-  // }
+  login(email: string, password: string): Observable<boolean> {
+    return this.http
+      .post(environment.host + '/signin', { email: email, password: password })
+      .map((response: Auth) => {
+        // login successful if there's a jwt token in the response
+        if (response.token.length > 0) {
+          // set token property
+          // store uname and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('usertoken', response.token);
+          localStorage.setItem('user', response.uname);
+          // return true to indicate successful login
+          return true;
+        }
+        // return false to indicate failed login
+        // return false;
+        return false;
+      });
+  }
 
   logout() {
     // remove user from local storage to log user out
     this.token = null;
-    localStorage.removeItem('User');
+    localStorage.removeItem('usertoken');
+    localStorage.removeItem('user');
   }
 }
