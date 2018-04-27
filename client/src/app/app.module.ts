@@ -33,6 +33,7 @@ import { RestaurantService } from './services/restaurant.service';
 import { MealService } from './services/meal.service';
 import { DeliveryService } from './services/delivery.service';
 import { DriverService } from './services/driver.service';
+import { AuthguardGuard } from './authguard.guard';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { DriverService } from './services/driver.service';
     RestaurantService,
     MealService,
     DeliveryService,
-    DriverService
+    DriverService,
+    AuthguardGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -1,49 +1,54 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { RouterModule, Routes } from "@angular/router";
-import { LoginComponent } from "../components/login/login.component";
-import { NotfoundComponent } from "../components/notfound/notfound.component";
-import { RegisterComponent } from "../components/register/register.component";
-import { AppComponent } from "../app.component";
-import { OrdersListComponent } from "../components/orders-list/orders-list.component";
-import { MapComponent } from "../components/map/map.component";
-import { RestaurantComponent } from "../components/restaurant/restaurant.component";
-import { FoodCardComponent } from "../components/food-card/food-card.component";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from '../components/login/login.component';
+import { NotfoundComponent } from '../components/notfound/notfound.component';
+import { RegisterComponent } from '../components/register/register.component';
+import { AppComponent } from '../app.component';
+import { OrdersListComponent } from '../components/orders-list/orders-list.component';
+import { MapComponent } from '../components/map/map.component';
+import { RestaurantComponent } from '../components/restaurant/restaurant.component';
+import { FoodCardComponent } from '../components/food-card/food-card.component';
+import { AuthguardGuard } from '../authguard.guard';
 
 const routes: Routes = [
   {
-    path: "login",
-    pathMatch: "full",
+    path: 'login',
+    pathMatch: 'full',
     component: LoginComponent
   },
   {
-    path: "signup",
-    pathMatch: "full",
+    path: 'signup',
+    pathMatch: 'full',
     component: RegisterComponent
   },
   {
-    path: "orders",
-    pathMatch: "full",
+    path: 'orders',
+    pathMatch: 'full',
+    canActivate: [AuthguardGuard],
     component: OrdersListComponent
   },
   {
-    path: "restaurant",
-    pathMatch: "full",
+    path: 'restaurant',
+    pathMatch: 'full',
+    canActivate: [AuthguardGuard],
     component: RestaurantComponent
   },
   {
-    path: "food",
-    pathMatch: "full",
+    path: 'food',
+    pathMatch: 'full',
+    canActivate: [AuthguardGuard],
     component: FoodCardComponent
   },
   {
-    path: "map",
-    pathMatch: "full",
+    path: 'map',
+    pathMatch: 'full',
+    canActivate: [AuthguardGuard],
     component: MapComponent
   },
   {
-    path: "**",
-    pathMatch: "full",
+    path: '**',
+    pathMatch: 'full',
     component: NotfoundComponent
   }
 ];
