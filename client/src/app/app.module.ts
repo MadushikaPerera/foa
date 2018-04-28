@@ -4,7 +4,7 @@ import { MaterialModule } from './material/material.module';
 import { RoutingModule, routingComponents } from './routing/routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { NgxGalleryModule } from 'ngx-gallery';
 
@@ -34,6 +34,7 @@ import { MealService } from './services/meal.service';
 import { DeliveryService } from './services/delivery.service';
 import { DriverService } from './services/driver.service';
 import { AuthguardGuard } from './authguard.guard';
+import { TokenInterceptor } from './services/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,12 @@ import { AuthguardGuard } from './authguard.guard';
     MealService,
     DeliveryService,
     DriverService,
-    AuthguardGuard
+    AuthguardGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
