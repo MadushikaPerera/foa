@@ -72,18 +72,18 @@ import { TokenInterceptor } from './services/token.interceptor';
   ],
   providers: [
     AuthenticationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     UserService,
     EmployeeService,
     RestaurantService,
     MealService,
     DeliveryService,
     DriverService,
-    AuthguardGuard,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
+    AuthguardGuard
   ],
   bootstrap: [AppComponent]
 })

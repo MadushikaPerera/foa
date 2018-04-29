@@ -11,11 +11,14 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor() {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
-    request = request.clone({
-      setHeaders: {
-        Authorization: localStorage.getItem('usertoken')
-      }
-    });
+    if('usertoken' in localStorage){
+      request = request.clone({
+        setHeaders: {
+          Authorization: localStorage.getItem('usertoken')
+        }
+      });
+  }
+
     return next.handle(request);
   }
 }
