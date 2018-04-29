@@ -1,3 +1,36 @@
 <p>
-  inventory works!
+  <b>Inventory works!</b>
 </p>
+<mat-grid-list cols="3" rowHeight="1:1">
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <img mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1200px-Good_Food_Display_-_NCI_Visuals_Online.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <a mat-button color="primary" class="inventory-card-button">Food Items</a>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="button-row">
+          <button mat-button class="food-card-button" (click)="openFoodDialog()">Add Food Items</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <img mat-card-image src="http://2.bp.blogspot.com/-BWEWT5d-sZM/Tb0qAnRxIEI/AAAAAAAAAWU/kzBHkdFQ6O0/s1600/800bikes.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <a mat-button color="primary" class="inventory-card-button">Vehicles</a>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="button-row">
+          <button mat-button class="food-card-button" (click)="openVehicleDialog()">Add Vehicles</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+
+

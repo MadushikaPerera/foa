@@ -29,12 +29,16 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
 import { EmployeeService } from './services/employee.service';
-import { RestaurantService } from './services/restaurant.service';
-import { MealService } from './services/meal.service';
 import { DeliveryService } from './services/delivery.service';
 import { DriverService } from './services/driver.service';
+import {InventoryService} from './services/inventory.service';
 import { AuthguardGuard } from './authguard.guard';
 import { TokenInterceptor } from './services/token.interceptor';
+import { CartComponent } from './components/cart/cart.component';
+import { VehicleDialogComponent } from './components/inventory/vehicle-dialog/vehicle-dialog.component';
+import { FoodDialogComponent } from './components/inventory/food-dialog/food-dialog.component';
+
+
 
 @NgModule({
   declarations: [
@@ -54,7 +58,10 @@ import { TokenInterceptor } from './services/token.interceptor';
     InventoryComponent,
     DeliveryComponent,
     RestaurantComponent,
-    AdminComponent
+    AdminComponent,
+    CartComponent,
+    VehicleDialogComponent,
+    FoodDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -79,11 +86,13 @@ import { TokenInterceptor } from './services/token.interceptor';
     },
     UserService,
     EmployeeService,
-    RestaurantService,
-    MealService,
     DeliveryService,
     DriverService,
-    AuthguardGuard
+    AuthguardGuard,
+    InventoryService
+  ],
+  entryComponents:[
+    FoodDialogComponent,VehicleDialogComponent
   ],
   bootstrap: [AppComponent]
 })

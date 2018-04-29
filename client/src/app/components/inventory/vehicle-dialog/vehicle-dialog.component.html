@@ -1,0 +1,18 @@
+<h2 mat-dialog-title class="example-container">Vehicles</h2>
+<mat-dialog-content>
+    <div >
+        <mat-form-field>
+          <input matInput placeholder="Brand">
+        </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Model">
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput placeholder="License Number">
+          </mat-form-field>
+      </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button (click)="addVehicle()">Add Vehicle</button>
+  <button mat-raised-button (click)="closeDialog()">cancel</button>
+</mat-dialog-actions>

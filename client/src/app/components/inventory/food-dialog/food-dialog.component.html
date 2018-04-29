@@ -1,0 +1,26 @@
+<h2 mat-dialog-title class="example-container">Food Item</h2>
+<mat-dialog-content>
+    <div >
+        <mat-form-field>
+          <input matInput placeholder="Meal Name">
+        </mat-form-field>
+        <mat-form-field>
+                <mat-select placeholder="Type">
+                  <mat-option value="option">Option</mat-option>
+                  <mat-option value="option">Option</mat-option>
+                  <mat-option value="option">Option</mat-option>
+                  <mat-option value="option">Option</mat-option>
+                </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Price">
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput placeholder="Quantity">
+          </mat-form-field>
+      </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button (click)="addFoodItem()">Add Food</button>
+  <button mat-raised-button (click)="closeDialog()">cancel</button>
+</mat-dialog-actions>

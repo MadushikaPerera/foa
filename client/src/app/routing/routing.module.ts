@@ -9,6 +9,7 @@ import { OrdersListComponent } from '../components/orders-list/orders-list.compo
 import { MapComponent } from '../components/map/map.component';
 import { RestaurantComponent } from '../components/restaurant/restaurant.component';
 import { FoodCardComponent } from '../components/food-card/food-card.component';
+import {InventoryComponent} from '../components/inventory/inventory.component';
 import { AuthguardGuard } from '../authguard.guard';
 
 const routes: Routes = [
@@ -45,6 +46,12 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthguardGuard],
     component: MapComponent
+  },
+  {
+    path: 'inventory',
+    pathMatch: 'full',
+    canActivate: [AuthguardGuard],
+    component: InventoryComponent
   },
   {
     path: '**',
