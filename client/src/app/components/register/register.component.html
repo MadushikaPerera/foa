@@ -1,38 +1,73 @@
 <mat-card>
 <form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Company (disabled)"  value="Google">
-  </mat-form-field>
-
-  <table class="example-full-width" cellspacing="0"><tr>
-    <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="First name">
-    </mat-form-field></td>
-    <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="Long Last Name That Will Be Truncated">
-    </mat-form-field></td>
-  </tr></table>
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+        <input matInput placeholder="First name" name="fname" [(ngModel)]="fname">
+        </mat-form-field>
+      </td>
+      <td>
+          <mat-form-field class="example-full-width">
+          <input matInput placeholder="Last Name" [(ngModel)]="lname" name="lname">
+        </mat-form-field>
+      </td>
+    </tr>
+  <tr>
+      <td>
+          <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" [(ngModel)]="email" name="email">
+        </mat-form-field>
+      </td>
+      <td>
+          <mat-form-field class="example-full-width">
+          <input matInput placeholder="Phone" [(ngModel)]="phone" name="phone">
+          </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+      <td>
+          <mat-form-field class="example-full-width">
+              <input matInput placeholder="Username" [(ngModel)]="uname" name="uname">
+              </mat-form-field>
+      </td>
+    </tr>
+</table>
 
   <p>
     <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Address 2"></textarea>
+      <textarea matInput placeholder="Address" [(ngModel)]="address" name="address"></textarea>
     </mat-form-field>
   </p>
 
-  <table class="example-full-width" cellspacing="0"><tr>
-    <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="City">
-    </mat-form-field></td>
-    <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="State">
-    </mat-form-field></td>
-    <td><mat-form-field class="example-full-width">
-      <input matInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
-      <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-    </mat-form-field></td>
-  </tr></table>
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+    <td>
+      <span>
+        <button mat-button [matMenuTriggerFor]="menu">Access Level</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="Signup('admin')" >Admin</button>
+          <button mat-menu-item (click)="Signup('user')">User</button>
+        </mat-menu>
+      </span>
+    </td>
+    </tr>
+    <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+      <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password">
+        <mat-hint align="end">Min 8 length</mat-hint>
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+  <td>
+      <button mat-raised-button color="primary" (click)="Signup()" >Signup</button>
+    </td>
+    <td>
+        <button mat-raised-button  color="primary">Cancel</button>
+    </td>
+  </tr>
+</table>
 </form>
 </mat-card>
