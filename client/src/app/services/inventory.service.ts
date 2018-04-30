@@ -9,6 +9,10 @@ import {Vehicle} from '../model/vehicle';
 @Injectable()
 export class InventoryService {
 
+  public foodlist: Food[];
+  public vehiclelist: Vehicle[];
+
+
   constructor(private http: HttpClient) { }
 
   addFoodItem( 
@@ -19,6 +23,7 @@ export class InventoryService {
     description:string): Observable<boolean> {
     return this.http
     .post(environment.host + '/addfood', {
+      name:name,
       type : type,
       price : price,
       quantity : quantity,
@@ -26,17 +31,22 @@ export class InventoryService {
     .map((response: Food) => {
       // signup successful
       if (response) {
+        console.log('food added',response);
+        
         return true;
       }
       return false;
     });
   }
 
-  // getFoodItems(): Observable<Food[]> {
-  //   // return this.http.get(environment.host + '/getfooditems').map((response: Response)=>{
-  //   //   return <Food>response.json();
-  //   // }).catch(this.handleError);
-  // }
+  getFoodItems(){
+    return this.http.get(environment.host + '/getfooditems')
+      .map((response)=>{
+        let foodlist = response as Food[];
+        console.log(foodlist);
+        return foodlist;
+    });
+  }
 
   deleteFoodItem(mid:string): Observable<boolean> {
     return this.http
@@ -54,7 +64,8 @@ export class InventoryService {
     brand:string,
     model:string,
     licenseno:string,
-    dob:string): Observable<boolean> {
+    dob:string,
+    quantity:number): Observable<boolean> {
     return this.http
     .post(environment.host + '/addvehicle', {
       brand : brand,
@@ -63,6 +74,7 @@ export class InventoryService {
       dob : dob})
     .map((response: Vehicle) => {
       // signup successful
+      console.log('Vehicle added',response);
       if (response) {
         return true;
       }
@@ -79,6 +91,15 @@ export class InventoryService {
         return true;
       }
       return false;
+    });
+  }
+
+  getVehicles(){
+    return this.http.get(environment.host + '/getvehicles')
+      .map((response)=>{
+        let vehiclelist = response as Vehicle[];
+        console.log(vehiclelist);
+        return vehiclelist;
     });
   }
 

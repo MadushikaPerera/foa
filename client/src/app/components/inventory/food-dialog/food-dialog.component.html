@@ -2,21 +2,24 @@
 <mat-dialog-content>
     <div >
         <mat-form-field>
-          <input matInput placeholder="Meal Name">
+          <input matInput placeholder="Meal Name" [(ngModel)]="mealname" name="mealname">
         </mat-form-field>
         <mat-form-field>
-                <mat-select placeholder="Type">
-                  <mat-option value="option">Option</mat-option>
-                  <mat-option value="option">Option</mat-option>
-                  <mat-option value="option">Option</mat-option>
-                  <mat-option value="option">Option</mat-option>
+                <mat-select placeholder="Type" [(ngModel)]="type">
+                  <mat-option value="Rice" [value]="Rice">Rice</mat-option>
+                  <mat-option value="Shorties" [value]="Shorties">Shorties</mat-option>
+                  <mat-option value="Drink" [value]="Drink">Drink</mat-option>
+                  <mat-option value="Dessert" [value]="Dessert">Dessert</mat-option>
                 </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Price">
+            <input matInput placeholder="Price" [(ngModel)]="price" name="price">
           </mat-form-field>
           <mat-form-field>
-              <input matInput placeholder="Quantity">
+            <input matInput placeholder="Description" [(ngModel)]="description" name="description">
+          </mat-form-field>
+          <mat-form-field> 
+              <input matInput placeholder="Quantity" [(ngModel)]="quantity" name="quantity">
           </mat-form-field>
       </div>
 </mat-dialog-content>

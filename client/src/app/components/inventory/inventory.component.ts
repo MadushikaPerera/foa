@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {FoodDialogComponent} from './food-dialog/food-dialog.component';
 import {VehicleDialogComponent} from './vehicle-dialog/vehicle-dialog.component';
+import {InventoryService} from '../../services/inventory.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import {VehicleDialogComponent} from './vehicle-dialog/vehicle-dialog.component'
 })
 export class InventoryComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,private inventoryservice:InventoryService) { }
 
   ngOnInit() {
     
@@ -34,6 +35,21 @@ export class InventoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+    });
+  }
+
+  getfoods(){
+    this.inventoryservice.getFoodItems().subscribe(result => {  
+      console.log('menna',result);
+      
+    });
+    
+  }
+
+  getVehicles(){
+    this.inventoryservice.getVehicles().subscribe(result => {  
+      console.log('menna',result);
+      
     });
   }
 
