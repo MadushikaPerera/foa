@@ -25,6 +25,7 @@ CREATE TABLE `foa`.`delivery` (
      PRIMARY KEY (`did`),
      UNIQUE INDEX `vno_UNIQUE` (`vehicleno` ASC));
 
+
 CREATE TABLE `foa`.`vehicle` (
      `vid` INT NOT NULL,
      `brand` VARCHAR(45) NULL,
@@ -49,11 +50,11 @@ CREATE TABLE `foa`.`driver` (
 
 CREATE TABLE `foa`.`meal` (
      `mid` INT NOT NULL,
-     `rid` INT NULL,
      `name` VARCHAR(45) NULL,
      `type` VARCHAR(45) NULL,
      `price` DOUBLE NULL,
-     `quantity` VARCHAR(45) NULL,
+     `description` VARCHAR(200),
+     `quantity` INT NULL,
      `active` VARCHAR(45) NULL DEFAULT 'true',
       PRIMARY KEY (`mid`));
 
