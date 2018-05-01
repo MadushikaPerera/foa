@@ -5,6 +5,6 @@ export class User {
      email : string;
      address : string;
      phone : string;
-     accesslevel : number;
+     accesslevel : string;
      password : string;
 }

@@ -7,7 +7,7 @@ CREATE TABLE `foa`.`user` (
      `password` VARCHAR(250) NULL,
      `phone` VARCHAR(45) NULL,
      `address` VARCHAR(45) NULL,
-     `accesslevel` INT NULL DEFAULT NULL ,
+     `accesslevel` VARCHAR(45) NULL,
      `active` VARCHAR(45) NULL DEFAULT 'true',
      PRIMARY KEY (`uid`),
      UNIQUE INDEX `UNIQUE` (`uname` ASC));

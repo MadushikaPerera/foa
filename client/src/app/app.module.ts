@@ -37,6 +37,11 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { CartComponent } from './components/cart/cart.component';
 import { VehicleDialogComponent } from './components/inventory/vehicle-dialog/vehicle-dialog.component';
 import { FoodDialogComponent } from './components/inventory/food-dialog/food-dialog.component';
+import { FoodTableComponent } from './components/inventory/food-table/food-table.component';
+import { VehicleTableComponent } from './components/inventory/vehicle-table/vehicle-table.component';
+import { AddComponent } from './components/inventory/food-table/add/add.component';
+import { DeleteComponent } from './components/inventory/food-table/delete/delete.component';
+import { EditComponent } from './components/inventory/food-table/edit/edit.component';
 
 
 
@@ -61,7 +66,12 @@ import { FoodDialogComponent } from './components/inventory/food-dialog/food-dia
     AdminComponent,
     CartComponent,
     VehicleDialogComponent,
-    FoodDialogComponent
+    FoodDialogComponent,
+    FoodTableComponent,
+    VehicleTableComponent,
+    AddComponent,
+    DeleteComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

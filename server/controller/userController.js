@@ -45,7 +45,7 @@ exports.addUser = function(req, res, next) {
         password: req.body.password,
         phone: req.body.phone,
         address: req.body.address,
-        accesslevel: req.body.accesslevel
+       accesslevel: req.body.accesslevel
       };
       console.log(User);
       conn.query("INSERT INTO user SET ?", User, function(err1, records) {

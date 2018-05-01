@@ -16,10 +16,11 @@ export class RegisterComponent implements OnInit {
     email : string;
     address : string;
     phone : string;
-    accesslevel : number;
+    accesslevel : string;
     password : string;
     error = '';
     loading = false;
+    
 
   constructor(private router: Router,
     private userService: UserService,
@@ -32,17 +33,18 @@ export class RegisterComponent implements OnInit {
 
   setAccess(type:string):void{
     if(type === 'admin'){
-      this.accesslevel = 1;
+      this.accesslevel = '1';
     }
     else{
-      this.accesslevel = 2;
+      this.accesslevel = '2';
     }
   }
 
 
   Signup():void{
-    if (this.fname && this.lname && this.uname && this.email && this.address && this.phone && this.accesslevel && this.password) {
+    if (this.fname && this.lname && this.uname && this.email && this.address && this.phone  && this.password) {
       this.loading = true;
+      this.accesslevel = '1';
       this.userService.signup(this.fname,
         this.lname ,
         this.uname ,

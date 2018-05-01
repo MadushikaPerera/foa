@@ -17,7 +17,7 @@ export class UserService {
     email : string,
     address : string,
     phone : string,
-    accesslevel : number,
+    accesslevel : string,
     password : string): Observable<boolean> {
     return this.http
       .post(environment.host + '/signup', {fname : fname,
