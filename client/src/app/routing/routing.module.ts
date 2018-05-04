@@ -11,6 +11,7 @@ import { RestaurantComponent } from '../components/restaurant/restaurant.compone
 import { FoodCardComponent } from '../components/food-card/food-card.component';
 import {InventoryComponent} from '../components/inventory/inventory.component';
 import {FoodTableComponent} from '../components/inventory/food-table/food-table.component';
+import {VehicleTableComponent} from '../components/inventory/vehicle-table/vehicle-table.component';
 import { AuthguardGuard } from '../authguard.guard';
 
 const routes: Routes = [
@@ -59,6 +60,12 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthguardGuard],
     component: FoodTableComponent
+  },
+  {
+    path: 'vehicles',
+    pathMatch: 'full',
+    canActivate: [AuthguardGuard],
+    component: VehicleTableComponent
   },
   {
     path: '**',

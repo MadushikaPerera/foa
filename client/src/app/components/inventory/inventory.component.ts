@@ -3,6 +3,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {FoodDialogComponent} from './food-dialog/food-dialog.component';
 import {VehicleDialogComponent} from './vehicle-dialog/vehicle-dialog.component';
 import {InventoryService} from '../../services/inventory.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {InventoryService} from '../../services/inventory.service';
 })
 export class InventoryComponent implements OnInit {
 
-  constructor(public dialog: MatDialog,private inventoryservice:InventoryService) { }
+  constructor(public dialog: MatDialog,private inventoryservice:InventoryService,private router: Router) { }
 
   ngOnInit() {
     
@@ -39,18 +40,11 @@ export class InventoryComponent implements OnInit {
   }
 
   getfoods(){
-    this.inventoryservice.getFoodItems().subscribe(result => {  
-      console.log('menna',result);
-      
-    });
-    
+    this.router.navigate(['/foods']);
   }
 
   getVehicles(){
-    this.inventoryservice.getVehicles().subscribe(result => {  
-      console.log('menna',result);
-      
-    });
+    this.router.navigate(['/vehicles']);
   }
 
 }
