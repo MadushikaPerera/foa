@@ -41,7 +41,7 @@ export class UserProfileComponent implements OnInit {
     if (this.fname && this.lname && this.phone && this.address) {
       this.loading = true;
       let user ={
-        uname:'kh123',
+        uname:localStorage.getItem('uname'),
         fname:this.fname,
         lname:this.lname,
         phone:this.phone,
@@ -52,8 +52,8 @@ export class UserProfileComponent implements OnInit {
         .subscribe(result => {
           if (result === true) {
             this.loading = false;
-            this.openSnackBar('User Updated', 'Success');
             this.loaduser();
+            this.openSnackBar('User Updated', 'Success');
           } else {
             this.error = 'Error occured please try again!';
             this.loading = false;

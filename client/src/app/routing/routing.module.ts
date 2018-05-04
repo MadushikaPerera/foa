@@ -57,11 +57,6 @@ const routes: Routes = [
     component: UserProfileComponent
   },
   {
-    path: '**',
-    pathMatch: 'full',
-    component: NotfoundComponent
-  },
-  {
     path: 'foods',
     pathMatch: 'full',
     canActivate: [AuthguardGuard],
@@ -72,7 +67,12 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthguardGuard],
     component: VehicleTableComponent
-   }
+   },
+   {
+    path: '**',
+    pathMatch: 'full',
+    component: NotfoundComponent
+  }
 ];
 
 @NgModule({
