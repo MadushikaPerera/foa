@@ -69,20 +69,21 @@ exports.updateUser = function(req, res, next) {
       let User = {
         fname: req.body.fname,
         lname: req.body.lname,
-        email: req.body.email,
-        password: req.body.password,
         phone: req.body.phone,
-        address: req.body.address,
-        accesslevel: req.body.accesslevel
+        address: req.body.address
       };
+      console.log(User);
+      
       conn.query(
         "UPDATE user SET ? WHERE uname = '" + req.body.uname + "' ",
         User,
         function(err1, records) {
-          if (!err1) {
-            // do something
-            console.log("Number of records inserted: " + records.affectedRows);
-            res.json(records);
+          if (err1) {
+            
+            res.json(false);
+          }else{
+            console.log(records);
+            res.json(true);
           }
           conn.release();
         }
@@ -111,6 +112,24 @@ exports.deleteUser = function(req, res, next) {
           conn.release();
         }
       );
+    }
+  });
+};
+
+exports.getUser = function(req, res, next) {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+      console.log("error");
+      res.json({ error: true });
+    } else {
+      conn.query("SELECT fname,lname,phone,address FROM user WHERE uname = '" +
+      req.query.uname +
+      "' ", function(err1, records) {        
+        if (!err1) {
+          res.json(records);
+        }
+        conn.release();
+      });
     }
   });
 };

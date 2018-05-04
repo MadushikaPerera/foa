@@ -20,13 +20,6 @@
               </mat-form-field>
           </td>
         </tr>
-        <tr>
-          <td>
-              <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Username" [(ngModel)]="uname" name="uname">
-                  </mat-form-field>
-          </td>
-        </tr>
     </table>
     
       <p>
@@ -36,28 +29,9 @@
       </p>
     
       <table class="example-full-width" cellspacing="0">
-        <tr>
-        <td>
-          <span>
-            <!-- <button mat-button [matMenuTriggerFor]="menu">Access Level</button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="Signup('admin')" >Admin</button>
-              <button mat-menu-item (click)="Signup('user')">User</button>
-            </mat-menu> -->
-          </span>
-        </td>
-        </tr>
-        <tr>
-        <td>
-          <mat-form-field class="example-full-width">
-          <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password">
-            <mat-hint align="end">Min 8 length</mat-hint>
-          </mat-form-field>
-        </td>
-      </tr>
       <tr>
       <td>
-          <button mat-raised-button color="primary" (click)="Signup()" >Save</button>
+          <button mat-raised-button color="primary" (click)="edit()" >Save</button>
         </td>
         <td>
             <button mat-raised-button  color="primary">Cancel</button>

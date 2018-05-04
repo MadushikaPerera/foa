@@ -6,7 +6,10 @@
         <mat-list-item [routerLink]="['/orders']"> Orders history</mat-list-item>
         <mat-list-item [routerLink]="['/restaurant']"> Order online</mat-list-item>
         <mat-list-item [routerLink]="['/inventory']"> Inventory</mat-list-item>
-        <mat-list-item [routerLink]="['/userProfile']"> Edit user</mat-list-item>
+        <mat-list-item [routerLink]="['/userProfile']"> Profile</mat-list-item>
+        <mat-list-item >
+            <button mat-button (click)="logout()"><mat-icon>launch</mat-icon>Logout</button>
+        </mat-list-item>
       </mat-list>
     </mat-sidenav>
     <mat-toolbar color="primary" style="min-height:64px;">
@@ -17,7 +20,7 @@
       </span>
       <span>Food Magic</span>
     </mat-toolbar>
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
     <div class="inner-sidenav-content scrollbar" id="style-4">
       <router-outlet></router-outlet>
     </div>

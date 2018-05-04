@@ -21,7 +21,8 @@ export class AuthenticationService {
           // set token property
           // store uname and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('usertoken', response.token);
-          localStorage.setItem('user', response.uname);
+          localStorage.setItem('uname', response.user);
+          
           // return true to indicate successful login
           return true;
         }
@@ -35,6 +36,10 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     this.token = null;
     localStorage.removeItem('usertoken');
-    localStorage.removeItem('user');
+    localStorage.removeItem('uname');
+  }
+
+  chekauth(){
+    return ('uname' in localStorage && 'token' in localStorage);
   }
 }

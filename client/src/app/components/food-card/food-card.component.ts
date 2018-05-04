@@ -9,6 +9,8 @@ export class FoodCardComponent implements OnInit {
 
   @Input()
   title:String;
+  @Input()
+  price:number;
 
   constructor() {
     this.title = "";

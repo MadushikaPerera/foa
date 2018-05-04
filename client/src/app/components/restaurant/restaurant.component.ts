@@ -4,6 +4,8 @@ import {
   NgxGalleryImage,
   NgxGalleryAnimation
 } from "ngx-gallery";
+import {Food} from '../../model/food';
+import {InventoryService} from '../../services/inventory.service';
 
 @Component({
   selector: "app-restaurant",
@@ -17,15 +19,17 @@ export class RestaurantComponent implements OnInit {
 
   meals : any[];
   types : any[];
-constructor() {
-  this.meals =[{text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-  {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-  {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-  {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'}];
+constructor(private inventoryservice:InventoryService) {
+  this.inventoryservice.getFoodItems().subscribe(res=>{
+    this.meals=res;
+    console.log('kaaama',this.meals);
+    
+  });
   this.types=[{title:'Fried Rice'},{title:'Rice & Curry'},{title:'Kottu'}];
 }
 
   ngOnInit(): void {
+    
     this.galleryOptions = [
       {
         width: "100%",
@@ -81,3 +85,4 @@ constructor() {
     ];
   }
 }
+

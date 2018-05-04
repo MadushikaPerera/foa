@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
@@ -37,11 +37,23 @@ export class UserService {
       });
   }
 
-  // getuser(uname : string): Observable<User[]> {
-  //           // add authorization header with jwt token
-  //           let headers = new Headers({ 'Authorization': localStorage.getItem('usertoken') });
-  //           let options = new RequestOptions({ headers: headers });
-  //  // return User;
-  // }
+  getuser(): Observable<User> {
+    return this.http.get(environment.host + '/getuser', {
+      params: new HttpParams().set('uname', localStorage.getItem('uname'))
+  }).map((response: User)=>{
+      let user = response as User;
+        return user;
+    });
+  }
+
+  edituser(data): Observable<boolean>{
+    return this.http.put(environment.host + '/edituser', data).map((response) => {
+      // signup successful
+      if (response) {
+        return true;
+      }
+      return false;
+    });
+  }
 
 }

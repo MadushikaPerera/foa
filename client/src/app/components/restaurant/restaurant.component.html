@@ -1,7 +1,7 @@
 <div>
-<!-- <mat-grid-list cols="1" >
+<mat-grid-list cols="1" rowHeight="4:1" >
     <mat-grid-tile><ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery></mat-grid-tile>
-</mat-grid-list> -->
+</mat-grid-list>
 
 
 <mat-chip-list>
@@ -12,13 +12,13 @@
 </mat-chip-list>
 
 
-<mat-grid-list cols="4" rowHeight="1:2">
+<mat-grid-list cols="5" rowHeight="1:2">
     <mat-grid-tile
       *ngFor="let meal of meals">
         <app-food-card
-        [title]="meal.text">
+        [price]="meal.price"
+        [title]="meal.name">
         </app-food-card>
-        
     </mat-grid-tile>
 </mat-grid-list>
 
