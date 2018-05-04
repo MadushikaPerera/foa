@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatPaginator, MatSort} from '@angular/material';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
@@ -10,6 +11,7 @@ import {EditComponent} from './edit/edit.component';
 import {DeleteComponent} from './delete/delete.component';
 import {Food} from '../../../model/food';
 import {InventoryService} from '../../../services/inventory.service';
+import { DataSource } from '@angular/cdk/collections';
 
 
 @Component({
@@ -19,9 +21,10 @@ import {InventoryService} from '../../../services/inventory.service';
 })
 export class FoodTableComponent implements OnInit {
 
-  displayedColumns = ['id', 'name', 'type', 'price', 'quantity', 'description'];
+  
  // exampleDatabase: DataService | null;
-  //dataSource: ExampleDataSource | null;
+  dataSource = new FoodDataSource(this.inventoryservice);
+  displayedColumns = ['mid', 'name', 'type', 'price', 'quantity', 'description','actions'];
   index: number;
   id: number;
 
@@ -117,3 +120,17 @@ export class FoodTableComponent implements OnInit {
 
 }
 
+
+export class FoodDataSource extends DataSource<any>{
+    constructor(private inventoryservice:InventoryService){
+       super();
+    }
+
+    connect():Observable<Food[]>{
+      console.log('food data source connect');
+      
+      return this.inventoryservice.getFoodItems();
+    }
+
+    disconnect(){}
+}

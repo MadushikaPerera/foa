@@ -102,7 +102,7 @@ import { EditComponent } from './components/inventory/food-table/edit/edit.compo
     InventoryService
   ],
   entryComponents:[
-    FoodDialogComponent,VehicleDialogComponent
+    FoodDialogComponent,VehicleDialogComponent,AddComponent,DeleteComponent,EditComponent
   ],
   bootstrap: [AppComponent]
 })

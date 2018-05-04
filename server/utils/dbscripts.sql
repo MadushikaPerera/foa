@@ -27,12 +27,13 @@ CREATE TABLE `foa`.`delivery` (
 
 
 CREATE TABLE `foa`.`vehicle` (
-     `vid` INT NOT NULL,
-     `brand` VARCHAR(45) NULL,
-     `model` VARCHAR(45) NULL,
-     `licenseno` VARCHAR(45) NULL,
-     `dob` VARCHAR(45) NULL,
-     `active` VARCHAR(45) NULL DEFAULT 'true',
+    `vid` int(11) NOT NULL AUTO_INCREMENT,
+    `brand` varchar(45) DEFAULT NULL,
+    `model` varchar(45) DEFAULT NULL,
+    `licenseno` varchar(45) DEFAULT NULL,
+    `dob` varchar(45) DEFAULT NULL,
+    `active` varchar(45) DEFAULT 'true',
+    `quantity` int(11) DEFAULT NULL,
      PRIMARY KEY (`vid`),
      UNIQUE INDEX `licenseno_UNIQUE` (`licenseno` ASC));
              

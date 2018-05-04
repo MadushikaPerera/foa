@@ -5,12 +5,15 @@ import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
 import {Food} from '../model/food';
 import {Vehicle} from '../model/vehicle';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class InventoryService {
 
   public foodlist: Food[];
   public vehiclelist: Vehicle[];
+
+  dataChange: BehaviorSubject<Food[]> = new BehaviorSubject<Food[]>([]);
 
 
   constructor(private http: HttpClient) { }
@@ -39,7 +42,8 @@ export class InventoryService {
     });
   }
 
-  getFoodItems(){
+  getFoodItems(): Observable<Food[]> {
+    console.log('calling food');
     return this.http.get(environment.host + '/getfooditems')
       .map((response)=>{
         let foodlist = response as Food[];
@@ -94,7 +98,8 @@ export class InventoryService {
     });
   }
 
-  getVehicles(){
+
+  getVehicles(): Observable< Vehicle[]> {
     return this.http.get(environment.host + '/getvehicles')
       .map((response)=>{
         let vehiclelist = response as Vehicle[];
