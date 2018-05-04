@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         .login(this.email, this.password)
         .subscribe(result => {
           if (result === true) {
-            this.router.navigate(['/orders']);
+            this.router.navigate(['/restaurant']);
           } else {
             this.error = 'Email or Password is incorrect';
             this.loading = false;

@@ -11,6 +11,8 @@ import { RestaurantComponent } from '../components/restaurant/restaurant.compone
 import { FoodCardComponent } from '../components/food-card/food-card.component';
 import {InventoryComponent} from '../components/inventory/inventory.component';
 import { UserProfileComponent } from '../components/user-profile/user-profile.component';
+import {FoodTableComponent} from '../components/inventory/food-table/food-table.component';
+import {VehicleTableComponent} from '../components/inventory/vehicle-table/vehicle-table.component';
 import { AuthguardGuard } from '../authguard.guard';
 
 const routes: Routes = [
@@ -37,12 +39,6 @@ const routes: Routes = [
     component: RestaurantComponent
   },
   {
-    path: 'food',
-    pathMatch: 'full',
-    canActivate: [AuthguardGuard],
-    component: FoodCardComponent
-  },
-  {
     path: 'map',
     pathMatch: 'full',
     canActivate: [AuthguardGuard],
@@ -64,7 +60,19 @@ const routes: Routes = [
     path: '**',
     pathMatch: 'full',
     component: NotfoundComponent
-  }
+  },
+  {
+    path: 'foods',
+    pathMatch: 'full',
+    canActivate: [AuthguardGuard],
+    component: FoodTableComponent
+  },
+   {
+    path: 'vehicles',
+    pathMatch: 'full',
+    canActivate: [AuthguardGuard],
+    component: VehicleTableComponent
+   }
 ];
 
 @NgModule({
