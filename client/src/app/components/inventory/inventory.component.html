@@ -1,7 +1,8 @@
 <mat-grid-list cols="3" rowHeight="1:1">
   <mat-grid-tile>
     <mat-card class="example-card">
-      <img mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1200px-Good_Food_Display_-_NCI_Visuals_Online.jpg" alt="Photo of a Shiba Inu">
+      <img mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1200px-Good_Food_Display_-_NCI_Visuals_Online.jpg"
+        alt="Photo of a Shiba Inu">
       <mat-card-content>
         <a mat-button color="primary" class="inventory-card-button" (click)="getfoods()">Food Items</a>
       </mat-card-content>
@@ -12,7 +13,7 @@
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
-  
+
   <mat-grid-tile>
     <mat-card class="example-card">
       <img mat-card-image src="http://2.bp.blogspot.com/-BWEWT5d-sZM/Tb0qAnRxIEI/AAAAAAAAAWU/kzBHkdFQ6O0/s1600/800bikes.jpg" alt="Photo of a Shiba Inu">
@@ -29,5 +30,31 @@
 </mat-grid-list>
 
 
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Food Items
+      </mat-panel-title>
+      <mat-panel-description>
+        Data related to Food
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-food-table></app-food-table>
+  </mat-expansion-panel>
+</mat-accordion>
 
 
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Vehicles
+      </mat-panel-title>
+      <mat-panel-description>
+        Data related to Delivery Vehicles
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-vehicle-table></app-vehicle-table>
+  </mat-expansion-panel>
+</mat-accordion>
