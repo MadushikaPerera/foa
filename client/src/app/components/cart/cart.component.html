@@ -1,3 +1,53 @@
-<p>
-  cart works!
-</p>
+<mat-card class="container">
+  <div class="box6">CART</div>
+  <div class="box7">
+    <button mat-button color="primary" (click)="shop()">Continue Shopping</button>
+  </div>
+</mat-card>
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" class="scrollbar" id="style-4">
+
+    <ng-container matColumnDef="item">
+      <mat-header-cell *matHeaderCellDef> ITEM </mat-header-cell>
+      <mat-cell *matCellDef="let cart"> {{cart.item}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+      <mat-cell *matCellDef="let cart"> {{cart.quantity}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unit">
+      <mat-header-cell *matHeaderCellDef> Unit Price </mat-header-cell>
+      <mat-cell *matCellDef="let cart"> {{cart.unit}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="subtotal">
+      <mat-header-cell *matHeaderCellDef> Subtotal </mat-header-cell>
+      <mat-cell *matCellDef="let cart"> {{cart.subtotal}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+  <mat-card class="container">
+    <div class="box1"></div>
+    <div class="box2">
+      <div>SUBTOTAL: </div>
+      <div>TOTAL:</div>
+    </div>
+  </mat-card>
+  <mat-divider></mat-divider>
+  <mat-card class="container">
+    <div class="box3">
+      Total:
+    </div>
+    <div class="box4">
+      Savings:
+    </div>
+    <div class="box5">
+      <button mat-button color="primary" (click)="checkout()">Checkout</button>
+    </div>
+  </mat-card>
+</div>

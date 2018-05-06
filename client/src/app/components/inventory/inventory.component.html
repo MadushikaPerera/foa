@@ -1,5 +1,12 @@
-<mat-grid-list cols="3" rowHeight="1:1">
-  <mat-grid-tile>
+<mat-card class="container">
+  <div class="box1">Inventory</div>
+  <div class="box2">
+    <button mat-button color="primary" (click)="shop()">Continue Shopping</button>
+  </div>
+</mat-card>
+
+<div class="container">
+  <div class="box1">
     <mat-card class="example-card">
       <img mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1200px-Good_Food_Display_-_NCI_Visuals_Online.jpg"
         alt="Photo of a Shiba Inu">
@@ -12,9 +19,8 @@
         </div>
       </mat-card-actions>
     </mat-card>
-  </mat-grid-tile>
-
-  <mat-grid-tile>
+  </div>
+  <div class="box2">
     <mat-card class="example-card">
       <img mat-card-image src="http://2.bp.blogspot.com/-BWEWT5d-sZM/Tb0qAnRxIEI/AAAAAAAAAWU/kzBHkdFQ6O0/s1600/800bikes.jpg" alt="Photo of a Shiba Inu">
       <mat-card-content>
@@ -26,12 +32,11 @@
         </div>
       </mat-card-actions>
     </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
-
+  </div>
+</div>
 
 <mat-accordion>
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel [expanded]="foodopen === 1" (opened)="setFoodStep(1)">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Food Items
@@ -40,13 +45,13 @@
         Data related to Food
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <app-food-table></app-food-table>
+    <app-food-table id="fooditems"></app-food-table>
   </mat-expansion-panel>
 </mat-accordion>
 
 
 <mat-accordion>
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel [expanded]="vehicleopen === 1" (opened)="setVehicleStep(1)">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Vehicles
@@ -55,6 +60,6 @@
         Data related to Delivery Vehicles
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <app-vehicle-table></app-vehicle-table>
+    <app-vehicle-table id="vehicles"></app-vehicle-table>
   </mat-expansion-panel>
 </mat-accordion>

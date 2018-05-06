@@ -1,14 +1,23 @@
 <div style="position:fixed;top:0;left:0;right:0;bottom:0;">
-  
+
   <mat-sidenav-container fullscreen>
     <mat-sidenav mode="over" #sidenav style="min-width:220px;">
       <mat-list>
-        <mat-list-item [routerLink]="['/orders']"> Orders history</mat-list-item>
-        <mat-list-item [routerLink]="['/restaurant']"> Order online</mat-list-item>
-        <mat-list-item [routerLink]="['/inventory']"> Inventory</mat-list-item>
-        <mat-list-item [routerLink]="['/userProfile']"> Profile</mat-list-item>
-        <mat-list-item >
-            <button mat-button (click)="logout()"><mat-icon>launch</mat-icon>Logout</button>
+        <mat-list-item [routerLink]="['/restaurant']" (click)="sidenav.close()">
+          <i class="fas fa-shopping-bag icon"></i>Shop</mat-list-item>
+        <mat-list-item [routerLink]="['/inventory']" (click)="sidenav.close()">
+          <i class="fas fa-boxes icon"></i> Inventory</mat-list-item>
+        <mat-list-item [routerLink]="['/userProfile']" (click)="sidenav.close()">
+          <i class="fas fa-user-circle icon"></i> Profile</mat-list-item>
+        <mat-list-item [routerLink]="['/cart']" (click)="sidenav.close()">
+          <i class="fas fa-cart-plus icon"></i>My Cart</mat-list-item>
+        <mat-list-item [routerLink]="['/order']" (click)="sidenav.close()">
+          <i class="fas fa-clipboard-list icon"></i>My Orders</mat-list-item>
+        <mat-list-item [routerLink]="['/delivery']" (click)="sidenav.close()">
+          <i class="fas fa-truck icon"></i>Deliveries</mat-list-item>
+        <mat-list-item>
+          <button mat-button (click)="logout()">
+            <mat-icon>launch</mat-icon>Logout</button>
         </mat-list-item>
       </mat-list>
     </mat-sidenav>

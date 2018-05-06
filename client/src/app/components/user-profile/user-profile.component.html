@@ -1,42 +1,48 @@
+<mat-card class="container">
+  <div class="box1">My Profile </div>
+  <div class="box2">
+    <button mat-button color="primary" (click)="shop()">Continue Shopping</button>
+  </div>
+</mat-card>
 <mat-card>
-    <form class="example-form">
-      <table class="example-full-width" cellspacing="0">
-        <tr>
-          <td>
-            <mat-form-field class="example-full-width">
+  <form class="example-form">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
             <input matInput placeholder="First name" name="fname" [(ngModel)]="fname">
-            </mat-form-field>
-          </td>
-          <td>
-              <mat-form-field class="example-full-width">
-              <input matInput placeholder="Last Name" [(ngModel)]="lname" name="lname">
-            </mat-form-field>
-          </td>
-        </tr>
-      <tr>
-          <td>
-              <mat-form-field class="example-full-width">
-              <input matInput placeholder="Phone" [(ngModel)]="phone" name="phone">
-              </mat-form-field>
-          </td>
-        </tr>
-    </table>
-    
-      <p>
-        <mat-form-field class="example-full-width">
-          <textarea matInput placeholder="Address" [(ngModel)]="address" name="address"></textarea>
-        </mat-form-field>
-      </p>
-    
-      <table class="example-full-width" cellspacing="0">
-      <tr>
-      <td>
-          <button mat-raised-button color="primary" (click)="edit()" >Save</button>
+          </mat-form-field>
         </td>
         <td>
-            <button mat-raised-button  color="primary">Cancel</button>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Last Name" [(ngModel)]="lname" name="lname">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Phone" [(ngModel)]="phone" name="phone">
+          </mat-form-field>
         </td>
       </tr>
     </table>
-    </form>
-    </mat-card>
+
+    <p>
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Address" [(ngModel)]="address" name="address"></textarea>
+      </mat-form-field>
+    </p>
+
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <button mat-raised-button color="primary" (click)="edit()">Save</button>
+        </td>
+        <td>
+          <button mat-raised-button color="primary">Cancel</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</mat-card>

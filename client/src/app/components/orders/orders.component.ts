@@ -1,18 +1,29 @@
 import { Component, OnInit } from "@angular/core";
+import { DataSource } from "@angular/cdk/collections";
+import { Observable } from "rxjs/Observable";
+import { Router } from "@angular/router";
+import {
+  MatDialog,
+  MatPaginator,
+  MatSort,
+  MatSnackBar
+} from "@angular/material";
 
 @Component({
-  selector: "app-orders-list",
-  templateUrl: "./orders-list.component.html",
-  styleUrls: ["./orders-list.component.css"]
+  selector: "app-orders",
+  templateUrl: "./orders.component.html",
+  styleUrls: ["./orders.component.css"]
 })
-export class OrdersListComponent implements OnInit {
-  displayedColumns = ["ordnumber", "custno", "custname", "price", "status"];
+export class OrdersComponent implements OnInit {
+  displayedColumns = ["order"];
   dataSource = ELEMENT_DATA;
 
-  constructor() {}
+  constructor(private router: Router, public snackBar: MatSnackBar) {}
 
-  ngOnInit() {
-    console.log("table");
+  ngOnInit() {}
+
+  shop() {
+    this.router.navigate(["/restaurant"]);
   }
 }
 
