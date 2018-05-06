@@ -1,11 +1,35 @@
-
-
 const pool = require("../utils/dbconnection");
+const multer = require("multer"); //FOR FILE UPLOAD
+const storage = multer.diskStorage({
+  //multers disk storage settings
+  destination: function(req, file, cb) {
+    cb(null, "./public/uploads"); //image storage path
+  },
+  filename: function(req, file, cb) {
+    const datetimestamp = Date.now();
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({
+  //multer settings
+  storage: storage
+}).single("file");
 
 exports.addInventoryFoodItem = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {
+      if (req.file) {
+        upload(req, res, function(err) {
+          if (err) {
+            // An error occurred when uploading
+            return res.status(422).send("an Error occured");
+          }
+          // No error occured.
+          path = req.file.path;
+          return res.status(200).send(path);
+        });
+      }
       let foodItem = {
         name: req.body.name,
         type: req.body.type,
@@ -13,13 +37,15 @@ exports.addInventoryFoodItem = function(req, res, next) {
         price: req.body.price,
         quantity: req.body.quantity
       };
-      conn.query("INSERT INTO meal SET ?",foodItem,function(err1, records, fields) {
+      conn.query("INSERT INTO meal SET ?", foodItem, function(
+        err1,
+        records,
+        fields
+      ) {
         if (!err1) {
           res.send(true);
-        }
-        else{
+        } else {
           console.log(err1);
-          
         }
         conn.release();
       });
@@ -31,6 +57,17 @@ exports.addInventoryVehicle = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {
+      if (req.file) {
+        upload(req, res, function(err) {
+          if (err) {
+            // An error occurred when uploading
+            return res.status(422).send("an Error occured");
+          }
+          // No error occured.
+          path = req.file.path;
+          return res.status(200).send(path);
+        });
+      }
       let vehicle = {
         licenseno: req.body.licenseno,
         brand: req.body.brand,
@@ -38,13 +75,15 @@ exports.addInventoryVehicle = function(req, res, next) {
         dob: req.body.dob,
         quantity: req.body.quantity
       };
-      conn.query("INSERT INTO vehicle SET ?",vehicle,function(err1, records, fields) {
+      conn.query("INSERT INTO vehicle SET ?", vehicle, function(
+        err1,
+        records,
+        fields
+      ) {
         if (!err1) {
           res.send(true);
-        }
-        else{
+        } else {
           console.log(err1);
-          
         }
         conn.release();
       });
@@ -94,7 +133,7 @@ exports.editInventoryItem = function(req, res, next) {
   });
 };
 
-exports.cancelInventoryItem = function(req, res, next) {
+exports.editVehicleItems = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {

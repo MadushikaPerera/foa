@@ -12,11 +12,21 @@ module.exports = function(app) {
     res.send({ hi: "there" });
   });
 
-  app.post("/addfood",requireAuth,inventoryController.addInventoryFoodItem);
+  app.post("/addfood", requireAuth, inventoryController.addInventoryFoodItem);
 
-  app.get('/getfooditems',requireAuth,inventoryController.getInventoryFoodItems);
+  app.get(
+    "/getfooditems",
+    requireAuth,
+    inventoryController.getInventoryFoodItems
+  );
 
-  app.post("/addvehicle",requireAuth,inventoryController.addInventoryVehicle);
+  app.post("/addvehicle", requireAuth, inventoryController.addInventoryVehicle);
 
-  app.get('/getvehicles',requireAuth,inventoryController.getInventoryVehicleItems);
+  app.get(
+    "/getvehicles",
+    requireAuth,
+    inventoryController.getInventoryVehicleItems
+  );
+
+  app.put("/delvehicle", requireAuth, function(req, res) {});
 };

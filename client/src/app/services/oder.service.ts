@@ -33,7 +33,7 @@ export class OderService {
 
   deleteOrder(vid: string): Observable<boolean> {
     return this.http
-      .put(environment.host + "/delorder", vid)
+      .put(environment.host + "/cancelorder", vid)
       .map((response: Order) => {
         if (response) {
           return true;

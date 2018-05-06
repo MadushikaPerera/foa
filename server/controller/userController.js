@@ -1,5 +1,20 @@
 const bcrypt = require("bcrypt-nodejs");
 const pool = require("../utils/dbconnection");
+const multer = require("multer"); //FOR FILE UPLOAD
+const storage = multer.diskStorage({
+  //multers disk storage settings
+  destination: function(req, file, cb) {
+    cb(null, "./public/uploads"); //image storage path
+  },
+  filename: function(req, file, cb) {
+    const datetimestamp = Date.now();
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({
+  //multer settings
+  storage: storage
+}).single("file");
 
 // compare passwords is equal to user's password
 exports.comparePassword = function(candidatePassword, password, callback) {
@@ -37,6 +52,17 @@ exports.addUser = function(req, res, next) {
       console.log("error");
       res.json({ error: true });
     } else {
+      if (req.file) {
+        upload(req, res, function(err) {
+          if (err) {
+            // An error occurred when uploading
+            return res.status(422).send("an Error occured");
+          }
+          // No error occured.
+          path = req.file.path;
+          return res.status(200).send(path);
+        });
+      }
       let User = {
         fname: req.body.fname,
         lname: req.body.lname,
@@ -45,7 +71,7 @@ exports.addUser = function(req, res, next) {
         password: req.body.password,
         phone: req.body.phone,
         address: req.body.address,
-       accesslevel: req.body.accesslevel
+        accesslevel: req.body.accesslevel
       };
       console.log(User);
       conn.query("INSERT INTO user SET ?", User, function(err1, records) {
@@ -73,15 +99,14 @@ exports.updateUser = function(req, res, next) {
         address: req.body.address
       };
       console.log(User);
-      
+
       conn.query(
         "UPDATE user SET ? WHERE uname = '" + req.body.uname + "' ",
         User,
         function(err1, records) {
           if (err1) {
-            
             res.json(false);
-          }else{
+          } else {
             console.log(records);
             res.json(true);
           }
@@ -122,14 +147,17 @@ exports.getUser = function(req, res, next) {
       console.log("error");
       res.json({ error: true });
     } else {
-      conn.query("SELECT fname,lname,phone,address FROM user WHERE uname = '" +
-      req.query.uname +
-      "' ", function(err1, records) {        
-        if (!err1) {
-          res.json(records);
+      conn.query(
+        "SELECT fname,lname,phone,address FROM user WHERE uname = '" +
+          req.query.uname +
+          "' ",
+        function(err1, records) {
+          if (!err1) {
+            res.json(records);
+          }
+          conn.release();
         }
-        conn.release();
-      });
+      );
     }
   });
 };
