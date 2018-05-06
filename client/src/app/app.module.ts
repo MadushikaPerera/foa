@@ -42,6 +42,7 @@ import { DeleteComponent } from "./components/inventory/food-table/delete/delete
 import { EditComponent } from "./components/inventory/food-table/edit/edit.component";
 import { OrdersComponent } from "./components/orders/orders.component";
 import { OrderItemComponent } from "./components/orders/order-item/order-item.component";
+import { FoodAdvancedComponent } from './components/restaurant/food-advanced/food-advanced.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { OrderItemComponent } from "./components/orders/order-item/order-item.co
     DeleteComponent,
     EditComponent,
     OrdersComponent,
-    OrderItemComponent
+    OrderItemComponent,
+    FoodAdvancedComponent
   ],
   imports: [
     BrowserModule,

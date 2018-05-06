@@ -21,7 +21,7 @@
     </mat-card>
   </div>
   <div class="box3">
-    <mat-card style="align-content: center">
+    <mat-card class="container2">
       <mat-form-field class="example-form-field">
         <input matInput type="text" placeholder="Search Meal" [(ngModel)]="value" />
         <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
@@ -36,6 +36,10 @@
       </div>
     </div>
   </div>
+  <button mat-button (click)="tofoods()">
+    <i class="fas fa-utensils fa-lg"></i>
+    More Meals
+  </button>
   <div class="box4">
     <mat-card>
       <p>

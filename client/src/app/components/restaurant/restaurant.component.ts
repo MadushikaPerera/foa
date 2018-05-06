@@ -5,6 +5,7 @@ import {
   NgxGalleryAnimation
 } from "ngx-gallery";
 import { Food } from "../../model/food";
+import { Router } from "@angular/router";
 import { InventoryService } from "../../services/inventory.service";
 
 @Component({
@@ -19,7 +20,10 @@ export class RestaurantComponent implements OnInit {
 
   meals: any[];
   types: any[];
-  constructor(private inventoryservice: InventoryService) {
+  constructor(
+    private inventoryservice: InventoryService,
+    private router: Router
+  ) {
     this.inventoryservice.getFoodItems().subscribe(res => {
       this.meals = res;
       console.log("kaaama", this.meals);
@@ -85,5 +89,9 @@ export class RestaurantComponent implements OnInit {
           "https://rajabojun.lk/wp-content/uploads/photo-gallery/resturant4.jpg"
       }
     ];
+  }
+
+  tofoods() {
+    this.router.navigate(["/meals"]);
   }
 }

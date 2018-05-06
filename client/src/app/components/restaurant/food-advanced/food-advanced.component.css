@@ -1,0 +1,26 @@
+.full-width {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+}
+
+.box1 {
+  flex: 1;
+  order: 1;
+}
+
+.box2 {
+  flex: 3;
+  order: 2;
+}
+
+.box3 {
+  flex: 1;
+  order: 3;
+}
+
+.icon {
+  padding: 5px;
+}

@@ -7,7 +7,8 @@ import { RegisterComponent } from "../components/register/register.component";
 import { AppComponent } from "../app.component";
 import { MapComponent } from "../components/map/map.component";
 import { RestaurantComponent } from "../components/restaurant/restaurant.component";
-import { FoodCardComponent } from "../components/food-card/food-card.component";
+import { FoodCardComponent } from "../components/restaurant/food-card/food-card.component";
+import { FoodAdvancedComponent } from "../components/restaurant/food-advanced/food-advanced.component";
 import { InventoryComponent } from "../components/inventory/inventory.component";
 import { UserProfileComponent } from "../components/user-profile/user-profile.component";
 import { FoodTableComponent } from "../components/inventory/food-table/food-table.component";
@@ -60,10 +61,10 @@ const routes: Routes = [
     component: DeliveryComponent
   },
   {
-    path: "vehicles",
+    path: "meals",
     pathMatch: "full",
     canActivate: [AuthguardGuard],
-    component: VehicleTableComponent
+    component: FoodAdvancedComponent
   },
   {
     path: "cart",
