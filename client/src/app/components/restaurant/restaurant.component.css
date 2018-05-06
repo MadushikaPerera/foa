@@ -1,10 +1,49 @@
-.mat-sidenav-container,
-.mat-sidenav-content,
-.mat-tab-body-content {
-  transform: none !important;
+.container1 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.mat-card{
+.box1 {
+  height: 30%;
   width: 100%;
-  height: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.box2 {
+  height: 10%;
+  width: 100%;
+  justify-content: center;
+}
+
+.box3 {
+  height: 30%;
+  width: 100%;
+  justify-content: center;
+}
+
+.box4 {
+  height: 30%;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.container2 {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.icon {
+  padding: 5px;
+}
+
+.ngx-gallery {
+  height: 50%;
+}
+
+.example-form-field {
+  width: 80%;
 }

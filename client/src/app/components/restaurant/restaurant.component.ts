@@ -4,8 +4,8 @@ import {
   NgxGalleryImage,
   NgxGalleryAnimation
 } from "ngx-gallery";
-import {Food} from '../../model/food';
-import {InventoryService} from '../../services/inventory.service';
+import { Food } from "../../model/food";
+import { InventoryService } from "../../services/inventory.service";
 
 @Component({
   selector: "app-restaurant",
@@ -15,21 +15,23 @@ import {InventoryService} from '../../services/inventory.service';
 export class RestaurantComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  value = "Search Meals";
 
-
-  meals : any[];
-  types : any[];
-constructor(private inventoryservice:InventoryService) {
-  this.inventoryservice.getFoodItems().subscribe(res=>{
-    this.meals=res;
-    console.log('kaaama',this.meals);
-    
-  });
-  this.types=[{title:'Fried Rice'},{title:'Rice & Curry'},{title:'Kottu'}];
-}
+  meals: any[];
+  types: any[];
+  constructor(private inventoryservice: InventoryService) {
+    this.inventoryservice.getFoodItems().subscribe(res => {
+      this.meals = res;
+      console.log("kaaama", this.meals);
+    });
+    this.types = [
+      { title: "Fried Rice" },
+      { title: "Rice & Curry" },
+      { title: "Kottu" }
+    ];
+  }
 
   ngOnInit(): void {
-    
     this.galleryOptions = [
       {
         width: "100%",
@@ -85,4 +87,3 @@ constructor(private inventoryservice:InventoryService) {
     ];
   }
 }
-

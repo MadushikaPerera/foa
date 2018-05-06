@@ -1,27 +1,46 @@
-<div>
-<mat-grid-list cols="1" rowHeight="4:1" >
-    <mat-grid-tile><ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery></mat-grid-tile>
-</mat-grid-list>
-
-
-<mat-chip-list>
-  <mat-chip
-    *ngFor="let type of types">
-    {{type.title}}
-  </mat-chip>
-</mat-chip-list>
-
-
-<mat-grid-list cols="5" rowHeight="1:2">
-    <mat-grid-tile
-      *ngFor="let meal of meals">
-        <app-food-card
-        [price]="meal.price"
-        [title]="meal.name">
+<div style="height: 50%;">
+  <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+</div>
+<div class="container1">
+  <div class="box1">
+    <mat-card>
+      <p>
+        The Food Magic opened their first restaurant in year 2000 and set out to serve only the highest quality food, fulfill their
+        Guest's every request and make sure everyone who walked in the door felt like family. Since then we have expanded
+        our guest dining area to a little larger size and earned a reputation of 1000 of customers a day.
+      </p>
+    </mat-card>
+  </div>
+  <div class="box2">
+    <mat-card>
+      <mat-chip-list class="container2">
+        <mat-chip *ngFor="let type of types">
+          {{type.title}}
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card>
+  </div>
+  <div class="box3">
+    <mat-card style="align-content: center">
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="Search Meal" [(ngModel)]="value" />
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card>
+    <div class="container2">
+      <div *ngFor="let meal of meals">
+        <app-food-card [price]="meal.price" [title]="meal.name">
         </app-food-card>
-    </mat-grid-tile>
-</mat-grid-list>
-
-
-
+      </div>
+    </div>
+  </div>
+  <div class="box4">
+    <mat-card>
+      <p>
+        Promotions
+      </p>
+    </mat-card>
+  </div>
 </div>
