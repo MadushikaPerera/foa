@@ -31,3 +31,12 @@
   flex: 1;
   order: 2;
 }
+
+.box3 {
+  flex: 1;
+  order: 3;
+}
+
+.icon {
+  padding: 5px;
+}
