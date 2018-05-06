@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import { environment } from "../../environments/environment";
-import { Delivery } from "../model/delivery";
+import { Order } from "../model/order";
 
 @Injectable()
-export class DeliveryService {
+export class OderService {
   constructor(private http: HttpClient) {}
 
-  addDelivery(
+  makeOrder(
     brand: string,
     model: string,
     licenseno: string,
@@ -17,15 +17,13 @@ export class DeliveryService {
     quantity: number
   ): Observable<boolean> {
     return this.http
-      .post(environment.host + "/makedelivery", {
+      .post(environment.host + "/makeorder", {
         brand: brand,
         model: model,
         licenseno: licenseno,
         dob: dob
       })
-      .map((response: Delivery) => {
-        // signup successful
-        console.log("Ingredients added", response);
+      .map((response: Order) => {
         if (response) {
           return true;
         }
@@ -33,11 +31,10 @@ export class DeliveryService {
       });
   }
 
-  deleteDelivery(vid: string): Observable<boolean> {
+  deleteOrder(vid: string): Observable<boolean> {
     return this.http
-      .put(environment.host + "/deldelivery", vid)
-      .map((response: Delivery) => {
-        // signup successful
+      .put(environment.host + "/delorder", vid)
+      .map((response: Order) => {
         if (response) {
           return true;
         }
@@ -45,9 +42,9 @@ export class DeliveryService {
       });
   }
 
-  getDeliveries(): Observable<Delivery[]> {
-    return this.http.get(environment.host + "/getdeliveries").map(response => {
-      let vehiclelist = response as Delivery[];
+  getOrders(): Observable<Order[]> {
+    return this.http.get(environment.host + "/getorders").map(response => {
+      let vehiclelist = response as Order[];
       console.log(vehiclelist);
       return vehiclelist;
     });

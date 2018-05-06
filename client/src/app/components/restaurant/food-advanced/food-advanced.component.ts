@@ -1,4 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { Food } from "../../../model/food";
+import { Router } from "@angular/router";
+import { InventoryService } from "../../../services/inventory.service";
 
 @Component({
   selector: "app-food-advanced",
@@ -24,7 +27,17 @@ export class FoodAdvancedComponent implements OnInit {
     return value;
   }
 
-  constructor() {}
+  meals: any[];
+  types: any[];
+
+  constructor(
+    private inventoryservice: InventoryService,
+    private router: Router
+  ) {
+    this.inventoryservice.getFoodItems().subscribe(res => {
+      this.meals = res;
+    });
+  }
 
   ngOnInit() {}
 }

@@ -28,8 +28,9 @@ import { AuthenticationService } from "./services/authentication.service";
 import { UserService } from "./services/user.service";
 import { EmployeeService } from "./services/employee.service";
 import { DeliveryService } from "./services/delivery.service";
-import { DriverService } from "./services/driver.service";
 import { InventoryService } from "./services/inventory.service";
+import { OderService } from "./services/oder.service";
+import { PromoService } from "./services/promo.service";
 import { AuthguardGuard } from "./authguard.guard";
 import { TokenInterceptor } from "./services/token.interceptor";
 import { CartComponent } from "./components/cart/cart.component";
@@ -42,7 +43,8 @@ import { DeleteComponent } from "./components/inventory/food-table/delete/delete
 import { EditComponent } from "./components/inventory/food-table/edit/edit.component";
 import { OrdersComponent } from "./components/orders/orders.component";
 import { OrderItemComponent } from "./components/orders/order-item/order-item.component";
-import { FoodAdvancedComponent } from './components/restaurant/food-advanced/food-advanced.component';
+import { FoodAdvancedComponent } from "./components/restaurant/food-advanced/food-advanced.component";
+import { FoodOrderComponent } from "./components/restaurant/food-order/food-order.component";
 
 @NgModule({
   declarations: [
@@ -70,7 +72,8 @@ import { FoodAdvancedComponent } from './components/restaurant/food-advanced/foo
     EditComponent,
     OrdersComponent,
     OrderItemComponent,
-    FoodAdvancedComponent
+    FoodAdvancedComponent,
+    FoodOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -97,16 +100,18 @@ import { FoodAdvancedComponent } from './components/restaurant/food-advanced/foo
     UserService,
     EmployeeService,
     DeliveryService,
-    DriverService,
     AuthguardGuard,
-    InventoryService
+    InventoryService,
+    OderService,
+    PromoService
   ],
   entryComponents: [
     FoodDialogComponent,
     VehicleDialogComponent,
     AddComponent,
     DeleteComponent,
-    EditComponent
+    EditComponent,
+    FoodOrderComponent
   ],
   bootstrap: [AppComponent]
 })

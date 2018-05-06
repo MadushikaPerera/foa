@@ -30,3 +30,7 @@
     </div>
   </div>
 </mat-card>
+<div *ngFor="let meal of meals">
+  <app-food-card [price]="meal.price" [title]="meal.name">
+  </app-food-card>
+</div>
