@@ -112,16 +112,68 @@ export class InventoryService {
     return this.dialogData1;
   }
 
-  addVehicle(food: Food): void {
-    this.dialogData1 = food;
+  addVehicle(vehicle: Vehicle): void {
+    this.dialogData = vehicle;
+    this.addVehicleItem(
+      vehicle.brand,
+      vehicle.model,
+      vehicle.licenseno,
+      vehicle.dob
+    ).subscribe(result => {
+      if (result === true) {
+        console.log("added");
+
+        // this.closeDialog();
+        // this.openSnackBar('Added Successfully','Success');
+      } else {
+        console.log("error");
+
+        // this.error = 'Email or Password is incorrect';
+        // this.loading = false;
+        // this.openSnackBar(this.error,'Error');
+      }
+    });
   }
 
-  updateVehicle(food: Food): void {
-    this.dialogData1 = food;
+  updateVehicle(vehicle: Vehicle): void {
+    this.dialogData = vehicle;
+    // this.editVItem(
+    //   vehicle.brand,
+    //   vehicle.model,
+    //   vehicle.licenseno,
+    //   vehicle.dob
+    // ).subscribe(result => {
+    //   if (result === true) {
+    //     console.log("edited");
+
+    //     // this.closeDialog();
+    //     // this.openSnackBar('Added Successfully','Success');
+    //   } else {
+    //     console.log("error");
+
+    //     // this.error = 'Email or Password is incorrect';
+    //     // this.loading = false;
+    //     // this.openSnackBar(this.error,'Error');
+    //   }
+    // });
   }
 
-  deleteVehicle(vid: number): void {
-    console.log(vid);
+  deleteVehicle(id: number): void {
+    console.log(id);
+    this.deleteFoodItem(id).subscribe(result => {
+      if (result === true) {
+        console.log("deleted");
+
+        // this.closeDialog();
+        // this.openSnackBar('Added Successfully','Success');
+      } else {
+        console.log("error");
+
+        // this.error = 'Email or Password is incorrect';
+        // this.loading = false;
+        // this.openSnackBar(this.error,'Error');
+      }
+    });
   }
 
   get IngredientData(): Ingredient[] {
@@ -230,8 +282,7 @@ export class InventoryService {
     brand: string,
     model: string,
     licenseno: string,
-    dob: string,
-    quantity: number
+    dob: string
   ): Observable<boolean> {
     return this.http
       .post(environment.host + "/addvehicle", {

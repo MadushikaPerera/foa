@@ -1,6 +1,7 @@
 export class Vehicle {
-    brand:string;
-    model:string;
-    licenseno:string;
-    dob:string;
+  vid: number;
+  brand: string;
+  model: string;
+  licenseno: string;
+  dob: string;
 }
