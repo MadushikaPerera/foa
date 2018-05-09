@@ -40,6 +40,7 @@ export class AddComponent implements OnInit {
   }
 
   public confirmAdd(): void {
-    // this.inventoryService.addFoodItem(this.data);
+    delete this.data["food"];
+    this.inventoryService.addFood(this.data);
   }
 }

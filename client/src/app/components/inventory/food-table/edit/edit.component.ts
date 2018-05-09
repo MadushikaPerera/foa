@@ -1,30 +1,33 @@
-import { Component, OnInit,Inject } from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormControl, Validators} from '@angular/forms';
-import {InventoryService} from '../../../../services/inventory.service';
+import { Component, OnInit, Inject } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { FormControl, Validators } from "@angular/forms";
+import { InventoryService } from "../../../../services/inventory.service";
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css']
+  selector: "app-edit",
+  templateUrl: "./edit.component.html",
+  styleUrls: ["./edit.component.css"]
 })
 export class EditComponent implements OnInit {
+  constructor(
+    public dialogRef: MatDialogRef<EditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public inventoryService: InventoryService
+  ) {}
 
-  constructor(public dialogRef: MatDialogRef<EditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,public inventoryService: InventoryService) { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  formControl = new FormControl('', [
+  formControl = new FormControl("", [
     Validators.required
     // Validators.email,
   ]);
 
   getErrorMessage() {
-    return this.formControl.hasError('required') ? 'Required field' :
-      this.formControl.hasError('email') ? 'Not a valid email' :
-        '';
+    return this.formControl.hasError("required")
+      ? "Required field"
+      : this.formControl.hasError("email")
+        ? "Not a valid email"
+        : "";
   }
 
   submit() {
@@ -35,8 +38,7 @@ export class EditComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  stopEdit(): void {
-   // this.inventoryService.editFoodItem(this.data);
+  Edit(): void {
+    this.inventoryService.updateFood(this.data);
   }
-
 }

@@ -95,7 +95,11 @@ exports.getInventoryFoodItems = function(req, res) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {
-      conn.query("SELECT * FROM meal", function(err1, records, fields) {
+      conn.query("SELECT * FROM meal WHERE active='true'", function(
+        err1,
+        records,
+        fields
+      ) {
         if (!err1) {
           res.json(records);
         }
@@ -109,7 +113,11 @@ exports.getInventoryVehicleItems = function(req, res) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {
-      conn.query("SELECT * FROM vehicle", function(err1, records, fields) {
+      conn.query("SELECT * FROM vehicle WHERE active='true'", function(
+        err1,
+        records,
+        fields
+      ) {
         if (!err1) {
           res.json(records);
         }
@@ -119,7 +127,50 @@ exports.getInventoryVehicleItems = function(req, res) {
   });
 };
 
-exports.editInventoryItem = function(req, res, next) {
+exports.editFoodItem = function(req, res, next) {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+    } else {
+      conn.query(
+        "UPDATE meal SET ? WHERE mid= '" + req.body.mid + "' ",
+        {
+          name: req.body.name,
+          type: req.body.type,
+          price: req.body.price,
+          quantity: req.body.quantity,
+          description: req.body.description
+        },
+        function(err1, records, fields) {
+          if (!err1) {
+            // do something
+            res.json(records);
+          }
+          conn.release();
+        }
+      );
+    }
+  });
+};
+
+exports.deleteFoodItem = function(req, res, next) {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+    } else {
+      conn.query(
+        "UPDATE meal SET active='false' WHERE mid= '" + req.body.mid + "' ",
+        function(err1, records, fields) {
+          if (!err1) {
+            // do something
+            res.json(records);
+          }
+          conn.release();
+        }
+      );
+    }
+  });
+};
+
+exports.editVehicleItems = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {
@@ -133,7 +184,7 @@ exports.editInventoryItem = function(req, res, next) {
   });
 };
 
-exports.editVehicleItems = function(req, res, next) {
+exports.editInventoryItem = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {

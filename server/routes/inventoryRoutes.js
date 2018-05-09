@@ -20,6 +20,10 @@ module.exports = function(app) {
     inventoryController.getInventoryFoodItems
   );
 
+  app.put("/editfood", requireAuth, inventoryController.editFoodItem);
+
+  app.put("/delfood", requireAuth, inventoryController.deleteFoodItem);
+
   app.post("/addvehicle", requireAuth, inventoryController.addInventoryVehicle);
 
   app.get(

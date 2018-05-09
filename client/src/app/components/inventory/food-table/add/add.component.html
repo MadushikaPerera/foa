@@ -6,7 +6,7 @@
     <!--Textarea for demo purposes-->
     <div class="form">
       <mat-form-field color="accent">
-        <textarea matInput #input class="form-control" placeholder="Meal Name" [(ngModel)]="data.title" name="title" required></textarea>
+        <textarea matInput #input class="form-control" placeholder="Meal Name" [(ngModel)]="data.name" name="name" required></textarea>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
@@ -14,8 +14,7 @@
     <!--Contains mat-hint for characters count and has maxLengt set-->
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #inputstate class="form-control" placeholder="Type" [(ngModel)]="data.state" name="state" maxlength="10"
-          required>
+        <input matInput #inputstate class="form-control" placeholder="Type" [(ngModel)]="data.type" name="type" maxlength="10" required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
       </mat-form-field>
@@ -23,19 +22,19 @@
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="Price" [(ngModel)]="data.url" name="url">
+        <input matInput placeholder="Price" [(ngModel)]="data.price" name="price">
       </mat-form-field>
     </div>
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="Description" [(ngModel)]="data.created_at" name="created_at">
+        <input matInput placeholder="Description" [(ngModel)]="data.description" name="description">
       </mat-form-field>
     </div>
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="Quantity" [(ngModel)]="data.updated_at" name="updated_at">
+        <input matInput placeholder="Quantity" [(ngModel)]="data.quantity" name="quantity">
       </mat-form-field>
     </div>
 
