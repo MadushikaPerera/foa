@@ -45,6 +45,9 @@ import { OrdersComponent } from "./components/orders/orders.component";
 import { OrderItemComponent } from "./components/orders/order-item/order-item.component";
 import { FoodAdvancedComponent } from "./components/restaurant/food-advanced/food-advanced.component";
 import { FoodOrderComponent } from "./components/restaurant/food-order/food-order.component";
+import { AddVehicleComponent } from "./components/inventory/vehicle-table/add/add.component";
+import { EditVehicleComponent } from "./components/inventory/vehicle-table/edit/edit.component";
+import { DeleteVehicleComponent } from "./components/inventory/vehicle-table/delete/delete.component";
 
 @NgModule({
   declarations: [
@@ -73,7 +76,10 @@ import { FoodOrderComponent } from "./components/restaurant/food-order/food-orde
     OrdersComponent,
     OrderItemComponent,
     FoodAdvancedComponent,
-    FoodOrderComponent
+    FoodOrderComponent,
+    AddVehicleComponent,
+    EditVehicleComponent,
+    DeleteVehicleComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +117,10 @@ import { FoodOrderComponent } from "./components/restaurant/food-order/food-orde
     AddComponent,
     DeleteComponent,
     EditComponent,
-    FoodOrderComponent
+    FoodOrderComponent,
+    AddVehicleComponent,
+    EditVehicleComponent,
+    DeleteVehicleComponent
   ],
   bootstrap: [AppComponent]
 })

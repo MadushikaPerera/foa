@@ -1,24 +1,21 @@
 <h2 mat-dialog-title class="example-container">Vehicles</h2>
 <mat-dialog-content>
-    <div >
-        <mat-form-field>
-          <input matInput placeholder="Brand" [(ngModel)]="brand" name="brand">
-        </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Model" [(ngModel)]="model" name="model">
-          </mat-form-field>
-          <mat-form-field>
-              <input matInput placeholder="License Number" [(ngModel)]="icenseno" name="icenseno">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Quantity" [(ngModel)]="quantity" name="quantity">
-        </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Date" [(ngModel)]="dob" name="dob">
-        </mat-form-field>
-      </div>
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Brand" [(ngModel)]="brand" name="brand">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Model" [(ngModel)]="model" name="model">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="License Number" [(ngModel)]="licenseno" name="licenseno">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Date" [(ngModel)]="dob" name="dob">
+    </mat-form-field>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button (click)="addVehicle()">Add Vehicle</button>
+  <button mat-raised-button (click)="addVehicle()">Add Vehicle</button>
   <button mat-raised-button (click)="closeDialog()">cancel</button>
 </mat-dialog-actions>

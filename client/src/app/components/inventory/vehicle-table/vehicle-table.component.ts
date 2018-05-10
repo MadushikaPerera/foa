@@ -8,9 +8,9 @@ import "rxjs/add/observable/fromEvent";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/distinctUntilChanged";
-import { AddComponent } from "./add/add.component";
-import { EditComponent } from "./edit/edit.component";
-import { DeleteComponent } from "./delete/delete.component";
+import { AddVehicleComponent } from "./add/add.component";
+import { EditVehicleComponent } from "./edit/edit.component";
+import { DeleteVehicleComponent } from "./delete/delete.component";
 import { Vehicle } from "../../../model/vehicle";
 import { InventoryService } from "../../../services/inventory.service";
 import { DataSource } from "@angular/cdk/collections";
@@ -23,15 +23,7 @@ import { DataSource } from "@angular/cdk/collections";
 export class VehicleTableComponent implements OnInit {
   exampleDatabase: InventoryService | null;
   dataSource: VehicleDataSource | null;
-  displayedColumns = [
-    "vid",
-    "brand",
-    "model",
-    "licenseno",
-    "dob",
-    "quantity",
-    "actions"
-  ];
+  displayedColumns = ["vid", "brand", "model", "licenseno", "dob", "actions"];
   index: number;
   id: number;
 
@@ -54,7 +46,7 @@ export class VehicleTableComponent implements OnInit {
   }
 
   addNew(vehicle: Vehicle) {
-    const dialogRef = this.dialog.open(AddComponent, {
+    const dialogRef = this.dialog.open(AddVehicleComponent, {
       data: { vehicle: vehicle }
     });
 
@@ -62,6 +54,8 @@ export class VehicleTableComponent implements OnInit {
       if (result === 1) {
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService
+        console.log("adding V", this.inventoryservice.getVehicleDialogData());
+
         this.exampleDatabase.dataChange1.value.push(
           this.inventoryservice.getVehicleDialogData()
         );
@@ -82,7 +76,7 @@ export class VehicleTableComponent implements OnInit {
     // index row is used just for debugging proposes and can be removed
     this.index = i;
     console.log(this.index);
-    const dialogRef = this.dialog.open(EditComponent, {
+    const dialogRef = this.dialog.open(EditVehicleComponent, {
       data: {
         vid: vid,
         brand: brand,
@@ -117,8 +111,8 @@ export class VehicleTableComponent implements OnInit {
   ) {
     this.index = i;
     this.id = vid;
-    const dialogRef = this.dialog.open(DeleteComponent, {
-      data: { id: vid, brand: brand, model: model, licenseno: licenseno }
+    const dialogRef = this.dialog.open(DeleteVehicleComponent, {
+      data: { vid: vid, brand: brand, model: model, licenseno: licenseno }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -169,20 +163,6 @@ export class VehicleTableComponent implements OnInit {
   }
 }
 
-// export class VehicleDataSource extends DataSource<any> {
-//   constructor(private inventoryservice: InventoryService) {
-//     super();
-//   }
-
-//   connect(): Observable<Vehicle[]> {
-//     console.log("vehicle data source connect");
-
-//     return this.inventoryservice.getVehicles();
-//   }
-
-//   disconnect() {}
-// }
-
 export class VehicleDataSource extends DataSource<any> {
   _filterChange = new BehaviorSubject("");
 
@@ -217,7 +197,7 @@ export class VehicleDataSource extends DataSource<any> {
       this._paginator.page
     ];
 
-    this._exampleDatabase.getAllFoods();
+    this._exampleDatabase.getAllVehicles();
 
     return Observable.merge(...displayDataChanges).map(() => {
       // Filter data
@@ -227,12 +207,13 @@ export class VehicleDataSource extends DataSource<any> {
         .slice()
         .filter((vehicle: Vehicle) => {
           const searchStr = (
-            vehicle.vid +
             vehicle.brand +
             vehicle.model +
             vehicle.licenseno +
             vehicle.dob
-          ).toLowerCase();
+          )
+            .toString()
+            .toLowerCase();
           return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
         });
 

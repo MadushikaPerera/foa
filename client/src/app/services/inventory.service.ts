@@ -113,7 +113,7 @@ export class InventoryService {
   }
 
   addVehicle(vehicle: Vehicle): void {
-    this.dialogData = vehicle;
+    this.dialogData1 = vehicle;
     this.addVehicleItem(
       vehicle.brand,
       vehicle.model,
@@ -136,31 +136,32 @@ export class InventoryService {
   }
 
   updateVehicle(vehicle: Vehicle): void {
-    this.dialogData = vehicle;
-    // this.editVItem(
-    //   vehicle.brand,
-    //   vehicle.model,
-    //   vehicle.licenseno,
-    //   vehicle.dob
-    // ).subscribe(result => {
-    //   if (result === true) {
-    //     console.log("edited");
+    this.dialogData1 = vehicle;
+    this.editVehicleItem(
+      vehicle.vid,
+      vehicle.brand,
+      vehicle.model,
+      vehicle.licenseno,
+      vehicle.dob
+    ).subscribe(result => {
+      if (result === true) {
+        console.log("edited");
 
-    //     // this.closeDialog();
-    //     // this.openSnackBar('Added Successfully','Success');
-    //   } else {
-    //     console.log("error");
+        // this.closeDialog();
+        // this.openSnackBar('Added Successfully','Success');
+      } else {
+        console.log("error");
 
-    //     // this.error = 'Email or Password is incorrect';
-    //     // this.loading = false;
-    //     // this.openSnackBar(this.error,'Error');
-    //   }
-    // });
+        // this.error = 'Email or Password is incorrect';
+        // this.loading = false;
+        // this.openSnackBar(this.error,'Error');
+      }
+    });
   }
 
   deleteVehicle(id: number): void {
     console.log(id);
-    this.deleteFoodItem(id).subscribe(result => {
+    this.deleteVehicleItem(id).subscribe(result => {
       if (result === true) {
         console.log("deleted");
 
@@ -186,20 +187,94 @@ export class InventoryService {
 
   addIngredient(food: Food): void {
     this.dialogData2 = food;
+    // this.addIngredient(
+    //   food.name,
+    //   food.type,
+    //   food.price,
+    //   food.quantity,
+    //   food.description
+    // ).subscribe(result => {
+    //   if (result === true) {
+    //     console.log("added");
+
+    //     // this.closeDialog();
+    //     // this.openSnackBar('Added Successfully','Success');
+    //   } else {
+    //     console.log("error");
+
+    //     // this.error = 'Email or Password is incorrect';
+    //     // this.loading = false;
+    //     // this.openSnackBar(this.error,'Error');
+    //   }
+    // });
   }
 
   updateIngredient(food: Food): void {
     this.dialogData2 = food;
+    // this.editIngredient(
+    //   food.mid,
+    //   food.name,
+    //   food.type,
+    //   food.price,
+    //   food.quantity,
+    //   food.description
+    // ).subscribe(result => {
+    //   if (result === true) {
+    //     console.log("edited");
+
+    //     // this.closeDialog();
+    //     // this.openSnackBar('Added Successfully','Success');
+    //   } else {
+    //     console.log("error");
+
+    //     // this.error = 'Email or Password is incorrect';
+    //     // this.loading = false;
+    //     // this.openSnackBar(this.error,'Error');
+    //   }
+    // });
   }
 
   deleteIngredient(iid: number): void {
-    console.log(iid);
+    // this.deleteIngredient(iid).subscribe(result => {
+    //   if (result === true) {
+    //     console.log("deleted");
+    //     // this.closeDialog();
+    //     // this.openSnackBar('Added Successfully','Success');
+    //   } else {
+    //     console.log("error");
+    //     // this.error = 'Email or Password is incorrect';
+    //     // this.loading = false;
+    //     // this.openSnackBar(this.error,'Error');
+    //   }
+    // });
   }
 
   getAllFoods(): void {
     this.http.get<Food[]>(environment.host + "/getfooditems").subscribe(
       data => {
         this.dataChange.next(data);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.name + " " + error.message);
+      }
+    );
+  }
+
+  getAllVehicles(): void {
+    this.http.get<Vehicle[]>(environment.host + "/getvehicles").subscribe(
+      data => {
+        this.dataChange1.next(data);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.name + " " + error.message);
+      }
+    );
+  }
+
+  getAllIngredients(): void {
+    this.http.get<Ingredient[]>(environment.host + "/getingredients").subscribe(
+      data => {
+        this.dataChange2.next(data);
       },
       (error: HttpErrorResponse) => {
         console.log(error.name + " " + error.message);
@@ -301,9 +376,34 @@ export class InventoryService {
       });
   }
 
-  deleteVehicleItem(vid: string): Observable<boolean> {
+  editVehicleItem(
+    vid: number,
+    brand: string,
+    model: string,
+    licenseno: string,
+    dob: string
+  ): Observable<boolean> {
     return this.http
-      .put(environment.host + "/delvehicle", vid)
+      .put(environment.host + "/editvehicle", {
+        vid: vid,
+        brand: brand,
+        model: model,
+        licenseno: licenseno,
+        dob: dob
+      })
+      .map((response: Vehicle) => {
+        // signup successful
+        console.log("Vehicle Edited");
+        if (response) {
+          return true;
+        }
+        return false;
+      });
+  }
+
+  deleteVehicleItem(vid: number): Observable<boolean> {
+    return this.http
+      .put(environment.host + "/delvehicle", { vid: vid })
       .map((response: Food) => {
         // signup successful
         if (response) {
@@ -338,6 +438,31 @@ export class InventoryService {
       .map((response: Ingredient) => {
         // signup successful
         console.log("Ingredients added", response);
+        if (response) {
+          return true;
+        }
+        return false;
+      });
+  }
+
+  editIngredientItem(
+    vid: number,
+    brand: string,
+    model: string,
+    licenseno: string,
+    dob: string
+  ): Observable<boolean> {
+    return this.http
+      .put(environment.host + "/editingredient", {
+        vid: vid,
+        brand: brand,
+        model: model,
+        licenseno: licenseno,
+        dob: dob
+      })
+      .map((response: Vehicle) => {
+        // signup successful
+        console.log("Vehicle Edited");
         if (response) {
           return true;
         }
