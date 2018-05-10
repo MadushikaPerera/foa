@@ -8,10 +8,7 @@ const requireAuth = passport.authenticate("jwt", { session: false });
 const requireSignin = passport.authenticate("local", { session: false });
 
 module.exports = function(app) {
-  app.get("/hi", function(req, res) {
-    res.send({ hi: "there" });
-  });
-
+  // Food rotues
   app.post("/addfood", requireAuth, inventoryController.addInventoryFoodItem);
 
   app.get(
@@ -24,6 +21,7 @@ module.exports = function(app) {
 
   app.put("/delfood", requireAuth, inventoryController.deleteFoodItem);
 
+  // Vehicle rotues
   app.post("/addvehicle", requireAuth, inventoryController.addInventoryVehicle);
 
   app.get(
@@ -32,5 +30,32 @@ module.exports = function(app) {
     inventoryController.getInventoryVehicleItems
   );
 
-  app.put("/delvehicle", requireAuth, function(req, res) {});
+  app.put("/editvehicle", requireAuth, inventoryController.editVehicleItems);
+
+  app.put("/delvehicle", requireAuth, inventoryController.deleteVehicleItem);
+
+  // Ingredients rotues
+  app.post(
+    "/addingredients",
+    requireAuth,
+    inventoryController.addInventoryIngredient
+  );
+
+  app.get(
+    "/getingredients",
+    requireAuth,
+    inventoryController.getInventoryIngredientItems
+  );
+
+  app.put(
+    "/editingredient",
+    requireAuth,
+    inventoryController.editIngredientItems
+  );
+
+  app.put(
+    "/delingredient",
+    requireAuth,
+    inventoryController.deleteIngredientItem
+  );
 };

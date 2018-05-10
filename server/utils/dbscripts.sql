@@ -13,19 +13,6 @@ CREATE TABLE `foa`.`user` (
      UNIQUE INDEX `UNIQUE` (`uname` ASC));
 
 
-CREATE TABLE `foa`.`delivery` (
-     `did` INT NOT NULL AUTO_INCREMENT,
-     `order` INT NULL,
-     `vehicleno` VARCHAR(45) NULL,
-     `driverid` INT NULL,
-     `pickuptime` VARCHAR(45) NULL,
-     `duration` INT NULL,
-     `status` VARCHAR(45) NULL,
-     `active` VARCHAR(45) NULL DEFAULT 'true',
-     PRIMARY KEY (`did`),
-     UNIQUE INDEX `vno_UNIQUE` (`vehicleno` ASC));
-
-
 CREATE TABLE `foa`.`vehicle` (
     `vid` int(11) NOT NULL AUTO_INCREMENT,
     `brand` varchar(45) DEFAULT NULL,
@@ -59,22 +46,59 @@ CREATE TABLE `foa`.`meal` (
      `active` VARCHAR(45) NULL DEFAULT 'true',
       PRIMARY KEY (`mid`));
 
-                         
- CREATE TABLE `foa`.`oder` (
-     `id` INT NOT NULL AUTO_INCREMENT,
-     `oderid` VARCHAR(45) NULL,
-     `cid` INT NULL,
-     `cname` VARCHAR(45) NULL,
-     `address` VARCHAR(45) NULL,
-     `phone` VARCHAR(45) NULL,
-     `oprice` DOUBLE NULL,
-     `cartitems` VARCHAR(45) NULL,
-     `otype` VARCHAR(45) NULL,
-     `cashmethod` VARCHAR(45) NULL,
-     `odate` VARCHAR(45) NULL,
-     `status` VARCHAR(45) NULL,
-     `active` VARCHAR(45) NULL DEFAULT 'true',
-     PRIMARY KEY (`id`));
+
+CREATE TABLE `foa`.`ingredient` (
+  `iid` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `type` VARCHAR(45) NULL,
+  `quantity` INT NOT NULL,
+  `price` DOUBLE NULL,
+  `description` VARCHAR(255) NULL,
+  `active` VARCHAR(45) NULL DEFAULT 'true',
+  PRIMARY KEY (`iid`));
+
+
+
+CREATE TABLE `foa`.`cart` (
+  `cid` INT NOT NULL AUTO_INCREMENT,
+  `item` VARCHAR(45) NULL,
+  `quantity` INT NULL,
+  `price` INT NULL,
+  `user` VARCHAR(45) NULL,
+  `status` VARCHAR(45) NULL DEFAULT 'pending',
+  `dob` VARCHAR(45) NULL,
+  `active` VARCHAR(45) NULL DEFAULT 'true',
+  PRIMARY KEY (`cid`));
+
+
+CREATE TABLE `foa`.`order` (
+  `oid` INT NOT NULL AUTO_INCREMENT,
+  `items` VARCHAR(255) NOT NULL,
+  `totalprice` DOUBLE NULL,
+  `user` VARCHAR(45) NOT NULL,
+  `address` VARCHAR(250) NOT NULL,
+  `contact` VARCHAR(45) NULL,
+  `payment` VARCHAR(45) NOT NULL,
+  `dob` VARCHAR(45) NULL,
+  `status` VARCHAR(45) NULL DEFAULT 'pending',
+  `active` VARCHAR(45) NULL DEFAULT 'true',
+  PRIMARY KEY (`oid`));
+
+  CREATE TABLE `foa`.`deliver` (
+    `did` INT NOT NULL AUTO_INCREMENT,
+    `items` VARCHAR(255) NOT NULL,
+    `user` VARCHAR(45) NOT NULL,
+    `payment` VARCHAR(45) NOT NULL,
+    `address` VARCHAR(45) NOT NULL,
+    `contact` VARCHAR(45) NULL,
+    `totalprice` DOUBLE NULL,
+    `employee` VARCHAR(45) NOT NULL,
+    `vehicleno` VARCHAR(45) NOT NULL,
+    `status` VARCHAR(45) NULL DEFAULT 'pending',
+    `ddate` VARCHAR(45) NOT NULL,
+    `active` VARCHAR(45) NULL DEFAULT 'true',
+    PRIMARY KEY (`did`));
+
                             
                             
                   
