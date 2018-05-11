@@ -233,10 +233,11 @@ exports.addInventoryIngredient = function(req, res, next) {
         });
       }
       let ingredient = {
-        licenseno: req.body.licenseno,
-        brand: req.body.brand,
-        model: req.body.model,
-        dob: req.body.dob
+        name: req.body.name,
+        type: req.body.type,
+        quantity: req.body.quantity,
+        price: req.body.price,
+        description: req.body.description
       };
       conn.query("INSERT INTO ingredient SET ?", ingredient, function(
         err1,
@@ -276,14 +277,16 @@ exports.editIngredientItems = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {
+      let ingredient = {
+        name: req.body.name,
+        type: req.body.type,
+        quantity: req.body.quantity,
+        price: req.body.price,
+        description: req.body.description
+      };
       conn.query(
-        "UPDATE ingredient SET ? WHERE iid= '" + req.body.vid + "' ",
-        {
-          brand: req.body.brand,
-          dob: req.body.dob,
-          licenseno: req.body.licenseno,
-          model: req.body.model
-        },
+        "UPDATE ingredient SET ? WHERE iid= '" + req.body.iid + "' ",
+        ingredient,
         function(err1, records, fields) {
           if (!err1) {
             // do something

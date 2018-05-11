@@ -4,17 +4,19 @@ exports.makeDelivery = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {
-      let delivery = [
-        {
-          order: req.body.order,
-          vehicleno: req.body.vehicleno,
-          driverid: req.body.driverid,
-          pickuptime: req.body.pickuptime,
-          duration: req.body.duration,
-          status: "Shipped"
-        }
-      ];
-      conn.query("INSERT INTO delivery SET ?", delivery, function(
+      let deliver = {
+        items: req.body.items,
+        user: req.body.user,
+        payment: req.body.payment,
+        address: req.body.address,
+        contact: req.body.contact,
+        totalprice: req.body.totalprice,
+        employee: req.body.employee,
+        vehicleno: req.body.vehicleno,
+        status: req.body.status,
+        ddate: req.body.ddate
+      };
+      conn.query("INSERT INTO deliver SET ?", deliver, function(
         err1,
         records,
         fields
@@ -33,7 +35,7 @@ exports.getDeliveries = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {
-      conn.query("SELECT * FROM delivery", function(err1, records, fields) {
+      conn.query("SELECT * FROM deliver", function(err1, records, fields) {
         if (!err1) {
           // do something
           res.json(records);
@@ -48,19 +50,21 @@ exports.editDelivery = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {
-      let delivery = [
-        {
-          order: req.body.order,
-          vehicleno: req.body.vehicleno,
-          driverid: req.body.driverid,
-          pickuptime: req.body.pickuptime,
-          duration: req.body.duration,
-          status: req.body.status
-        }
-      ];
+      let deliver = {
+        items: req.body.items,
+        user: req.body.user,
+        payment: req.body.payment,
+        address: req.body.address,
+        contact: req.body.contact,
+        totalprice: req.body.totalprice,
+        employee: req.body.employee,
+        vehicleno: req.body.vehicleno,
+        status: req.body.status,
+        ddate: req.body.ddate
+      };
       conn.query(
-        "UPDATE delivery SET ? WHERE did = '" + req.body.did + "' ",
-        delivery,
+        "UPDATE deliver SET ? WHERE did = '" + req.body.did + "' ",
+        deliver,
         function(err1, records, fields) {
           if (!err1) {
             // do something
@@ -78,10 +82,11 @@ exports.cancelDelivery = function(req, res, next) {
     if (err) {
     } else {
       conn.query(
-        "UPDATE delivery status='false' WHERE did = '" + req.body.did + "' ",
+        "UPDATE deliver status='false' WHERE did = '" + req.body.did + "' ",
         function(err1, records, fields) {
           if (!err1) {
             // do something
+            res.json(records);
           }
           conn.release();
         }

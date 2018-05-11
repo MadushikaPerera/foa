@@ -99,6 +99,17 @@ CREATE TABLE `foa`.`order` (
     `active` VARCHAR(45) NULL DEFAULT 'true',
     PRIMARY KEY (`did`));
 
+
+CREATE TABLE `foa`.`promotion` (
+  `pid` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(45) NOT NULL,
+  `rate` INT NULL,
+  `startdate` VARCHAR(45) NOT NULL,
+  `enddate` VARCHAR(45) NOT NULL,
+  `active` VARCHAR(45) NULL DEFAULT 'true',
+  PRIMARY KEY (`pid`));
+
                             
                             
                   

@@ -2,33 +2,24 @@ const Authentication = require("../utils/auth");
 const passportService = require("../utils/passport");
 const passport = require("passport");
 const connection = require("../utils/dbconnection");
+const order = require("../controller/odersController");
 
 const requireAuth = passport.authenticate("jwt", { session: false });
 const requireSignin = passport.authenticate("local", { session: false });
 
 module.exports = function(app) {
   // Make Order
-  app.post("/makeorder", requireAuth, function(req, res) {
-    res.send({ hi: "Make Order" });
-  });
+  app.post("/makeorder", requireAuth, order.makeOrder);
 
   //Get order info
-  app.get("/getorder", function(req, res) {
-    res.send({ hi: "Get order info" });
-  });
+  app.get("/getorder", order.getOrders);
 
   //Get all orders
-  app.get("/getorders", function(req, res) {
-    res.send({ hi: "Get all orders" });
-  });
+  app.get("/getorders", requireAuth, order.getOrders);
 
   //Cancel order
-  app.put("/cancelorder", function(req, res) {
-    res.send({ hi: "Cancel order" });
-  });
+  app.put("/cancelorder", requireAuth, order.cancelOrder);
 
   //Edit order
-  app.put("/editorder", function(req, res) {
-    res.send({ hi: "Edit order" });
-  });
+  app.put("/editorder", requireAuth, order.editOrder);
 };
