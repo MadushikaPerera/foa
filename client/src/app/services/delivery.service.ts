@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import { environment } from "../../environments/environment";
-import { Delivery } from "../model/delivery";
+import { Deliver } from "../model/deliver";
 
 @Injectable()
 export class DeliveryService {
@@ -23,7 +23,7 @@ export class DeliveryService {
         licenseno: licenseno,
         dob: dob
       })
-      .map((response: Delivery) => {
+      .map((response: Deliver) => {
         // signup successful
         console.log("Ingredients added", response);
         if (response) {
@@ -36,7 +36,7 @@ export class DeliveryService {
   deleteDelivery(vid: string): Observable<boolean> {
     return this.http
       .put(environment.host + "/deldelivery", vid)
-      .map((response: Delivery) => {
+      .map((response: Deliver) => {
         // signup successful
         if (response) {
           return true;
@@ -45,9 +45,9 @@ export class DeliveryService {
       });
   }
 
-  getDeliveries(): Observable<Delivery[]> {
+  getDeliveries(): Observable<Deliver[]> {
     return this.http.get(environment.host + "/getdeliveries").map(response => {
-      let vehiclelist = response as Delivery[];
+      let vehiclelist = response as Deliver[];
       console.log(vehiclelist);
       return vehiclelist;
     });

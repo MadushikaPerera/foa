@@ -9,7 +9,7 @@ import "rxjs/add/operator/map";
 import { environment } from "../../environments/environment";
 import { Food } from "../model/food";
 import { Vehicle } from "../model/vehicle";
-import { Ingredient } from "../model/ingredients";
+import { Ingredient } from "../model/ingredient";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()

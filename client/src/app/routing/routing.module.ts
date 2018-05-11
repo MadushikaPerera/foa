@@ -17,6 +17,7 @@ import { CartComponent } from "../components/cart/cart.component";
 import { OrdersComponent } from "../components/orders/orders.component";
 import { OrderItemComponent } from "../components/orders/order-item/order-item.component";
 import { DeliveryComponent } from "../components/delivery/delivery.component";
+import { AdminComponent } from "../components/admin/admin.component";
 import { AuthguardGuard } from "../authguard.guard";
 
 const routes: Routes = [
@@ -77,6 +78,12 @@ const routes: Routes = [
     pathMatch: "full",
     canActivate: [AuthguardGuard],
     component: OrdersComponent
+  },
+  {
+    path: "admin",
+    pathMatch: "full",
+    canActivate: [AuthguardGuard],
+    component: AdminComponent
   },
   {
     path: "**",
