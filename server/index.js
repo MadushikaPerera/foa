@@ -12,6 +12,7 @@ const EmployeeRoutes = require("./routes/employeeRoutes");
 const InventoryRoutes = require("./routes/inventoryRoutes");
 const OrderRoutes = require("./routes/orderRoutes");
 const PromoRoutes = require("./routes/promoRoutes");
+const CartRoutes = require("./routes/cartRoutes");
 
 const port = process.env.PORT || 3000;
 
@@ -31,6 +32,7 @@ EmployeeRoutes(app);
 InventoryRoutes(app);
 OrderRoutes(app);
 PromoRoutes(app);
+CartRoutes(app);
 ///
 
 // app.use(express.static(path.join(__dirname, "../client/dist")));
