@@ -1,0 +1,20 @@
+<h2 mat-dialog-title class="example-container">
+  <i class="fas fa-cart-plus icon fa-lg"></i>Add to cart</h2>
+<mat-dialog-content>
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Food Name" #name>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Quantity" [(ngModel)]="req">
+        <mat-option *ngFor="let quantity of foods" [value]="quantity.value">
+          {{ quantity.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-button (click)="addToCart()">Add To Cart</button>
+</mat-dialog-actions>

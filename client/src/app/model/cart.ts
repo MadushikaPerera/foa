@@ -1,11 +1,9 @@
 export class Cart {
-  oid: number;
-  items: string;
-  totalprice: number;
+  cid: number;
+  item: string;
+  quantity: number;
+  price: number;
   user: string;
-  address: string;
-  contact: string;
-  payment: string;
-  dob: string;
   status: string;
+  dob: string;
 }

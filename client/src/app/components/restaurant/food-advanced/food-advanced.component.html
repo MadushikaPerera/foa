@@ -5,12 +5,6 @@
   </div>
 </mat-card>
 <mat-card>
-  <mat-form-field class="full-width">
-    <input matInput type="text" placeholder="Search Meal" [(ngModel)]="value" />
-    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
   <div class="container">
     <div class="box1">
       <span>
@@ -18,7 +12,14 @@
       </span>
       <mat-slider class="full-width" thumbLabel tickInterval="100" min="100" max="10000" step="10"></mat-slider>
     </div>
-    <div class="box2"></div>
+    <div class="box2">
+      <mat-form-field class="full-width">
+        <input matInput type="text" placeholder="Search Meal" [(ngModel)]="value" />
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
     <div class="box3">
       <mat-form-field>
         <mat-select placeholder="Favorite food">

@@ -31,6 +31,7 @@ import { DeliveryService } from "./services/delivery.service";
 import { InventoryService } from "./services/inventory.service";
 import { OderService } from "./services/oder.service";
 import { PromoService } from "./services/promo.service";
+import { CartService } from "./services/cart.service";
 import { AuthguardGuard } from "./authguard.guard";
 import { TokenInterceptor } from "./services/token.interceptor";
 import { CartComponent } from "./components/cart/cart.component";
@@ -48,6 +49,7 @@ import { FoodOrderComponent } from "./components/restaurant/food-order/food-orde
 import { AddVehicleComponent } from "./components/inventory/vehicle-table/add/add.component";
 import { EditVehicleComponent } from "./components/inventory/vehicle-table/edit/edit.component";
 import { DeleteVehicleComponent } from "./components/inventory/vehicle-table/delete/delete.component";
+import { AddtocartComponent } from "./components/cart/addtocart/addtocart.component";
 
 @NgModule({
   declarations: [
@@ -79,7 +81,8 @@ import { DeleteVehicleComponent } from "./components/inventory/vehicle-table/del
     FoodOrderComponent,
     AddVehicleComponent,
     EditVehicleComponent,
-    DeleteVehicleComponent
+    DeleteVehicleComponent,
+    AddtocartComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +112,8 @@ import { DeleteVehicleComponent } from "./components/inventory/vehicle-table/del
     AuthguardGuard,
     InventoryService,
     OderService,
-    PromoService
+    PromoService,
+    CartService
   ],
   entryComponents: [
     FoodDialogComponent,
@@ -120,7 +124,8 @@ import { DeleteVehicleComponent } from "./components/inventory/vehicle-table/del
     FoodOrderComponent,
     AddVehicleComponent,
     EditVehicleComponent,
-    DeleteVehicleComponent
+    DeleteVehicleComponent,
+    AddtocartComponent
   ],
   bootstrap: [AppComponent]
 })

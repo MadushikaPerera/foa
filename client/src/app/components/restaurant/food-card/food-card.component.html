@@ -1,17 +1,17 @@
 <mat-card class="example-card">
-  
+
   <mat-card-actions>
-      <mat-card-content>
-        <div style="text-align: center;">
-            {{title}}
-        </div>
-        <div style="text-align: center;">
-            <font color="red">{{price}}</font>
-        </div>
-        </mat-card-content>
+    <mat-card-content>
+      <div style="text-align: center;">
+        {{title}}
+      </div>
+      <div style="text-align: center;">
+        <font color="red">{{price}}</font>
+      </div>
+    </mat-card-content>
     <div class="button-row">
       <button mat-button class="food-card-button">LIKE</button>
-      <button mat-button class="food-card-button">
+      <button mat-button class="food-card-button" (click)="addtocart()">
         <mat-icon aria-label="add to shopping cart">add_shopping_cart</mat-icon>
       </button>
     </div>

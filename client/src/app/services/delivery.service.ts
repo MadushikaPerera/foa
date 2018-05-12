@@ -35,7 +35,7 @@ export class DeliveryService {
 
   deleteDelivery(vid: string): Observable<boolean> {
     return this.http
-      .put(environment.host + "/deldelivery", vid)
+      .put(environment.host + "/deldelivery", { vid: vid })
       .map((response: Deliver) => {
         // signup successful
         if (response) {
