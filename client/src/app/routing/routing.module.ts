@@ -86,6 +86,11 @@ const routes: Routes = [
     component: AdminComponent
   },
   {
+    path: "",
+    pathMatch: "full",
+    component: RestaurantComponent
+  },
+  {
     path: "**",
     pathMatch: "full",
     component: NotfoundComponent
