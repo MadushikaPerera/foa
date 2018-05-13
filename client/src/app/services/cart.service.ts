@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import {
   HttpClient,
   HttpHeaders,
-  HttpErrorResponse
+  HttpErrorResponse,
+  HttpParams
 } from "@angular/common/http";
 import { Cart } from "../model/cart";
 import { Observable } from "rxjs/Observable";
@@ -36,12 +37,16 @@ export class CartService {
       });
   }
 
-  getDeliveries(): Observable<Cart[]> {
-    return this.http.get(environment.host + "/getcartitems").map(response => {
-      let cartlist = response as Cart[];
-      console.log(cartlist);
-      return cartlist;
-    });
+  getCartItems(): Observable<Cart[]> {
+    return this.http
+      .get(environment.host + "/getcartitems", {
+        params: new HttpParams().set("uname", localStorage.getItem("uname"))
+      })
+      .map(response => {
+        let cartlist = response as Cart[];
+        console.log(cartlist);
+        return cartlist;
+      });
   }
 
   deleteItemFromCart(cid: string): Observable<boolean> {

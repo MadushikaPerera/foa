@@ -175,20 +175,6 @@ export class FoodTableComponent implements OnInit {
   }
 }
 
-// export class FoodDataSource extends DataSource<any> {
-//   constructor(private inventoryservice: InventoryService) {
-//     super();
-//   }
-
-//   connect(): Observable<Food[]> {
-//     console.log("food data source connect");
-
-//     return this.inventoryservice.getFoodItems();
-//   }
-
-//   disconnect() {}
-// }
-
 export class FoodDataSource extends DataSource<Food> {
   _filterChange = new BehaviorSubject("");
 

@@ -31,17 +31,18 @@ exports.getCartItems = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {
-      conn.query("SELECT * FROM cart WHERE active='true'", function(
-        err1,
-        records,
-        fields
-      ) {
-        if (!err1) {
-          // do something
-          res.json(records);
+      conn.query(
+        "SELECT * FROM cart WHERE active='true' and user='" +
+          req.query.uname +
+          "' ",
+        function(err1, records, fields) {
+          if (!err1) {
+            // do something
+            res.json(records);
+          }
+          conn.release();
         }
-        conn.release();
-      });
+      );
     }
   });
 };

@@ -8,6 +8,7 @@ import {
   MatSort,
   MatSnackBar
 } from "@angular/material";
+import { CartService } from "../../services/cart.service";
 
 @Component({
   selector: "app-cart",
@@ -18,9 +19,18 @@ export class CartComponent implements OnInit {
   displayedColumns = ["item", "quantity", "unit", "subtotal"];
   dataSource = CART_DATA;
 
-  constructor(private router: Router, public snackBar: MatSnackBar) {}
+  constructor(
+    private router: Router,
+    public snackBar: MatSnackBar,
+    private cartservice: CartService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    let cart = this;
+    this.cartservice.getCartItems().subscribe(res => {
+      console.log(res);
+    });
+  }
 
   shop() {
     this.router.navigate(["/restaurant"]);
@@ -41,17 +51,3 @@ const CART_DATA: Cart[] = [
   { item: 3, quantity: "Lithium", unit: 6.941, subtotal: "Li" },
   { item: 4, quantity: "Beryllium", unit: 9.0122, subtotal: "Be" }
 ];
-
-// export class FoodDataSource extends DataSource<any> {
-//   constructor(private inventoryservice: InventoryService) {
-//     super();
-//   }
-
-//   connect(): Observable<Food[]> {
-//     console.log("food data source connect");
-
-//     return this.inventoryservice.getFoodItems();
-//   }
-
-//   disconnect() {}
-// }

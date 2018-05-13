@@ -3,7 +3,7 @@
 <mat-dialog-content>
   <div>
     <mat-form-field>
-      <input matInput placeholder="Food Name" #name>
+      <input matInput placeholder="Food Name" [(ngModel)]="name">
     </mat-form-field>
     <mat-form-field>
       <mat-select placeholder="Quantity" [(ngModel)]="req">

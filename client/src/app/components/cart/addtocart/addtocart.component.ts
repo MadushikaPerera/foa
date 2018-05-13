@@ -1,7 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material";
 import { CartService } from "../../../services/cart.service";
 import { MatSnackBar } from "@angular/material";
+import * as momentNs from "moment";
+
+const moment = momentNs;
 
 @Component({
   selector: "app-addtocart",
@@ -9,18 +12,25 @@ import { MatSnackBar } from "@angular/material";
   styleUrls: ["./addtocart.component.css"]
 })
 export class AddtocartComponent implements OnInit {
-  @Input() name: string;
-  @Input() mid: number;
-  @Input() quantity: number;
+  name: string;
+  mid: number;
+  quantity: number;
+  price: number;
   req: number;
   error: string;
   loading: boolean;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AddtocartComponent>,
     private cartservice: CartService,
     public snackBar: MatSnackBar
-  ) {}
+  ) {
+    this.name = this.data.name;
+    this.mid = this.data.mid;
+    this.price = this.data.price;
+    this.quantity = this.data.quantity;
+  }
 
   foods = [
     { value: 1 },
@@ -41,16 +51,25 @@ export class AddtocartComponent implements OnInit {
   }
 
   addToCart() {
-    // this.cartservice.addItemToCart().subscribe(result => {
-    //   if (result === true) {
-    //     this.closeDialog();
-    //     this.openSnackBar("Added To Cart Successfully", "Success");
-    //   } else {
-    //     this.error = "Not Added";
-    //     this.loading = false;
-    //     this.openSnackBar(this.error, "Error");
-    //   }
-    // });
+    this.cartservice
+      .addItemToCart(
+        this.name,
+        this.req,
+        this.price,
+        localStorage.getItem("uname"),
+        "pending",
+        moment().format("MMM Do YY")
+      )
+      .subscribe(result => {
+        if (result === true) {
+          this.closeDialog();
+          this.openSnackBar("Added To Cart Successfully", "Success");
+        } else {
+          this.error = "Not Added";
+          this.loading = false;
+          this.openSnackBar(this.error, "Error");
+        }
+      });
   }
 
   openSnackBar(message: string, action: string) {

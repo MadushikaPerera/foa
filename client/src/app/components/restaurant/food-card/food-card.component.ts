@@ -8,8 +8,10 @@ import { AddtocartComponent } from "../../cart/addtocart/addtocart.component";
   styleUrls: ["./food-card.component.css"]
 })
 export class FoodCardComponent implements OnInit {
-  @Input() title: String;
+  @Input() title: string;
   @Input() price: number;
+  @Input() mid: number;
+  @Input() quantity: number;
 
   constructor(public dialog: MatDialog) {
     this.title = "";
@@ -19,6 +21,12 @@ export class FoodCardComponent implements OnInit {
 
   addtocart(): void {
     let dialogRef = this.dialog.open(AddtocartComponent, {
+      data: {
+        name: this.title,
+        mid: this.mid,
+        price: this.price,
+        quantity: this.quantity
+      },
       width: "750px"
     });
 

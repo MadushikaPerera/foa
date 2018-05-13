@@ -31,7 +31,7 @@
     </mat-card>
     <div class="container2">
       <div *ngFor="let meal of meals">
-        <app-food-card [price]="meal.price" [title]="meal.name">
+        <app-food-card [price]="meal.price" [title]="meal.name" [mid]="meal.mid" [quantity]="meal.quantity">
         </app-food-card>
       </div>
     </div>
