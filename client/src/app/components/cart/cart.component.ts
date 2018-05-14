@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { DataSource } from "@angular/cdk/collections";
 import { Observable } from "rxjs/Observable";
 import { Router } from "@angular/router";
@@ -8,7 +8,12 @@ import {
   MatSort,
   MatSnackBar
 } from "@angular/material";
+import { HttpClient } from "@angular/common/http";
+import { Cart } from "../../model/cart";
 import { CartService } from "../../services/cart.service";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { EditItemComponent } from "./edit-item/edit-item.component";
+import { DeleteItemComponent } from "./delete-item/delete-item.component";
 
 @Component({
   selector: "app-cart",
@@ -16,20 +21,128 @@ import { CartService } from "../../services/cart.service";
   styleUrls: ["./cart.component.css"]
 })
 export class CartComponent implements OnInit {
-  displayedColumns = ["item", "quantity", "unit", "subtotal"];
-  dataSource = CART_DATA;
+  exampleDatabase: CartService | null;
+  dataSource: CartDataSource | null;
+  displayedColumns = [
+    "cid",
+    "item",
+    "quantity",
+    "price",
+    "subtotal",
+    "actions"
+  ];
+  index: number;
+  id: number;
 
   constructor(
+    public dialog: MatDialog,
     private router: Router,
     public snackBar: MatSnackBar,
-    private cartservice: CartService
+    private cartservice: CartService,
+    public httpClient: HttpClient
   ) {}
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild("filter") filter: ElementRef;
+
   ngOnInit() {
-    let cart = this;
-    this.cartservice.getCartItems().subscribe(res => {
-      console.log(res);
+    this.loadData();
+  }
+
+  refresh() {
+    this.loadData();
+  }
+
+  startEdit(
+    i: number,
+    cid: number,
+    item: string,
+    quantity: number,
+    price: number
+  ) {
+    this.id = cid;
+    // index row is used just for debugging proposes and can be removed
+    this.index = i;
+    console.log(this.index);
+    const dialogRef = this.dialog.open(EditItemComponent, {
+      data: { cid: cid, item: item, quantity: quantity, price: price }
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        // When using an edit things are little different, firstly we find record inside DataService by id
+        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
+          x => x.cid === this.id
+        );
+        // Then you update that record using data from dialogData (values you enetered)
+        this.exampleDatabase.dataChange.value[
+          foundIndex
+        ] = this.cartservice.getCartDialogData();
+        // And lastly refresh table
+        this.refreshTable();
+      }
+    });
+  }
+
+  deleteItem(
+    i: number,
+    cid: number,
+    item: string,
+    quantity: number,
+    price: number
+  ) {
+    this.index = i;
+    this.id = cid;
+    const dialogRef = this.dialog.open(DeleteItemComponent, {
+      data: { cid: cid, item: item, quantity: quantity, price: price }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
+          x => x.cid === this.id
+        );
+        // // for delete we use splice in order to remove single object from DataService
+        this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
+        this.refreshTable();
+      }
+    });
+  }
+
+  // If you don't need a filter or a pagination this can be simplified, you just use code from else block
+  private refreshTable() {
+    // if there's a paginator active we're using it for refresh
+    if (this.dataSource._paginator.hasNextPage()) {
+      this.dataSource._paginator.nextPage();
+      this.dataSource._paginator.previousPage();
+      // in case we're on last page this if will tick
+    } else if (this.dataSource._paginator.hasPreviousPage()) {
+      this.dataSource._paginator.previousPage();
+      this.dataSource._paginator.nextPage();
+      // in all other cases including active filter we do it like this
+    } else {
+      this.dataSource.filter = "";
+      this.dataSource.filter = this.filter.nativeElement.value;
+    }
+  }
+
+  public loadData() {
+    this.exampleDatabase = new CartService(this.httpClient);
+    this.dataSource = new CartDataSource(
+      this.exampleDatabase,
+      this.paginator,
+      this.sort
+    );
+    Observable.fromEvent(this.filter.nativeElement, "keyup")
+      .debounceTime(150)
+      .distinctUntilChanged()
+      .subscribe(() => {
+        if (!this.dataSource) {
+          return;
+        }
+        this.dataSource.filter = this.filter.nativeElement.value;
+      });
   }
 
   shop() {
@@ -38,16 +151,107 @@ export class CartComponent implements OnInit {
 
   checkout() {}
 }
-export interface Cart {
-  quantity: string;
-  item: number;
-  unit: number;
-  subtotal: string;
-}
 
-const CART_DATA: Cart[] = [
-  { item: 1, quantity: "Hydrogen", unit: 1.0079, subtotal: "H" },
-  { item: 2, quantity: "Helium", unit: 4.0026, subtotal: "He" },
-  { item: 3, quantity: "Lithium", unit: 6.941, subtotal: "Li" },
-  { item: 4, quantity: "Beryllium", unit: 9.0122, subtotal: "Be" }
-];
+export class CartDataSource extends DataSource<Cart> {
+  _filterChange = new BehaviorSubject("");
+
+  get filter(): string {
+    return this._filterChange.value;
+  }
+
+  set filter(filter: string) {
+    this._filterChange.next(filter);
+  }
+
+  filteredData: Cart[] = [];
+  renderedData: Cart[] = [];
+
+  constructor(
+    public _exampleDatabase: CartService,
+    public _paginator: MatPaginator,
+    public _sort: MatSort
+  ) {
+    super();
+    // Reset to the first page when the user changes the filter.
+    this._filterChange.subscribe(() => (this._paginator.pageIndex = 0));
+  }
+
+  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  connect(): Observable<Cart[]> {
+    // Listen for any changes in the base data, sorting, filtering, or pagination
+    const displayDataChanges = [
+      this._exampleDatabase.dataChange,
+      this._sort.sortChange,
+      this._filterChange,
+      this._paginator.page
+    ];
+
+    this._exampleDatabase.getAllCartItems();
+
+    return Observable.merge(...displayDataChanges).map(() => {
+      // Filter data
+      console.log("filter", this._exampleDatabase.cartData);
+
+      this.filteredData = this._exampleDatabase.cartData
+        .slice()
+        .filter((cart: Cart) => {
+          const searchStr = (
+            cart.cid +
+            cart.item +
+            cart.quantity +
+            cart.price
+          ).toLowerCase();
+          return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+        });
+
+      // Sort filtered data
+      const sortedData = this.sortData(this.filteredData.slice());
+
+      // Grab the page's slice of the filtered sorted data.
+      const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+      this.renderedData = sortedData.splice(
+        startIndex,
+        this._paginator.pageSize
+      );
+      return this.renderedData;
+    });
+  }
+  disconnect() {}
+
+  /** Returns a sorted copy of the database data. */
+  sortData(data: Cart[]): Cart[] {
+    if (!this._sort.active || this._sort.direction === "") {
+      return data;
+    }
+
+    return data.sort((a, b) => {
+      let propertyA: number | string = "";
+      let propertyB: number | string = "";
+
+      switch (this._sort.active) {
+        case "id":
+          [propertyA, propertyB] = [a.cid, b.cid];
+          break;
+        case "name":
+          [propertyA, propertyB] = [a.item, b.item];
+          break;
+        case "quantity":
+          [propertyA, propertyB] = [a.quantity, b.quantity];
+          break;
+        case "price":
+          [propertyA, propertyB] = [a.price, b.price];
+          break;
+        case "subtotal":
+          [propertyA, propertyB] = [a.price, b.price];
+          break;
+      }
+
+      const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
+      const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
+
+      return (
+        (valueA < valueB ? -1 : 1) * (this._sort.direction === "asc" ? 1 : -1)
+      );
+    });
+  }
+}

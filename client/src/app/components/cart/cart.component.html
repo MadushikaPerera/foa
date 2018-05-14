@@ -1,15 +1,32 @@
-<mat-card class="container">
+<mat-card class="containerb">
   <div class="box6">
     <i class="fas fa-cart-plus icon fa-lg"></i>My Cart</div>
   <div class="box7">
     <button mat-button color="primary" (click)="shop()">Continue Shopping</button>
   </div>
 </mat-card>
-<div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource" class="scrollbar" id="style-4">
+
+<div class="container mat-elevation-z8">
+
+  <div class="form">
+    <mat-form-field floatPlaceholder="never" color="accent">
+      <input matInput #filter placeholder="Filter Food">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="cid">
+      <mat-header-cell *matHeaderCellDef> Item </mat-header-cell>
+      <mat-cell *matCellDef="let cart"> {{cart.cid}} </mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="item">
-      <mat-header-cell *matHeaderCellDef> ITEM </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Item </mat-header-cell>
       <mat-cell *matCellDef="let cart"> {{cart.item}} </mat-cell>
     </ng-container>
 
@@ -18,21 +35,44 @@
       <mat-cell *matCellDef="let cart"> {{cart.quantity}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="unit">
+    <ng-container matColumnDef="price">
       <mat-header-cell *matHeaderCellDef> Unit Price </mat-header-cell>
-      <mat-cell *matCellDef="let cart"> {{cart.unit}} </mat-cell>
+      <mat-cell *matCellDef="let cart"> {{cart.price}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="subtotal">
       <mat-header-cell *matHeaderCellDef> Subtotal </mat-header-cell>
-      <mat-cell *matCellDef="let cart"> {{cart.subtotal}} </mat-cell>
+      <mat-cell *matCellDef="let cart"> {{cart.price}} </mat-cell>
+    </ng-container>
+
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent" (click)="startEdit(i, row.cid, row.item, row.quantity, row.price)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="accent" (click)="deleteItem(i, row.cid, row.item, row.quantity, row.price)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
   </mat-table>
-  <mat-card class="container">
+
+
+  <div class="no-results" [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
+    No results
+  </div>
+
+  <mat-paginator style="display: none;" #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+
+  <mat-card class="containerb">
     <div class="box1"></div>
     <div class="box2">
       <div>SUBTOTAL: </div>
@@ -40,7 +80,8 @@
     </div>
   </mat-card>
   <mat-divider></mat-divider>
-  <mat-card class="container">
+
+  <mat-card class="containerb">
     <div class="box3">
       Total:
     </div>
@@ -51,4 +92,5 @@
       <button mat-button color="primary" (click)="checkout()">Checkout</button>
     </div>
   </mat-card>
+
 </div>

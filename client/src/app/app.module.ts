@@ -50,6 +50,8 @@ import { AddVehicleComponent } from "./components/inventory/vehicle-table/add/ad
 import { EditVehicleComponent } from "./components/inventory/vehicle-table/edit/edit.component";
 import { DeleteVehicleComponent } from "./components/inventory/vehicle-table/delete/delete.component";
 import { AddtocartComponent } from "./components/cart/addtocart/addtocart.component";
+import { DeleteItemComponent } from "./components/cart/delete-item/delete-item.component";
+import { EditItemComponent } from "./components/cart/edit-item/edit-item.component";
 
 @NgModule({
   declarations: [
@@ -82,7 +84,9 @@ import { AddtocartComponent } from "./components/cart/addtocart/addtocart.compon
     AddVehicleComponent,
     EditVehicleComponent,
     DeleteVehicleComponent,
-    AddtocartComponent
+    AddtocartComponent,
+    DeleteItemComponent,
+    EditItemComponent
   ],
   imports: [
     BrowserModule,
@@ -125,7 +129,9 @@ import { AddtocartComponent } from "./components/cart/addtocart/addtocart.compon
     AddVehicleComponent,
     EditVehicleComponent,
     DeleteVehicleComponent,
-    AddtocartComponent
+    AddtocartComponent,
+    DeleteItemComponent,
+    EditItemComponent
   ],
   bootstrap: [AppComponent]
 })
