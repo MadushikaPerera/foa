@@ -5,7 +5,7 @@
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="Id" [(ngModel)]="data.cid" name="cid" required>
+        <input matInput #input class="form-control" placeholder="Id" [(ngModel)]="data.cid" name="cid" readonly="true" required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
@@ -13,7 +13,7 @@
     <!--Textarea for demo purposes-->
     <div class="form">
       <mat-form-field color="accent">
-        <textarea matInput #input class="form-control" placeholder="Item" [(ngModel)]="data.item" name="item" required></textarea>
+        <textarea matInput #input class="form-control" placeholder="Item" [(ngModel)]="data.item" name="item" readonly="true" required></textarea>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
@@ -21,14 +21,14 @@
     <!--Contains mat-hint for characters count and has maxLengt set-->
 
     <div class="form">
-      <mat-form-field color="accent">
-        <input matInput placeholder="Quantity" [(ngModel)]="data.quantity" name="quantity">
+      <mat-form-field color="accent" focused="true">
+        <input matInput placeholder="Quantity" [(ngModel)]="data.quantity" name="quantity" #quantity>
       </mat-form-field>
     </div>
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="Price" [(ngModel)]="data.price" name="price">
+        <input matInput placeholder="Price" [(ngModel)]="data.price" readonly="true" name="price">
       </mat-form-field>
     </div>
 

@@ -9,6 +9,9 @@ import { Cart } from "../model/cart";
 import { Observable } from "rxjs/Observable";
 import { environment } from "../../environments/environment";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import * as momentNs from "moment";
+
+const moment = momentNs;
 
 @Injectable()
 export class CartService {
@@ -28,9 +31,43 @@ export class CartService {
 
   updateCartItem(cart: Cart): void {
     this.dialogData = cart;
+    this.editUserCartItem(
+      cart.cid,
+      cart.quantity,
+      localStorage.getItem("uname"),
+      moment().format("MMM Do YY")
+    ).subscribe(result => {
+      if (result === true) {
+        console.log("added");
+
+        // this.closeDialog();
+        // this.openSnackBar('Added Successfully','Success');
+      } else {
+        console.log("error");
+
+        // this.error = 'Email or Password is incorrect';
+        // this.loading = false;
+        // this.openSnackBar(this.error,'Error');
+      }
+    });
   }
 
-  deleteCartItem(id: number): void {}
+  deleteCartItem(id: number): void {
+    this.deleteItemFromCart(id).subscribe(result => {
+      if (result === true) {
+        console.log("added");
+
+        // this.closeDialog();
+        // this.openSnackBar('Added Successfully','Success');
+      } else {
+        console.log("error");
+
+        // this.error = 'Email or Password is incorrect';
+        // this.loading = false;
+        // this.openSnackBar(this.error,'Error');
+      }
+    });
+  }
 
   getAllCartItems(): void {
     this.http
@@ -83,7 +120,7 @@ export class CartService {
       });
   }
 
-  deleteItemFromCart(cid: string): Observable<boolean> {
+  deleteItemFromCart(cid: number): Observable<boolean> {
     return this.http
       .put(environment.host + "/deletecartitem", {
         cid: cid,
@@ -111,6 +148,28 @@ export class CartService {
         item: item,
         quantity: quantity,
         price: price,
+        user: user,
+        dob: dob
+      })
+      .map((response: Cart) => {
+        // signup successful
+        if (response) {
+          return true;
+        }
+        return false;
+      });
+  }
+
+  editUserCartItem(
+    cid: number,
+    quantity: number,
+    user: string,
+    dob: string
+  ): Observable<boolean> {
+    return this.http
+      .put(environment.host + "/editcartitem", {
+        cid: cid,
+        quantity: quantity,
         user: user,
         dob: dob
       })

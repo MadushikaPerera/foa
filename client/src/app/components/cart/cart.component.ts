@@ -33,6 +33,9 @@ export class CartComponent implements OnInit {
   ];
   index: number;
   id: number;
+  subtotal: number;
+  total: number;
+  promo: number;
 
   constructor(
     public dialog: MatDialog,
@@ -40,7 +43,11 @@ export class CartComponent implements OnInit {
     public snackBar: MatSnackBar,
     private cartservice: CartService,
     public httpClient: HttpClient
-  ) {}
+  ) {
+    this.subtotal = 0;
+    this.total = 0;
+    this.promo = 0;
+  }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -52,6 +59,13 @@ export class CartComponent implements OnInit {
 
   refresh() {
     this.loadData();
+  }
+
+  getTotal() {
+    return this.dataSource.filteredData.reduce(
+      (summ, v) => (summ += v.price),
+      0
+    );
   }
 
   startEdit(
@@ -70,7 +84,13 @@ export class CartComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(dialogRef.componentInstance.data);
+
       if (result === 1) {
+        console.log(this.id);
+        delete this.exampleDatabase.dataChange.value[0];
+        console.log(this.exampleDatabase.dataChange.value);
+
         // When using an edit things are little different, firstly we find record inside DataService by id
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
           x => x.cid === this.id
@@ -195,6 +215,8 @@ export class CartDataSource extends DataSource<Cart> {
       this.filteredData = this._exampleDatabase.cartData
         .slice()
         .filter((cart: Cart) => {
+          console.log("filtering", cart.cid);
+
           const searchStr = (
             cart.cid +
             cart.item +

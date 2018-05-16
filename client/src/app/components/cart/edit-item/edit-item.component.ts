@@ -1,4 +1,11 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Inject,
+  AfterViewInit,
+  ViewChild,
+  ElementRef
+} from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { CartService } from "../../../services/cart.service";
@@ -15,7 +22,15 @@ export class EditItemComponent implements OnInit {
     private cartservice: CartService
   ) {}
 
-  ngOnInit() {}
+  @ViewChild("quantity") QuantityElement: ElementRef;
+
+  ngOnInit() {
+    this.QuantityElement.nativeElement.focus();
+  }
+
+  ngAfterViewInit() {
+    this.QuantityElement.nativeElement.focus();
+  }
 
   formControl = new FormControl("", [
     Validators.required

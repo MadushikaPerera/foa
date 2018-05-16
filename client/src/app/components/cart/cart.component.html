@@ -75,18 +75,35 @@
   <mat-card class="containerb">
     <div class="box1"></div>
     <div class="box2">
-      <div>SUBTOTAL: </div>
-      <div>TOTAL:</div>
+      <div class="containerb">
+        <div class="box1">SUBTOTAL:</div>
+        <div class="box2">{{getTotal()}}</div>
+      </div>
+      <div class="containerb">
+        <div class="box1">TOTAL:</div>
+        <div class="box2">
+          <b>{{getTotal()}}</b>
+        </div>
+      </div>
     </div>
   </mat-card>
   <mat-divider></mat-divider>
 
   <mat-card class="containerb">
     <div class="box3">
-      Total:
+      <div class="containerb">
+        <div class="box1">TOTAL:</div>
+        <div class="box2">
+          <b>{{getTotal()}}</b>
+        </div>
+      </div>
     </div>
     <div class="box4">
-      Savings:
+
+      <div class="containerb">
+        <div class="box1">Savings:</div>
+        <div class="box2">{{promo}}</div>
+      </div>
     </div>
     <div class="box5">
       <button mat-button color="primary" (click)="checkout()">Checkout</button>
