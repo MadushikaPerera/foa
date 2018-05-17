@@ -11,9 +11,13 @@ import {
 import { HttpClient } from "@angular/common/http";
 import { Cart } from "../../model/cart";
 import { CartService } from "../../services/cart.service";
+import { OderService } from "../../services/oder.service";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { EditItemComponent } from "./edit-item/edit-item.component";
 import { DeleteItemComponent } from "./delete-item/delete-item.component";
+import * as momentNs from "moment";
+
+const moment = momentNs;
 
 @Component({
   selector: "app-cart",
@@ -36,12 +40,16 @@ export class CartComponent implements OnInit {
   subtotal: number;
   total: number;
   promo: number;
+  address: string;
+  contact: string;
+  payment: string;
 
   constructor(
     public dialog: MatDialog,
     private router: Router,
     public snackBar: MatSnackBar,
     private cartservice: CartService,
+    private orderservice: OderService,
     public httpClient: HttpClient
   ) {
     this.subtotal = 0;
@@ -66,6 +74,14 @@ export class CartComponent implements OnInit {
       (summ, v) => (summ += v.price),
       0
     );
+  }
+
+  getItemsToCheckOut() {
+    return this.dataSource.filteredData.map(item => ({
+      cid: item.cid,
+      item: item.item,
+      quantity: item.quantity
+    }));
   }
 
   startEdit(
@@ -169,7 +185,33 @@ export class CartComponent implements OnInit {
     this.router.navigate(["/restaurant"]);
   }
 
-  checkout() {}
+  checkout() {
+    console.log(JSON.stringify(this.getItemsToCheckOut()).toString());
+    this.orderservice
+      .makeOrder(
+        JSON.stringify(this.getItemsToCheckOut()),
+        this.getTotal(),
+        localStorage.getItem("uname"),
+        this.address,
+        this.contact,
+        this.payment,
+        moment().format("MMM Do YY")
+      )
+      .subscribe(result => {
+        if (result === true) {
+          console.log("added");
+
+          // this.closeDialog();
+          // this.openSnackBar('Added Successfully','Success');
+        } else {
+          console.log("error");
+
+          // this.error = 'Email or Password is incorrect';
+          // this.loading = false;
+          // this.openSnackBar(this.error,'Error');
+        }
+      });
+  }
 }
 
 export class CartDataSource extends DataSource<Cart> {

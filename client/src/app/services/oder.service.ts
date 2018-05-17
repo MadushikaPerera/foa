@@ -10,17 +10,22 @@ export class OderService {
   constructor(private http: HttpClient) {}
 
   makeOrder(
-    brand: string,
-    model: string,
-    licenseno: string,
-    dob: string,
-    quantity: number
+    items: string,
+    totalprice: number,
+    user: string,
+    address: string,
+    contact: string,
+    payment: string,
+    dob: string
   ): Observable<boolean> {
     return this.http
       .post(environment.host + "/makeorder", {
-        brand: brand,
-        model: model,
-        licenseno: licenseno,
+        items: items,
+        totalprice: totalprice,
+        user: user,
+        address: address,
+        contact: contact,
+        payment: payment,
         dob: dob
       })
       .map((response: Order) => {
@@ -31,9 +36,9 @@ export class OderService {
       });
   }
 
-  deleteOrder(vid: string): Observable<boolean> {
+  deleteOrder(oid: number): Observable<boolean> {
     return this.http
-      .put(environment.host + "/cancelorder", vid)
+      .put(environment.host + "/cancelorder", { oid: oid })
       .map((response: Order) => {
         if (response) {
           return true;
@@ -44,9 +49,9 @@ export class OderService {
 
   getOrders(): Observable<Order[]> {
     return this.http.get(environment.host + "/getorders").map(response => {
-      let vehiclelist = response as Order[];
-      console.log(vehiclelist);
-      return vehiclelist;
+      let orderlist = response as Order[];
+      console.log(orderlist);
+      return orderlist;
     });
   }
 }
