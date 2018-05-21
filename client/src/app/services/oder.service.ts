@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import { environment } from "../../environments/environment";
@@ -7,7 +8,14 @@ import { Order } from "../model/order";
 
 @Injectable()
 export class OderService {
+  private checkoutSource = new BehaviorSubject<string>("");
+  currentcheckout = this.checkoutSource.asObservable();
+
   constructor(private http: HttpClient) {}
+
+  changecheckout(checkout: string) {
+    this.checkoutSource.next(checkout);
+  }
 
   makeOrder(
     items: string,

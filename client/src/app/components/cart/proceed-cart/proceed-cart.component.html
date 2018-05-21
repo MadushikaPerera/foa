@@ -1,0 +1,27 @@
+<mat-card class="containerb">
+  <div class="box6">
+    <i class="fas fa-cart-plus icon fa-lg"></i>Checkout</div>
+  <div class="box7">
+    <button mat-button color="primary" (click)="shop()">Continue Shopping</button>
+  </div>
+</mat-card>
+
+<mat-card class="example-container">
+  <mat-form-field>
+    <input matInput placeholder="Address" [(ngModel)]="address">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Contact" [(ngModel)]="contact">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Payment" [(ngModel)]="payment">
+      <mat-option *ngFor="let payment of payments" [value]="payment.value">
+        {{ payment.value }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="pay()">
+    <i class="fas fa-credit-card fa-xs"></i>
+    <input matInput [(ngModel)]="cardno">
+  </mat-form-field>
+</mat-card>

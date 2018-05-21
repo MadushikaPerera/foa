@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>
+  <i class="fas fa-cart-plus icon fa-lg"></i>Enter Details to Checkout</h2>
+<mat-dialog-content>
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Address" [(ngModel)]="address">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Contact" [(ngModel)]="contact">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Payment" [(ngModel)]="payment">
+        <mat-option *ngFor="let payment of payments" [value]="payment.value">
+          {{ payment.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-button (click)="checkout(address,contact,payment)">Add To Cart</button>
+</mat-dialog-actions>

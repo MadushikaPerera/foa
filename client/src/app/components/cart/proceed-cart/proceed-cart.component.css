@@ -1,0 +1,22 @@
+.containerb {
+  display: flex;
+}
+
+.box6 {
+  flex: 3;
+  order: 1;
+}
+
+.box7 {
+  flex: 1;
+  order: 2;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 100%;
+}

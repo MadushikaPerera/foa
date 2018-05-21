@@ -3,9 +3,10 @@ const pool = require("../utils/dbconnection");
 exports.makeOrder = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
+      console.log(err);
     } else {
       let order = {
-        items: req.body.items,
+        items: JSON.stringify(req.body.items),
         totalprice: req.body.totalprice,
         user: req.body.user,
         address: req.body.address,
@@ -23,6 +24,7 @@ exports.makeOrder = function(req, res, next) {
           // do something
           res.json(records);
         }
+        console.log(err1);
         conn.release();
       });
     }

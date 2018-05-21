@@ -15,6 +15,7 @@ import { OderService } from "../../services/oder.service";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { EditItemComponent } from "./edit-item/edit-item.component";
 import { DeleteItemComponent } from "./delete-item/delete-item.component";
+import { MakeOrderComponent } from "./make-order/make-order.component";
 import * as momentNs from "moment";
 
 const moment = momentNs;
@@ -186,6 +187,23 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
+    this.router.navigate(["/checkout"]);
+  }
+
+  checkoutDialog(address: string, contact: string, payment: string) {
+    const dialogRef = this.dialog.open(MakeOrderComponent, {
+      data: { address: address, contact: contact, payment: payment }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(address, contact, payment);
+      if (result === 1) {
+        console.log(this.dialog);
+      }
+    });
+  }
+
+  checkouts() {
     console.log(JSON.stringify(this.getItemsToCheckOut()).toString());
     this.orderservice
       .makeOrder(
