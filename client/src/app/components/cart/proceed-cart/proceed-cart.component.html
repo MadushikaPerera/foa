@@ -6,22 +6,50 @@
   </div>
 </mat-card>
 
-<mat-card class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Address" [(ngModel)]="address">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Contact" [(ngModel)]="contact">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-select placeholder="Payment" [(ngModel)]="payment">
-      <mat-option *ngFor="let payment of payments" [value]="payment.value">
-        {{ payment.value }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field *ngIf="pay()">
-    <i class="fas fa-credit-card fa-xs"></i>
-    <input matInput [(ngModel)]="cardno">
-  </mat-form-field>
+<mat-card class="containerb">
+  <div class="box1">
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="Address" [(ngModel)]="address">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Contact" [(ngModel)]="contact">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Payment" [(ngModel)]="payment">
+          <mat-option *ngFor="let payment of payments" [value]="payment.value">
+            {{ payment.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="pay()">
+        <i class="fas fa-credit-card fa-xs"></i>
+        <input matInput [(ngModel)]="cardno">
+      </mat-form-field>
+    </div>
+  </div>
+  <dir class="box2">
+    <app-map></app-map>
+  </dir>
+</mat-card>
+<mat-card>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Orders
+      </mat-panel-title>
+      <mat-panel-description class="containerb">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3">{{items.total}}</div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-order-item></app-order-item>
+  </mat-expansion-panel>
+</mat-card>
+<mat-card class="containerb">
+  <div class="box6"></div>
+  <div class="box7">
+    <button mat-raised-button>Make Order</button>
+  </div>
 </mat-card>

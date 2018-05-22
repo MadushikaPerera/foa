@@ -8,12 +8,12 @@ import { Order } from "../model/order";
 
 @Injectable()
 export class OderService {
-  private checkoutSource = new BehaviorSubject<string>("");
+  private checkoutSource = new BehaviorSubject<any>({});
   currentcheckout = this.checkoutSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  changecheckout(checkout: string) {
+  changecheckout(checkout: any) {
     this.checkoutSource.next(checkout);
   }
 

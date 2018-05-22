@@ -13,6 +13,7 @@ export class ProceedCartComponent implements OnInit {
   contact: string;
   payment: string;
   cardno: string;
+  items: any;
   payments = [
     { value: "Credit Card / Debit card" },
     { value: "Cash on Delivery" },
@@ -31,6 +32,9 @@ export class ProceedCartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.oderservice.currentcheckout.subscribe(items => (this.items = items));
+    console.log(this.items);
+
     this.userservice.getuser().subscribe(result => {
       if (result) {
         this.address = result[0].address;

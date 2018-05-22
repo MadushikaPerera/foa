@@ -44,6 +44,7 @@ export class CartComponent implements OnInit {
   address: string;
   contact: string;
   payment: string;
+  items: string;
 
   constructor(
     public dialog: MatDialog,
@@ -63,6 +64,7 @@ export class CartComponent implements OnInit {
   @ViewChild("filter") filter: ElementRef;
 
   ngOnInit() {
+    this.orderservice.currentcheckout.subscribe(items => (this.items = items));
     this.loadData();
   }
 
@@ -187,6 +189,10 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
+    this.orderservice.changecheckout({
+      items: this.getItemsToCheckOut(),
+      total: this.getTotal()
+    });
     this.router.navigate(["/checkout"]);
   }
 
