@@ -54,6 +54,7 @@ import { DeleteItemComponent } from "./components/cart/delete-item/delete-item.c
 import { EditItemComponent } from "./components/cart/edit-item/edit-item.component";
 import { MakeOrderComponent } from "./components/cart/make-order/make-order.component";
 import { ProceedCartComponent } from "./components/cart/proceed-cart/proceed-cart.component";
+import { DriverDialogComponent } from './components/orders/driver-dialog/driver-dialog.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { ProceedCartComponent } from "./components/cart/proceed-cart/proceed-car
     DeleteItemComponent,
     EditItemComponent,
     MakeOrderComponent,
-    ProceedCartComponent
+    ProceedCartComponent,
+    DriverDialogComponent
   ],
   imports: [
     BrowserModule,
