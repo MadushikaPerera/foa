@@ -44,7 +44,7 @@
         <div class="box3">{{items.total}}</div>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <app-order-item></app-order-item>
+    <app-order-item [payment]="payment" [address]="address" [items]="items.items"></app-order-item>
   </mat-expansion-panel>
 </mat-card>
 <mat-card class="containerb">
