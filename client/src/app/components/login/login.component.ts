@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
-import { AuthenticationService } from '../../services/authentication.service';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material";
+import { AuthenticationService } from "../../services/authentication.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
   model: any = {};
   loading = false;
   email: string;
   password: string;
-  error = '';
+  error = "";
 
   constructor(
     private router: Router,
@@ -32,23 +32,23 @@ export class LoginComponent implements OnInit {
         .login(this.email, this.password)
         .subscribe(result => {
           if (result === true) {
-            this.router.navigate(['/restaurant']);
+            this.router.navigate(["/restaurant"]);
           } else {
-            this.error = 'Email or Password is incorrect';
+            this.error = "Email or Password is incorrect";
             this.loading = false;
-            this.openSnackBar(this.error, 'Error');
+            this.openSnackBar(this.error, "Error");
           }
         });
     } else {
-      this.error = 'Email or Password cannot be empty';
+      this.error = "Email or Password cannot be empty";
       this.loading = false;
       console.log(this.error);
-      this.openSnackBar(this.error, 'Error');
+      this.openSnackBar(this.error, "Error");
     }
   }
 
-  Register(){
-    this.router.navigate(['/signup']);
+  Register() {
+    this.router.navigate(["/signup"]);
   }
 
   openSnackBar(message: string, action: string) {

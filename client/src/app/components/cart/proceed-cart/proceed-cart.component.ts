@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material";
 import { UserService } from "../../../services/user.service";
 import { OderService } from "../../../services/oder.service";
+import * as momentNs from "moment";
+
+const moment = momentNs;
 
 @Component({
   selector: "app-proceed-cart",
@@ -28,7 +32,8 @@ export class ProceedCartComponent implements OnInit {
   constructor(
     private userservice: UserService,
     private oderservice: OderService,
-    private router: Router
+    private router: Router,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -45,5 +50,35 @@ export class ProceedCartComponent implements OnInit {
 
   shop() {
     this.router.navigate(["/restaurant"]);
+  }
+
+  checkouts() {
+    this.oderservice
+      .makeOrder(
+        this.items.items,
+        this.items.total,
+        localStorage.getItem("uname"),
+        this.address,
+        this.contact,
+        this.payment,
+        moment().format("MMM Do YY"),
+        "checkout"
+      )
+      .subscribe(result => {
+        if (result === true) {
+          console.log("added");
+
+          this.openSnackBar("Order Added Successfully", "Success");
+        } else {
+          console.log("error");
+          this.openSnackBar("Error", "Error");
+        }
+      });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
+    });
   }
 }

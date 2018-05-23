@@ -73,10 +73,9 @@ CREATE TABLE `foa`.`cart` (
 
 CREATE TABLE `foa`.`order` (
   `oid` INT NOT NULL AUTO_INCREMENT,
-  `items` VARCHAR(255) NOT NULL,
-  `totalprice` DOUBLE NULL,
+  `totalprice` INT NULL,
   `user` VARCHAR(45) NOT NULL,
-  `address` VARCHAR(250) NOT NULL,
+  `address` VARCHAR(45) NOT NULL,
   `contact` VARCHAR(45) NULL,
   `payment` VARCHAR(45) NOT NULL,
   `dob` VARCHAR(45) NULL,
@@ -109,6 +108,15 @@ CREATE TABLE `foa`.`promotion` (
   `enddate` VARCHAR(45) NOT NULL,
   `active` VARCHAR(45) NULL DEFAULT 'true',
   PRIMARY KEY (`pid`));
+
+CREATE TABLE `foa`.`orderitem` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `cid` INT NULL,
+  `item` VARCHAR(45) NULL,
+  `quantity` INT NULL,
+  `oid` INT NULL,
+  `active` VARCHAR(45) NULL DEFAULT 'true',
+  PRIMARY KEY (`id`));
 
                             
                             

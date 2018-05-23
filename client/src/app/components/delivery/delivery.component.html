@@ -4,96 +4,98 @@
   <div class="box2">
   </div>
 </mat-card>
-<div class="form">
-  <mat-form-field floatPlaceholder="never" color="accent">
-    <input matInput #filter placeholder="Filter Food">
-  </mat-form-field>
-</div>
 
-<mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+<div class="container mat-elevation-z8">
+  <div class="form">
+    <mat-form-field floatPlaceholder="never" color="accent">
+      <input matInput #filter placeholder="Filter Food">
+    </mat-form-field>
+  </div>
 
-  <!--- Note that these columns can be defined in any order.
+  <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+    <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-  <!-- ID Column -->
-  <ng-container matColumnDef="did">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.did}}</mat-cell>
-  </ng-container>
+    <!-- ID Column -->
+    <ng-container matColumnDef="did">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.did}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="user">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>User</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.user}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="user">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>User</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.user}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="payment">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Payment Method</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.payment}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="payment">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Payment Method</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.payment}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="address">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.address}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.address}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="contact">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Contact No</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.contact}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="contact">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Contact No</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.contact}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="totalprice">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.totalprice}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="totalprice">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.totalprice}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="employee">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Driver</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.employee}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="employee">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Driver</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.employee}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="vehicleno">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Licence No</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.vehicleno}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="vehicleno">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Licence No</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.vehicleno}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="status">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.status}}</mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.status}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="ddate">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Delivery Date</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.ddate}}</mat-cell>
-  </ng-container>
-
-
-  <!-- actions -->
-  <ng-container matColumnDef="actions">
-    <mat-cell *matCellDef="let row; let i=index;">
-      <button mat-icon-button color="accent" (click)="startEdit(i, row.mid, row.name, row.type, row.price, row.quantity, row.description)">
-        <mat-icon aria-label="Edit">Edit Driver</mat-icon>
-      </button>
-
-      <button mat-icon-button color="accent" (click)="deleteItem(i, row.mid, row.name, row.type, row.price)">
-        <mat-icon aria-label="Delete">delete</mat-icon>
-      </button>
-    </mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+    <ng-container matColumnDef="ddate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Delivery Date</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.ddate}}</mat-cell>
+    </ng-container>
 
 
-<div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
-  No results
-</div>
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent" (click)="startEdit(i, row.mid, row.name, row.type, row.price, row.quantity, row.description)">
+          <mat-icon aria-label="Edit">Edit Driver</mat-icon>
+        </button>
 
-<mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator>
+        <button mat-icon-button color="accent" (click)="deleteItem(i, row.mid, row.name, row.type, row.price)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+    No results
+  </div>
+
+  <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
 </div>

@@ -18,13 +18,14 @@ export class OderService {
   }
 
   makeOrder(
-    items: string,
+    items: [any],
     totalprice: number,
     user: string,
     address: string,
     contact: string,
     payment: string,
-    dob: string
+    dob: string,
+    status: string
   ): Observable<boolean> {
     return this.http
       .post(environment.host + "/makeorder", {
@@ -34,7 +35,8 @@ export class OderService {
         address: address,
         contact: contact,
         payment: payment,
-        dob: dob
+        dob: dob,
+        status: status
       })
       .map((response: Order) => {
         if (response) {

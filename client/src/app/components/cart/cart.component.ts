@@ -16,9 +16,6 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { EditItemComponent } from "./edit-item/edit-item.component";
 import { DeleteItemComponent } from "./delete-item/delete-item.component";
 import { MakeOrderComponent } from "./make-order/make-order.component";
-import * as momentNs from "moment";
-
-const moment = momentNs;
 
 @Component({
   selector: "app-cart",
@@ -207,34 +204,6 @@ export class CartComponent implements OnInit {
         console.log(this.dialog);
       }
     });
-  }
-
-  checkouts() {
-    console.log(JSON.stringify(this.getItemsToCheckOut()).toString());
-    this.orderservice
-      .makeOrder(
-        JSON.stringify(this.getItemsToCheckOut()),
-        this.getTotal(),
-        localStorage.getItem("uname"),
-        this.address,
-        this.contact,
-        this.payment,
-        moment().format("MMM Do YY")
-      )
-      .subscribe(result => {
-        if (result === true) {
-          console.log("added");
-
-          // this.closeDialog();
-          // this.openSnackBar('Added Successfully','Success');
-        } else {
-          console.log("error");
-
-          // this.error = 'Email or Password is incorrect';
-          // this.loading = false;
-          // this.openSnackBar(this.error,'Error');
-        }
-      });
   }
 }
 

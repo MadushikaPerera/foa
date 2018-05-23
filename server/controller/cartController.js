@@ -31,6 +31,7 @@ exports.getCartItems = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {
+      //and status='checkout'
       conn.query(
         "SELECT * FROM cart WHERE active='true' and user='" +
           req.query.uname +
