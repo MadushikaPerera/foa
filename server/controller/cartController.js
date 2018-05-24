@@ -92,3 +92,21 @@ exports.cancelCartItem = function(req, res, next) {
     }
   });
 };
+
+exports.chekoutCartItems = function(req, res, next) {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+    } else {
+      conn.query(
+        "UPDATE cart SET status='checkedout' WHERE cid IN '" + req.body.cids + "' ",
+        function(err1, records, fields) {
+          if (!err1) {
+            // do something
+            res.json(records);
+          }
+          conn.release();
+        }
+      );
+    }
+  });
+};

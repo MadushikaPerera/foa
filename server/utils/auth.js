@@ -33,7 +33,7 @@ const hashPassword = function(password) {
 exports.signin = function(req, res, next) {
   // User had already had their email and pass auth'd
   //  We just need to give them a tokens
-  res.send({ token: tokenForUser(JSON.parse(req.user)),user:JSON.parse(req.user).uname });
+  res.send({ token: tokenForUser(JSON.parse(req.user)),user:JSON.parse(req.user).uname,access:JSON.parse(req.user).accesslevel});
 };
 
 exports.signup = async function(req, res, next) {
