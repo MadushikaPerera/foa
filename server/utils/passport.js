@@ -1,11 +1,11 @@
-const passport = require('passport');
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-const LocalStrategy = require('passport-local');
-const pool = require('./dbconnection');
-const bcrypt = require('bcrypt-nodejs');
+const passport = require("passport");
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+const LocalStrategy = require("passport-local");
+const pool = require("./dbconnection");
+const bcrypt = require("bcrypt-nodejs");
 
-require('dotenv').config();
+require("dotenv").config();
 
 const comparePassword = function(candidatePassword, password) {
   return new Promise(function(resolve, reject) {
@@ -22,7 +22,7 @@ const comparePassword = function(candidatePassword, password) {
 };
 
 // Create local strategy
-const localOptions = { usernameField: 'email' };
+const localOptions = { usernameField: "email" };
 const localLogin = new LocalStrategy(localOptions, function(
   email,
   password,
@@ -33,11 +33,11 @@ const localLogin = new LocalStrategy(localOptions, function(
   // otherwise, call done with false
   pool.getConnection(function(err, conn) {
     if (err) {
-      console.log('error');
+      console.log("error");
       res.json({ error: true });
     } else {
       conn.query(
-        "select email,password,uname,fname from user where email='" +
+        "select email,password,uname,fname,accesslevel from user where email='" +
           email +
           "' ",
         async function(err1, records) {
@@ -71,7 +71,7 @@ const localLogin = new LocalStrategy(localOptions, function(
 
 // Setup options for JWT Strategy
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+  jwtFromRequest: ExtractJwt.fromHeader("authorization"),
   secretOrKey: process.env.JWT_KEY
 };
 

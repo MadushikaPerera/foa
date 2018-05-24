@@ -26,13 +26,21 @@ CREATE TABLE `foa`.`vehicle` (
              
         
 
-CREATE TABLE `foa`.`driver` (
-     `drid` INT NOT NULL,
-     `empid` INT NULL,
-     `licenseno` VARCHAR(45) NULL,
-     `active` VARCHAR(45) NULL DEFAULT 'true',
-     PRIMARY KEY (`drid`),
-     UNIQUE INDEX `licenseno_UNIQUE` (`licenseno` ASC));
+CREATE TABLE `foa`.`employee` (
+  `eid` INT NOT NULL AUTO_INCREMENT,
+  `fname` VARCHAR(45) NOT NULL,
+  `lname` VARCHAR(45) NULL,
+  `nic` VARCHAR(45) NOT NULL,
+  `address` VARCHAR(45) NULL,
+  `contact` VARCHAR(45) NULL,
+  `type` VARCHAR(45) NOT NULL,
+  `license` VARCHAR(45) NULL,
+  `dob` VARCHAR(45) NULL,
+  `active` VARCHAR(45) NULL DEFAULT 'true',
+  PRIMARY KEY (`eid`),
+  UNIQUE INDEX `nic_UNIQUE` (`nic` ASC),
+  UNIQUE INDEX `license_UNIQUE` (`license` ASC));
+
 
 
 

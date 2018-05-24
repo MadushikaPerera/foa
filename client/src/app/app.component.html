@@ -7,15 +7,15 @@
           <i class="fas fa-shopping-bag icon"></i>Shop</mat-list-item>
         <mat-list-item [routerLink]="['/meals']" (click)="sidenav.close()">
           <i class="fas fa-utensils icon"></i>Find You're Meal</mat-list-item>
-        <mat-list-item [routerLink]="['/inventory']" (click)="sidenav.close()">
+        <mat-list-item *ngIf="chekadmin()" [routerLink]="['/inventory']" (click)="sidenav.close()">
           <i class="fas fa-boxes icon"></i> Inventory</mat-list-item>
         <mat-list-item [routerLink]="['/userProfile']" (click)="sidenav.close()">
           <i class="fas fa-user-circle icon"></i> Profile</mat-list-item>
         <mat-list-item [routerLink]="['/cart']" (click)="sidenav.close()">
           <i class="fas fa-cart-plus icon"></i>My Cart</mat-list-item>
-        <mat-list-item [routerLink]="['/order']" (click)="sidenav.close()">
+        <mat-list-item *ngIf="chekadmin()" [routerLink]="['/order']" (click)="sidenav.close()">
           <i class="fas fa-clipboard-list icon"></i>My Orders</mat-list-item>
-        <mat-list-item [routerLink]="['/delivery']" (click)="sidenav.close()">
+        <mat-list-item *ngIf="chekadmin()" [routerLink]="['/delivery']" (click)="sidenav.close()">
           <i class="fas fa-truck icon"></i>Deliveries</mat-list-item>
         <mat-list-item>
           <button mat-button (click)="logout()">

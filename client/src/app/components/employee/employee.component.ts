@@ -16,9 +16,9 @@ import { EditemployeeComponent } from "./editemployee/editemployee.component";
 import { DeleteemployeeComponent } from "./deleteemployee/deleteemployee.component";
 
 @Component({
-  selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.css']
+  selector: "app-employee",
+  templateUrl: "./employee.component.html",
+  styleUrls: ["./employee.component.css"]
 })
 export class EmployeeComponent implements OnInit {
   exampleDatabase: EmployeeService | null;
@@ -30,6 +30,7 @@ export class EmployeeComponent implements OnInit {
     "nic",
     "address",
     "contact",
+    "type",
     "license",
     "dob",
     "actions"
@@ -39,8 +40,9 @@ export class EmployeeComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private employeeservice:EmployeeService,
-    public httpClient: HttpClient) { }
+    private employeeservice: EmployeeService,
+    public httpClient: HttpClient
+  ) {}
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -83,8 +85,9 @@ export class EmployeeComponent implements OnInit {
     nic: number,
     address: string,
     contact: string,
+    type: string,
     license: string,
-    dob: string,
+    dob: string
   ) {
     this.id = eid;
     // index row is used just for debugging proposes and can be removed
@@ -98,8 +101,9 @@ export class EmployeeComponent implements OnInit {
         nic: nic,
         address: address,
         contact: contact,
-        license:license,
-        dob:dob
+        type: type,
+        license: license,
+        dob: dob
       }
     });
 
@@ -121,16 +125,15 @@ export class EmployeeComponent implements OnInit {
 
   deleteItem(
     i: number,
-    eid:number,
+    eid: number,
     fname: number,
     lname: string,
-    nic: string,
-    quantity: string
+    nic: string
   ) {
     this.index = i;
     this.id = eid;
     const dialogRef = this.dialog.open(DeleteemployeeComponent, {
-      data: { eid:eid, fname: fname, lname: lname, nic: nic,address:address,contact:contact,license:license,dob:dob }
+      data: { eid: eid, fname: fname, lname: lname, nic: nic }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -179,7 +182,6 @@ export class EmployeeComponent implements OnInit {
         this.dataSource.filter = this.filter.nativeElement.value;
       });
   }
-
 }
 
 export class FoodDataSource extends DataSource<Employee> {
@@ -232,6 +234,7 @@ export class FoodDataSource extends DataSource<Employee> {
             employee.nic +
             employee.address +
             employee.contact +
+            employee.type +
             employee.license +
             employee.dob
           ).toLowerCase();
@@ -280,6 +283,9 @@ export class FoodDataSource extends DataSource<Employee> {
           break;
         case "contact":
           [propertyA, propertyB] = [a.contact, b.contact];
+          break;
+        case "type":
+          [propertyA, propertyB] = [a.type, b.type];
           break;
         case "license":
           [propertyA, propertyB] = [a.license, b.license];

@@ -8,7 +8,7 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import { environment } from "../../environments/environment";
 import { Driver } from "../model/driver";
-import { Employee } from '../model/employee';
+import { Employee } from "../model/employee";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()
@@ -34,6 +34,7 @@ export class EmployeeService {
       employee.nic,
       employee.address,
       employee.contact,
+      employee.type,
       employee.license,
       employee.dob
     ).subscribe(result => {
@@ -60,6 +61,7 @@ export class EmployeeService {
       employee.nic,
       employee.address,
       employee.contact,
+      employee.type,
       employee.license,
       employee.dob
     ).subscribe(result => {
@@ -99,11 +101,12 @@ export class EmployeeService {
   addEmployee(
     fname: string,
     lname: string,
-    nic: number,
+    nic: string,
     address: string,
     contact: string,
+    type: string,
     license: string,
-    dob: string,
+    dob: string
   ): Observable<boolean> {
     return this.http
       .post(environment.host + "/addemployee", {
@@ -112,8 +115,9 @@ export class EmployeeService {
         nic: nic,
         address: address,
         contact: contact,
-        license:license,
-        dob:dob
+        type: type,
+        license: license,
+        dob: dob
       })
       .map((response: Employee) => {
         // signup successful
@@ -129,11 +133,12 @@ export class EmployeeService {
   editEmployee(
     fname: string,
     lname: string,
-    nic: number,
+    nic: string,
     address: string,
     contact: string,
+    type: string,
     license: string,
-    dob: string,
+    dob: string
   ): Observable<boolean> {
     return this.http
       .put(environment.host + "/editemployee", {
@@ -142,8 +147,9 @@ export class EmployeeService {
         nic: nic,
         address: address,
         contact: contact,
-        license:license,
-        dob:dob
+        type: type,
+        license: license,
+        dob: dob
       })
       .map((response: Employee) => {
         // signup successful
@@ -176,7 +182,7 @@ export class EmployeeService {
 
   deleteEmployee(eid: number): Observable<boolean> {
     return this.http
-      .put(environment.host + "/delemployee",{eid:eid})
+      .put(environment.host + "/delemployee", { eid: eid })
       .map((response: Employee) => {
         // signup successful
         if (response) {

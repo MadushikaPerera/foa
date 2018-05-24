@@ -97,6 +97,7 @@ export class CartService {
         item: item,
         quantity: quantity,
         price: price,
+        status: status,
         user: user,
         dob: dob
       })
@@ -172,6 +173,22 @@ export class CartService {
         quantity: quantity,
         user: user,
         dob: dob
+      })
+      .map((response: Cart) => {
+        // signup successful
+        if (response) {
+          return true;
+        }
+        return false;
+      });
+  }
+
+  checkoutCartItem(cid: [any]): Observable<boolean> {
+    console.log(cid);
+
+    return this.http
+      .put(environment.host + "/checkoutcartitem", {
+        cids: cid
       })
       .map((response: Cart) => {
         // signup successful

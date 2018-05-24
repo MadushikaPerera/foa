@@ -6,13 +6,13 @@ exports.makeOrder = function(req, res, next) {
       console.log(err);
     } else {
       let order = {
-        totalprice: 100,
-        user: "madu",
-        address: "asasasa",
-        contact: "23232323",
-        payment: "cash",
-        dob: "34323",
-        status: "pending"
+        totalprice: req.body.totalprice,
+        user: req.body.user,
+        address: req.body.address,
+        contact: req.body.contact,
+        payment: req.body.payment,
+        dob: req.body.dob,
+        status: req.body.status
       };
       conn.query(
         "INSERT INTO `order` (`totalprice`,`user`,`address`,`contact`,`payment`,`dob`,`status`) VALUES('" +

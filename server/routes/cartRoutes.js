@@ -22,4 +22,7 @@ module.exports = function(app) {
 
   //Edit cart item
   app.put("/editcartitem", requireAuth, cart.editCartItem);
+
+  //Checkout cart item
+  app.put("/checkoutcartitem", requireAuth, cart.chekoutCartItems);
 };

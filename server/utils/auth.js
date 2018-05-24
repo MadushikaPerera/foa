@@ -1,7 +1,7 @@
-const jwt = require('jwt-simple');
-const bcrypt = require('bcrypt-nodejs');
-const pool = require('./dbconnection');
-require('dotenv').config();
+const jwt = require("jwt-simple");
+const bcrypt = require("bcrypt-nodejs");
+const pool = require("./dbconnection");
+require("dotenv").config();
 
 function tokenForUser(user) {
   const timpestamp = new Date().getTime();
@@ -33,7 +33,13 @@ const hashPassword = function(password) {
 exports.signin = function(req, res, next) {
   // User had already had their email and pass auth'd
   //  We just need to give them a tokens
-  res.send({ token: tokenForUser(JSON.parse(req.user)),user:JSON.parse(req.user).uname,access:JSON.parse(req.user).accesslevel});
+  console.log("login", JSON.parse(req.user));
+
+  res.send({
+    token: tokenForUser(JSON.parse(req.user)),
+    user: JSON.parse(req.user).uname,
+    access: JSON.parse(req.user).accesslevel
+  });
 };
 
 exports.signup = async function(req, res, next) {
@@ -44,12 +50,12 @@ exports.signup = async function(req, res, next) {
   const email = req.body.email;
   const address = req.body.address;
   const phone = req.body.phone;
-  const accesslevel = req.body.access;
+  const accesslevel = "2";
 
   if (!email || !password) {
     return res
       .status(422)
-      .send({ error: 'You must provide email and password' });
+      .send({ error: "You must provide email and password" });
   }
 
   pool.getConnection(function(err, conn) {
@@ -65,7 +71,7 @@ exports.signup = async function(req, res, next) {
 
           // If a user with email does exist, return an error
           if (result.length < 0) {
-            return res.status(422).send({ error: 'Email is in use' });
+            return res.status(422).send({ error: "Email is in use" });
           }
 
           // If a user email does NOT exist, create and save user record
@@ -92,7 +98,7 @@ exports.signup = async function(req, res, next) {
                 return next(err);
               }
               // Respond to request indicating the user was created
-              res.json({ token: tokenForUser({ uname, email }) });
+              res.json({ token: tokenForUser({ uname, email, accesslevel }) });
               conn.release();
             }
           );

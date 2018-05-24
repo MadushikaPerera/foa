@@ -20,7 +20,8 @@ import { DeliveryComponent } from "../components/delivery/delivery.component";
 import { AdminComponent } from "../components/admin/admin.component";
 import { ProceedCartComponent } from "../components/cart/proceed-cart/proceed-cart.component";
 import { AuthguardGuard } from "../authguard.guard";
-import {AdminauthguardGuard} from '../adminauthguard.guard';
+import { AdminauthguardGuard } from "../adminauthguard.guard";
+import { EmployeeComponent } from "../components/employee/employee.component";
 
 const routes: Routes = [
   {
@@ -80,6 +81,12 @@ const routes: Routes = [
     pathMatch: "full",
     canActivate: [AuthguardGuard],
     component: OrdersComponent
+  },
+  {
+    path: "employee",
+    pathMatch: "full",
+    canActivate: [AuthguardGuard],
+    component: EmployeeComponent
   },
   {
     path: "admin",
