@@ -100,11 +100,11 @@ exports.chekoutCartItems = function(req, res, next) {
     if (err) {
     } else {
       let cartids = [];
-      req.body.cids.map(id => cartids.push({ cid: id.cid }));
+      req.body.cids.map(id => cartids.push(id.cid));
       console.log(cartids);
 
       conn.query(
-        "UPDATE cart SET status='checkedout' WHERE cid ? ",
+        "UPDATE cart SET status='checkedout' WHERE cid IN (?) ",
         cartids,
         function(err1, records, fields) {
           console.log("checking out", err1);

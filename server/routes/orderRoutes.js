@@ -15,7 +15,7 @@ module.exports = function(app) {
   app.get("/getorder", order.getOrders);
 
   //Get all orders
-  app.get("/getorders", requireAuth, order.getOrders);
+  app.get("/getallorders", requireAuth, order.getAllOrders);
 
   //Cancel order
   app.put("/cancelorder", requireAuth, order.cancelOrder);

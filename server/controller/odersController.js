@@ -64,6 +64,25 @@ exports.getOrders = function(req, res, next) {
   pool.getConnection(function(err, conn) {
     if (err) {
     } else {
+      conn.query("SELECT * FROM order WHERE active='true' and user='"+req.body.uname+"' ", function(
+        err1,
+        records,
+        fields
+      ) {
+        if (!err1) {
+          // do something
+          res.json(records);
+        }
+        conn.release();
+      });
+    }
+  });
+};
+
+exports.getAllOrders = function(req, res, next) {
+  pool.getConnection(function(err, conn) {
+    if (err) {
+    } else {
       conn.query("SELECT * FROM order WHERE active='true'", function(
         err1,
         records,
