@@ -55,6 +55,10 @@ import { EditItemComponent } from "./components/cart/edit-item/edit-item.compone
 import { MakeOrderComponent } from "./components/cart/make-order/make-order.component";
 import { ProceedCartComponent } from "./components/cart/proceed-cart/proceed-cart.component";
 import { DriverDialogComponent } from './components/orders/driver-dialog/driver-dialog.component';
+import { EmployeeComponent } from './components/employee/employee.component';
+import { AddemployeeComponent } from './components/employee/addemployee/addemployee.component';
+import { EditemployeeComponent } from './components/employee/editemployee/editemployee.component';
+import { DeleteemployeeComponent } from './components/employee/deleteemployee/deleteemployee.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +96,11 @@ import { DriverDialogComponent } from './components/orders/driver-dialog/driver-
     EditItemComponent,
     MakeOrderComponent,
     ProceedCartComponent,
-    DriverDialogComponent
+    DriverDialogComponent,
+    EmployeeComponent,
+    AddemployeeComponent,
+    EditemployeeComponent,
+    DeleteemployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -138,7 +146,10 @@ import { DriverDialogComponent } from './components/orders/driver-dialog/driver-
     AddtocartComponent,
     DeleteItemComponent,
     EditItemComponent,
-    MakeOrderComponent
+    MakeOrderComponent,
+    AddemployeeComponent,
+    EditemployeeComponent,
+    DeleteemployeeComponent
   ],
   bootstrap: [AppComponent]
 })

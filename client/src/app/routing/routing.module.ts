@@ -20,6 +20,7 @@ import { DeliveryComponent } from "../components/delivery/delivery.component";
 import { AdminComponent } from "../components/admin/admin.component";
 import { ProceedCartComponent } from "../components/cart/proceed-cart/proceed-cart.component";
 import { AuthguardGuard } from "../authguard.guard";
+import {AdminauthguardGuard} from '../adminauthguard.guard';
 
 const routes: Routes = [
   {

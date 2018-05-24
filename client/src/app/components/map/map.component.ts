@@ -15,7 +15,9 @@ export class MapComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`);
@@ -35,22 +37,10 @@ export class MapComponent implements OnInit {
 
   markers: marker[] = [
     {
-      lat: 51.673858,
-      lng: 7.815982,
-      label: "A",
-      draggable: true
-    },
-    {
-      lat: 51.373858,
-      lng: 7.215982,
-      label: "B",
+      lat: 79.861244,
+      lng: 6.927079,
+      label: "Company",
       draggable: false
-    },
-    {
-      lat: 51.723858,
-      lng: 7.895982,
-      label: "C",
-      draggable: true
     }
   ];
 }

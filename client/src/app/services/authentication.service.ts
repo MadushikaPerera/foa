@@ -22,6 +22,7 @@ export class AuthenticationService {
           // store uname and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('usertoken', response.token);
           localStorage.setItem('uname', response.user);
+          localStorage.setItem('access', response.access);
           
           // return true to indicate successful login
           return true;
