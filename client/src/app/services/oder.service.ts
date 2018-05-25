@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
@@ -58,7 +58,17 @@ export class OderService {
   }
 
   getOrders(): Observable<Order[]> {
-    return this.http.get(environment.host + "/getorders").map(response => {
+    return this.http.get(environment.host + "/getorders", {
+      params: new HttpParams().set('uname', localStorage.getItem('uname'))
+  }).map(response => {
+      let orderlist = response as Order[];
+      console.log(orderlist);
+      return orderlist;
+    });
+  }
+
+  getAllOrders(): Observable<Order[]> {
+    return this.http.get(environment.host + "/getallorders").map(response => {
       let orderlist = response as Order[];
       console.log(orderlist);
       return orderlist;

@@ -8,6 +8,7 @@ import {
   MatSort,
   MatSnackBar
 } from "@angular/material";
+import { OderService } from "../../services/oder.service";
 
 @Component({
   selector: "app-orders",
@@ -18,7 +19,7 @@ export class OrdersComponent implements OnInit {
   displayedColumns = ["order"];
   dataSource = ELEMENT_DATA;
 
-  constructor(private router: Router, public snackBar: MatSnackBar) {}
+  constructor(private router: Router, public snackBar: MatSnackBar,private orderservice:OderService) {}
 
   ngOnInit() {}
 

@@ -18,6 +18,9 @@
         <mat-list-item *ngIf="chekadmin()" [routerLink]="['/delivery']" (click)="sidenav.close()">
           <i class="fas fa-truck icon"></i>Deliveries</mat-list-item>
         <mat-list-item>
+        <mat-list-item *ngIf="chekadmin()" [routerLink]="['/employee']" (click)="sidenav.close()">
+          <i class="fas fa-truck icon"></i>Employee</mat-list-item>
+        <mat-list-item>
           <button mat-button (click)="logout()">
             <mat-icon>launch</mat-icon>Logout</button>
         </mat-list-item>
