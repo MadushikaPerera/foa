@@ -4,23 +4,42 @@ import { FormControl, Validators } from "@angular/forms";
 import { Employee } from "../../../model/employee";
 import { EmployeeService } from "../../../services/employee.service";
 
-
 @Component({
-  selector: 'app-editemployee',
-  templateUrl: './editemployee.component.html',
-  styleUrls: ['./editemployee.component.css']
+  selector: "app-editemployee",
+  templateUrl: "./editemployee.component.html",
+  styleUrls: ["./editemployee.component.css"]
 })
 export class EditemployeeComponent implements OnInit {
-
-  constructor(public dialogRef: MatDialogRef<EditemployeeComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<EditemployeeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Employee,
-    private employeeservice:EmployeeService) { }
+    private employeeservice: EmployeeService
+  ) {}
 
-    ngOnInit() {
-    }
-  
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-  
+  ngOnInit() {}
+
+  formControl = new FormControl("", [
+    Validators.required
+    // Validators.email,
+  ]);
+
+  getErrorMessage() {
+    return this.formControl.hasError("required")
+      ? "Required field"
+      : this.formControl.hasError("email")
+        ? "Not a valid email"
+        : "";
+  }
+
+  submit() {
+    // emppty stuff
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  Edit(): void {
+    this.employeeservice.updateEmployees(this.data);
+  }
 }

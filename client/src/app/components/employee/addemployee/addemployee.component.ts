@@ -18,13 +18,29 @@ export class AddemployeeComponent implements OnInit {
 
   ngOnInit() {}
 
+  formControl = new FormControl("", [
+    Validators.required
+    // Validators.email,
+  ]);
+
+  getErrorMessage() {
+    return this.formControl.hasError("required")
+      ? "Required field"
+      : this.formControl.hasError("email")
+        ? "Not a valid email"
+        : "";
+  }
+
+  submit() {
+    // emppty stuff
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  AddEmployee() {
+  AddEmployee(): void {
     delete this.data["employee"];
     this.employeeservice.addEmployees(this.data);
-    this.dialogRef.close();
   }
 }

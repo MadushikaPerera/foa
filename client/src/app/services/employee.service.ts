@@ -56,6 +56,7 @@ export class EmployeeService {
   updateEmployees(employee: Employee): void {
     this.dialogData = employee;
     this.editEmployee(
+      employee.eid,
       employee.fname,
       employee.lname,
       employee.nic,
@@ -122,7 +123,7 @@ export class EmployeeService {
       .map((response: Employee) => {
         // signup successful
         if (response) {
-          console.log("food added", response);
+          console.log("employee added", response);
 
           return true;
         }
@@ -131,6 +132,7 @@ export class EmployeeService {
   }
 
   editEmployee(
+    eid: number,
     fname: string,
     lname: string,
     nic: string,
@@ -142,6 +144,7 @@ export class EmployeeService {
   ): Observable<boolean> {
     return this.http
       .put(environment.host + "/editemployee", {
+        eid: eid,
         fname: fname,
         lname: lname,
         nic: nic,

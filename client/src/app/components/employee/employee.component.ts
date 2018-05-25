@@ -63,9 +63,11 @@ export class EmployeeComponent implements OnInit {
       data: { employee: employee }
     });
 
-    console.log("dialog data", dialogRef);
+    console.log(" employee dialog data", dialogRef);
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log("added employee", result);
+
       if (result === 1) {
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService

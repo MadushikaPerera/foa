@@ -20,8 +20,8 @@ module.exports = function(app, pool) {
   });
 
   //delete Employees
-  app.put("/deleteemployees", EmployeeController.delEmployee);
+  app.put("/delemployee", EmployeeController.delEmployee);
 
   //Edit Employees
-  app.put("/editdemployees", EmployeeController.editEmployee);
+  app.put("/editemployee", EmployeeController.editEmployee);
 };
